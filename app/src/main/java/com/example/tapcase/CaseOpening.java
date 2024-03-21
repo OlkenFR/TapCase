@@ -8,17 +8,17 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.tapcase.databinding.ActivityCaseOpenerBinding;
+import com.example.tapcase.databinding.ActivityCaseOpeningBinding;
+
 public class CaseOpening extends AppCompatActivity {
+
+    private ActivityCaseOpeningBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_case_opening);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
+        binding = ActivityCaseOpeningBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
     }
 }
