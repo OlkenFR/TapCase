@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.tapcase.databinding.ActivityClickerBinding;
 import com.example.tapcase.databinding.FragmentClickerBinding;
 
 public class ClickerFragment extends Fragment {
@@ -16,12 +17,9 @@ public class ClickerFragment extends Fragment {
     public ClickerFragment() {
         // Required empty public constructor
     }
-
     @Override
     public void onResume() {
         super.onResume();
-
-
         binding.buttonClicker.setOnClickListener(v -> {
             score = score + 1;
             binding.scoreClicker.setText("" + score);
@@ -32,6 +30,7 @@ public class ClickerFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_clicker, container, false);
+        binding = FragmentClickerBinding.inflate(inflater, container, false);
+        return binding.getRoot();
     }
 }
