@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/clicker"
+        android:title="Clicker"
+        android:icon="@drawable/ic_cash"/>
+    <item
+        android:id="@+id/inventory"
+        android:title="Inventory"
+        android:icon="@drawable/ic_inventory"/>
+    <item
+        android:id="@+id/store"
+        android:title="Store"
+        android:icon="@drawable/ic_store"/>
+</menu>
