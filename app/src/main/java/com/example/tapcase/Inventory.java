@@ -69,6 +69,12 @@ public class Inventory extends AppCompatActivity {
 
             }
         });
+        binding.btnVendre.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
     }
     private List<Item> readItemsFromTextFile() {
         List<Item> itemsList = new ArrayList<>();
