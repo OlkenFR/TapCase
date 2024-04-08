@@ -82,7 +82,7 @@ public class Item extends Fragment {
         binding.ivImageArme.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Inventory.select_weapons(nom, image, rarete, prix, String.valueOf(fleurs_par_click), getResources());
+                InventoryFragment.select_weapons(nom, image, rarete, prix, String.valueOf(fleurs_par_click), getResources());
             }
         });
 
