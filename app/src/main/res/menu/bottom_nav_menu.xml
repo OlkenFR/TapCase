@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/store"
+        android:title="Store"
+        android:icon="@drawable/box_white"
+        app:itemIconSize="100dp" />
+    <item
+        android:id="@+id/clicker"
+        android:title="Clicker"
+        android:icon="@drawable/click_white"
+        app:itemIconSize="100dp"/>
+    <item
+        android:id="@+id/inventory"
+        android:title="Inventory"
+        android:icon="@drawable/inventory_white" />
+</menu>
