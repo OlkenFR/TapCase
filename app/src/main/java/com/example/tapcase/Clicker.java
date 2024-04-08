@@ -16,7 +16,6 @@ import com.google.android.material.navigation.NavigationBarView;
 public class Clicker extends AppCompatActivity implements NavigationBarView.OnItemSelectedListener {
     private ActivityClickerBinding binding;
     BottomNavigationView bottomNavigationView;
-    private int score;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,17 +29,6 @@ public class Clicker extends AppCompatActivity implements NavigationBarView.OnIt
         bottomNavigationView
                 .setOnItemSelectedListener(this);
         bottomNavigationView.setSelectedItemId(R.id.clicker);
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-
-
-        binding.buttonClicker.setOnClickListener(v -> {
-            score = score + 1;
-            binding.scoreClicker.setText("" + score);
-        });
     }
 
     ClickerFragment clickerFragment = new ClickerFragment();
