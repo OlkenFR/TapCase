@@ -28,9 +28,9 @@ public class Clicker extends AppCompatActivity {
         super.onResume();
 
 
-        binding.buttonClicker.setOnClickListener(v -> {
+        binding.btnClicker.setOnClickListener(v -> {
             score = score + 1;
-            binding.scoreClicker.setText("" + score);
+            binding.tvScore.setText("" + score);
         });
 
     }
