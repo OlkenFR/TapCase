@@ -10,12 +10,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.tapcase.databinding.FragmentItemBinding;
+
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link Item#newInstance} factory method to
  * create an instance of this fragment.
  */
 public class Item extends Fragment {
+    private FragmentItemBinding binding;
     private static final String ARG_NOM_ARME = "nom_arme";
     private static final String ARG_PRIX = "prix";
     private static final String ARG_RARETE = "rarete";
