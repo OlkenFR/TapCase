@@ -43,6 +43,9 @@ public class InventoryFragment extends Fragment {
             case CLASSIFIE:
                 binding.ivWeaponSelected.setBackground(resources.getDrawable(R.drawable.arrondir_classifie));
                 break;
+            case SECRET:
+                binding.ivWeaponSelected.setBackground(resources.getDrawable(R.drawable.arrondir_secret));
+                break;
         }
     }
 

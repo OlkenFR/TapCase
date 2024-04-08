@@ -4,5 +4,7 @@ public enum Rarete {
     BASE,
     SUPERIEUR,
     EXOTIQUE,
-    CLASSIFIE
+    CLASSIFIE,
+
+    SECRET
 }

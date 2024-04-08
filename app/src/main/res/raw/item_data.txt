@@ -1,28 +1,35 @@
-Glock basique,0,BASE,glock_classique,1
-Glock superieur,10,SUPERIEUR,glock_weasel,3
-Glock exotique,20,EXOTIQUE,glock_neo_noir,5
-Glock classifié,50,CLASSIFIE,glock_bullet_queen,10
-AWP basique,0,BASE,awp_dragon_lore,1
-AWP superieur,10,SUPERIEUR,awp_worm_god,3
-AWP exotique,20,EXOTIQUE,awp_hyperbeast,5
-AWP classifié,50,CLASSIFIE,awp_atheris,10
-AK basique,50,BASE,ak_elite_build,40
-AK superieur,50,SUPERIEUR,ak_point_disarray,40
-AK exotique,50,EXOTIQUE,ak_vulcan,40
-AK classifié,50,CLASSIFIE,ak_bloodsport,40
-Knife basique,0,BASE,knife_boreal_forest,1
-Knife superieur,10,SUPERIEUR,knife_doppler,3
-Knife exotique,20,EXOTIQUE,knife_fade,5
-Knife classifié,50,CLASSIFIE,knife_freehand,10
-USP basique,0,BASE,usp_cyrex,1
-USP superieur,10,SUPERIEUR,usp_flashback,3
-USP exotique,20,EXOTIQUE,usp_orion,5
-USP classifié,50,CLASSIFIE,usp_traitor,10
-MP9 basique,0,BASE,mp_food_chain,1
-MP9 superieur,10,SUPERIEUR,mp_hydra,3
-MP9 exotique,20,EXOTIQUE,mp_mount_fuji,5
-MP9 classifié,50,CLASSIFIE,mp_goo,10
-M4 basique,0,BASE,m_nitro,1
-M4 superieur,10,SUPERIEUR,m_printstream,3
-M4 exotique,20,EXOTIQUE,m_cyrex,5
-M4 classifié,50,CLASSIFIE,m_hyperbeast,10
+Glock-17,0,BASE,glock_classique,1
+Glock-17 Weasel,10,SUPERIEUR,glock_weasel,2
+Glock-17 Water element,25,EXOTIQUE,glock_water_element,4
+Glock-17 Black-Neo,40,EXOTIQUE,glock_neo_noir,7
+Glock-17 Bullet queen,75,CLASSIFIE,glock_bullet_queen,15
+USP-S Cyrex,15,BASE,usp_cyrex,5
+USP-S Flashback,28,SUPERIEUR,usp_flashback,7
+USP-S Orion,37,EXOTIQUE,usp_orion,12
+USP-S The traitor,67,CLASSIFIE,usp_traitor,18
+USP-S Kill confirmed,98,CLASSIFIE,usp_kill_confirmed,25
+MP9 Dry season,40,BASE,mp_dry_season,12
+MP9 Hydra,54,SUPERIEUR,mp_hydra,16
+MP9 Goo,67,SUPERIEUR,mp_goo,20
+MP9 Mount Fudji,95,EXOTIQUE,mp_mount_fuji,25
+MP9 Food chain,120,CLASSIFIE,mp_food_chain,30
+M4A1-S Nitro,60,BASE,m_nitro,17
+M4A1-S Cyrex,78,SUPERIEUR,m_cyrex,22
+M4A1-S Printstream,110,EXOTIQUE,m_printstream,28
+M4A1-S Hyperbeast,144,CLASSIFIE,m_hyperbeast,32
+M4A1-S Danger,176,CLASSIFIE,m_imminent_danger,39
+AK-47 Elite build,108,BASE,ak_elite_build,28
+AK-47 Dissaray point,128,SUPERIEUR,ak_point_disarray,33
+AK-47 Panthera,156,EXOTIQUE,ak_panthera,37
+AK-47 Bloodsport,185,CLASSIFIE,ak_bloodsport,42
+AK-47 Vulcan,230,CLASSIFIE,ak_vulcan,51
+AWP Worm god,154,BASE,awp_worm_god,44
+AWP Atheris,178,SUPERIEUR,awp_atheris,53
+AWP Black-Neo,200,EXOTIQUE,awp_neo_noir,60
+AWP Hyperbeast,232,CLASSIFIE,awp_hyperbeast,69
+AWP Dragon lore,300,SECRET,awp_dragon_lore,80
+Classic Boreal forest,234,SECRET,knife_boreal_forest,80
+Huntsman Freehand,275,SECRET,knife_freehand,91
+Bayonet Fade,322,SECRET,knife_fade,108
+Karambit Lore,366,SECRET,knife_lore,122
+Butterfly Doppler,540,SECRET,knife_doppler,150

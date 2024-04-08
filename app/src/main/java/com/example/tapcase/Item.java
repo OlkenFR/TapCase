@@ -78,6 +78,9 @@ public class Item extends Fragment {
             case CLASSIFIE:
                 binding.ivImageArme.setBackground(getResources().getDrawable(R.drawable.arrondir_classifie));
                 break;
+            case SECRET:
+                binding.ivImageArme.setBackground(getResources().getDrawable(R.drawable.arrondir_secret));
+                break;
         }
         binding.ivImageArme.setOnClickListener(new View.OnClickListener() {
             @Override
