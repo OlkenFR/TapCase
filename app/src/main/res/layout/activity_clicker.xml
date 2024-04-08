@@ -7,5 +7,25 @@
     android:layout_height="match_parent"
     tools:context=".Clicker">
 
-    <include layout="@layout/bottom_nav_menu"/>
+    <ImageView
+        android:id="@+id/iv_case_opener"
+        android:layout_width="130dp"
+        android:layout_height="100dp"
+        app:srcCompat="@drawable/ic_cash"
+        tools:layout_editor_absoluteX="27dp"
+        tools:layout_editor_absoluteY="615dp" />
+
+    <ImageView
+        android:id="@+id/iv_inventory"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/ic_inventory"
+        tools:layout_editor_absoluteX="176dp"
+        tools:layout_editor_absoluteY="359dp" />
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/ic_store" />
 </androidx.constraintlayout.widget.ConstraintLayout>
