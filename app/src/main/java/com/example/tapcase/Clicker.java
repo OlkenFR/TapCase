@@ -28,7 +28,7 @@ public class Clicker extends AppCompatActivity implements NavigationBarView.OnIt
 
         bottomNavigationView
                 .setOnItemSelectedListener(this);
-        bottomNavigationView.setSelectedItemId(R.id.inventory);
+        bottomNavigationView.setSelectedItemId(R.id.clicker);
     }
 
     ClickerFragment clickerFragment = new ClickerFragment();
