@@ -3,4 +3,9 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="blue">#1eebb5</color>
+    <color name="BASE">#9EB9D0</color>
+    <color name="EXOTIQUE">#896CB4</color>
+    <color name="CLASSIFIE">#E25450</color>
+    <color name="SUPERIEUR">#445B88</color>
+    <color name="BACKGROUND">#BED3E8</color>
 </resources>

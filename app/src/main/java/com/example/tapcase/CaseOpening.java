@@ -12,9 +12,7 @@ import com.example.tapcase.databinding.ActivityCaseOpenerBinding;
 import com.example.tapcase.databinding.ActivityCaseOpeningBinding;
 
 public class CaseOpening extends AppCompatActivity {
-
     private ActivityCaseOpeningBinding binding;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

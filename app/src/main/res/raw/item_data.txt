@@ -1,0 +1,6 @@
+Glock basique,0,BASE,glock_classique,1
+Glock exotique,20,EXOTIQUE,glock_neo_noir,5
+Glock superieur,10,SUPERIEUR,glock_weasel,3
+Glock classifié,50,CLASSIFIE,glock_bullet_queen,10
+AWP basique,50,BASE,awp_atheris,40
+AK CLASSIFIE,50,CLASSIFIE,ak_bloodsport,40
