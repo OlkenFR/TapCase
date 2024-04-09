@@ -26,6 +26,29 @@ public class StoreFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
+
+        //ACTION FOR THE CLASSIC BOX TAP
+        binding.ivStoreBoxClassic.setOnClickListener(v -> {
+            binding.tvTest.setText("Classic");
+        });
+        //ACTION FOR THE DREAMS BOX TAP
+        binding.ivStoreBoxDreams.setOnClickListener(v -> {
+            binding.tvTest.setText("Dreams");
+        });
+        //ACTION FOR THE BRAVO BOX TAP
+        binding.ivStoreBoxBravo.setOnClickListener(v -> {
+            binding.tvTest.setText("Bravo");
+        });
+        //ACTION FOR THE COBBLE BOX TAP
+        binding.ivStoreBoxCobble.setOnClickListener(v -> {
+            binding.tvTest.setText("Cobblestone");
+        });
+
+
+
+
+
+        //STARTING THE ROLL OF WEAPON
         binding.btnStore.setOnClickListener(v -> {
             scrollPos=0;
             scrollSpeed=30;
