@@ -1,21 +1,17 @@
 package com.example.tapcase;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.Toast;
-
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import com.example.tapcase.R;
 
 import com.example.tapcase.databinding.ActivityClickerBinding;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.navigation.NavigationBarView;
 
-public class Clicker extends AppCompatActivity implements NavigationBarView.OnItemSelectedListener {
+public class Clicker extends AppCompatActivity {
     private ActivityClickerBinding binding;
     BottomNavigationView bottomNavigationView;
+
+    private int score;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,37 +22,32 @@ public class Clicker extends AppCompatActivity implements NavigationBarView.OnIt
         bottomNavigationView
                 = findViewById(R.id.bottomNavigationView);
 
-        bottomNavigationView
-                .setOnItemSelectedListener(this);
         bottomNavigationView.setSelectedItemId(R.id.clicker);
+
+        bottomNavigationView
+                .setOnItemSelectedListener(item -> {
+                    int id = item.getItemId();
+                    if(id == R.id.clicker){
+                        return true;
+                    } else if (id == R.id.inventory){
+                        startActivity(new Intent(getApplicationContext(), Inventory.class));
+                        finish();
+                        return true;
+                    } else if (id == R.id.store){
+                        startActivity(new Intent(getApplicationContext(), Store.class));
+                        finish();
+                        return true;
+                    }
+                    return false;
+                });
     }
 
-    ClickerFragment clickerFragment = new ClickerFragment();
-    InventoryFragment inventoryFragment = new InventoryFragment();
-    StoreFragment storeFragment = new StoreFragment();
-
     @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-        int id = menuItem.getItemId();
-        if(id == R.id.clicker){
-            getSupportFragmentManager()
-                    .beginTransaction()
-                    .replace(R.id.flFragment, clickerFragment)
-                    .commit();
-            return true;
-        } else if (id == R.id.inventory){
-            getSupportFragmentManager()
-                    .beginTransaction()
-                    .replace(R.id.flFragment, inventoryFragment)
-                    .commit();
-            return true;
-        } else if (id == R.id.store){
-            getSupportFragmentManager()
-                    .beginTransaction()
-                    .replace(R.id.flFragment, storeFragment)
-                    .commit();
-            return true;
-        }
-        return false;
+    protected void onResume() {
+        super.onResume();
+        binding.btnClicker.setOnClickListener(v -> {
+            score = score + 1;
+            binding.tvScore.setText("" + score);
+        });
     }
 }

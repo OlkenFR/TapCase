@@ -1,28 +1,57 @@
 package com.example.tapcase;
 
-        import android.os.Bundle;
+import android.content.Intent;
+import android.os.Bundle;
+import android.os.Handler;
+import android.view.MenuItem;
 
-        import androidx.fragment.app.Fragment;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
-        import android.os.Handler;
-        import android.view.LayoutInflater;
-        import android.view.View;
-        import android.view.ViewGroup;
+import com.example.tapcase.databinding.ActivityStoreBinding;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-        import com.example.tapcase.databinding.ActivityClickerBinding;
-        import com.example.tapcase.databinding.FragmentClickerBinding;
-        import com.example.tapcase.databinding.FragmentStoreBinding;
+import java.util.Timer;
+import java.util.TimerTask;
 
-        import java.util.Timer;
-        import java.util.TimerTask;
+public class Store extends AppCompatActivity {
 
-public class StoreFragment extends Fragment {
-    private FragmentStoreBinding binding;
+    private ActivityStoreBinding binding;
+    BottomNavigationView bottomNavigationView;
     private double scrollSpeed;
     private double scrollPos;
-    public StoreFragment() {
-        // Required empty public constructor
+    private Timer timer;
+    private final Handler handler = new Handler();
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        binding = ActivityStoreBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+
+        bottomNavigationView
+                = findViewById(R.id.bottomNavigationView);
+
+        bottomNavigationView.setSelectedItemId(R.id.store);
+
+        bottomNavigationView
+                .setOnItemSelectedListener(item -> {
+                    int id = item.getItemId();
+                    if(id == R.id.clicker){
+                        startActivity(new Intent(getApplicationContext(), Clicker.class));
+                        finish();
+                        return true;
+                    } else if (id == R.id.inventory){
+                        startActivity(new Intent(getApplicationContext(), Inventory.class));
+                        finish();
+                        return true;
+                    } else if (id == R.id.store){
+                        return true;
+                    }
+                    return false;
+                });
     }
+
     @Override
     public void onResume() {
         super.onResume();
@@ -76,23 +105,5 @@ public class StoreFragment extends Fragment {
                 }
             }, 0, 5); // Exécute la tâche toutes les 1000 millisecondes (1 seconde)
         });
-    }
-
-
-    private Timer timer;
-    private final Handler handler = new Handler();
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        binding = FragmentStoreBinding.inflate(inflater, container, false);
-
-
-
-
-    
-    
-        return binding.getRoot();
     }
 }
