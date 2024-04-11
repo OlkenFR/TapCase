@@ -1,0 +1,1 @@
+Glock-17,0,BASE,glock_classique,1
