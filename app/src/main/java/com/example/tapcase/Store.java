@@ -29,32 +29,30 @@ public class Store extends AppCompatActivity {
         binding = ActivityStoreBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        bottomNavigationView
-                = findViewById(R.id.bottomNavigationView);
+        bottomNavigationView = findViewById(R.id.bottomNavigationView);
 
         bottomNavigationView.setSelectedItemId(R.id.store);
+    }
 
-        bottomNavigationView
-                .setOnItemSelectedListener(item -> {
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        bottomNavigationView.setOnItemSelectedListener(item -> {
                     int id = item.getItemId();
                     if(id == R.id.clicker){
-                        startActivity(new Intent(getApplicationContext(), Clicker.class));
-                        finish();
+                        startActivity(new Intent(Store.this, Clicker.class));
+                        overridePendingTransition(0,0);
                         return true;
                     } else if (id == R.id.inventory){
-                        startActivity(new Intent(getApplicationContext(), Inventory.class));
-                        finish();
+                        startActivity(new Intent(Store.this, Inventory.class));
+                        overridePendingTransition(0,0);
                         return true;
                     } else if (id == R.id.store){
                         return true;
                     }
                     return false;
                 });
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
 
         //ACTION FOR THE CLASSIC BOX TAP
         binding.ivStoreBoxClassic.setOnClickListener(v -> {
@@ -72,10 +70,6 @@ public class Store extends AppCompatActivity {
         binding.ivStoreBoxCobble.setOnClickListener(v -> {
             binding.tvTest.setText("Cobblestone");
         });
-
-
-
-
 
         //STARTING THE ROLL OF WEAPON
         binding.btnStore.setOnClickListener(v -> {

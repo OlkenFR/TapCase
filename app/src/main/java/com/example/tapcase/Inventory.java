@@ -60,7 +60,7 @@ public class Inventory extends AppCompatActivity {
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         List<Item> itemsFromTextFile = readItemsFromTextFile();
         for (Item item : itemsFromTextFile) {
-            ft.add(binding.gridLayout.getId(), item);
+            ft.add(binding.fragmentItem.getId(), item);
         }
 
         binding.btnSelect.setOnClickListener(new View.OnClickListener() {
@@ -70,22 +70,19 @@ public class Inventory extends AppCompatActivity {
             }
         });
 
-        bottomNavigationView
-                = findViewById(R.id.bottomNavigationView);
+        bottomNavigationView = findViewById(R.id.bottomNavigationView);
         bottomNavigationView.setSelectedItemId(R.id.inventory);
-
-        bottomNavigationView
-                .setOnItemSelectedListener(item -> {
+        bottomNavigationView.setOnItemSelectedListener(item -> {
                     int id = item.getItemId();
                     if(id == R.id.clicker){
-                        startActivity(new Intent(getApplicationContext(), Clicker.class));
-                        finish();
+                        startActivity(new Intent(Inventory.this, Clicker.class));
+                        overridePendingTransition(0,0);
                         return true;
                     } else if (id == R.id.inventory){
                         return true;
                     } else if (id == R.id.store){
-                        startActivity(new Intent(getApplicationContext(), Store.class));
-                        finish();
+                        startActivity(new Intent(Inventory.this, Store.class));
+                        overridePendingTransition(0,0);
                         return true;
                     }
                     return false;

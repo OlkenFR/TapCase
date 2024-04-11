@@ -96,11 +96,12 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <GridLayout
-                android:id="@+id/gridLayout"
+            <androidx.fragment.app.FragmentContainerView
+                android:id="@+id/fragment_item"
+                android:name="com.example.tapcase.Item"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:columnCount="3" />
+                android:layout_height="wrap_content" />
+
         </LinearLayout>
     </ScrollView>
     <com.google.android.material.bottomnavigation.BottomNavigationView

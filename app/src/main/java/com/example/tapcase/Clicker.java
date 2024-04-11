@@ -10,9 +10,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 public class Clicker extends AppCompatActivity {
     private ActivityClickerBinding binding;
     BottomNavigationView bottomNavigationView;
-
-    private int score;
-
+    private Integer score;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,12 +28,12 @@ public class Clicker extends AppCompatActivity {
                     if(id == R.id.clicker){
                         return true;
                     } else if (id == R.id.inventory){
-                        startActivity(new Intent(getApplicationContext(), Inventory.class));
-                        finish();
+                        startActivity(new Intent(Clicker.this, Inventory.class));
+                        overridePendingTransition(0,0);
                         return true;
                     } else if (id == R.id.store){
-                        startActivity(new Intent(getApplicationContext(), Store.class));
-                        finish();
+                        startActivity(new Intent(Clicker.this, Store.class));
+                        overridePendingTransition(0,0);
                         return true;
                     }
                     return false;
