@@ -1,7 +1,18 @@
 package com.example.tapcase;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.view.MotionEvent;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+
+import java.util.Random;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.tapcase.databinding.ActivityClickerBinding;
@@ -40,12 +51,86 @@ public class Clicker extends AppCompatActivity {
                 });
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onResume() {
         super.onResume();
-        binding.btnClicker.setOnClickListener(v -> {
-            score = score + 1;
-            binding.tvScore.setText("" + score);
+        ViewGroup parent = (ViewGroup) binding.getRoot();
+        parent.setOnTouchListener((view, event) -> {
+            if (event.getAction() == MotionEvent.ACTION_DOWN) {
+
+                RelativeLayout.LayoutParams paramsLayout = new RelativeLayout.LayoutParams(
+                        RelativeLayout.LayoutParams.MATCH_PARENT,
+                        RelativeLayout.LayoutParams.MATCH_PARENT
+                );
+
+
+                Random random = new Random();
+                int randomX = random.nextInt(150);
+                int randomY = random.nextInt(150);
+
+                int newMarginX = (int) event.getX() - randomX;
+                int newMarginY = (int) event.getY() - randomY;
+
+                //CODE FOR PRINTING TEXT WHILE SHOOTING
+                TextView texteViewTir = new TextView(Clicker.this);
+                texteViewTir.setText("o");
+                texteViewTir.setTextSize(20);
+                texteViewTir.setPadding(newMarginX,newMarginY, 0, 0);
+                texteViewTir.setLayoutParams(paramsLayout);
+
+                //CODE FOR PRINTING IMAGE WHILE SHOOTING
+                ImageView imageView = new ImageView(Clicker.this);
+                imageView.setImageResource(R.drawable.fleur);
+                paramsLayout.width = newMarginX+150;
+                paramsLayout.height = newMarginY+150;
+                imageView.setScaleType(ImageView.ScaleType.FIT_XY);
+                imageView.setPadding(newMarginX,newMarginY, 0, 0);
+                imageView.setLayoutParams(paramsLayout);
+
+                binding.main.addView(imageView);
+
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        binding.main.removeView(imageView);
+                    }
+                }, 1000); //for 1 seconds
+
+
+
+
+//                params.addRule(RelativeLayout.CENTER_IN_PARENT);
+
+
+//                LinearLayout.LayoutParams paramsLayout = new LinearLayout.LayoutParams(150, 150);
+
+
+
+//                paramsLayout.leftMargin = 500;
+//                paramsLayout.topMargin = 500;
+
+
+//                paramsLayout.setMargins(newMarginX, newMarginY, 0, 0);
+//                paramsLayout.leftMargin = 150;
+//                paramsLayout.width=150;
+//                paramsLayout.height=150;
+//                paramsLayout.leftMargin += newMarginX;
+//                paramsLayout.topMargin += newMarginY;
+
+
+
+//                paramsLayout.width = 500;
+//                paramsLayout.height = 500;
+//                imageView.setMaxWidth(200);
+//                imageView.setMaxHeight(200);
+//                imageView.setPadding(newMarginX, newMarginY, 0, 0);
+//                paramsLayout.setMargins(500, 500, 0, 0);
+
+
+
+            }
+            return true;
         });
     }
 }
