@@ -21,139 +21,6 @@
         app:layout_constraintStart_toStartOf="parent"
         tools:layout_editor_absoluteY="38dp" />
 
-    <View
-        android:id="@+id/rectangleView"
-        android:layout_width="10dp"
-        android:layout_height="150dp"
-        android:layout_marginBottom="50dp"
-        android:layout_weight="1"
-        android:background="#B30000"
-        android:elevation="10dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <HorizontalScrollView
-        android:id="@+id/horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:layout_marginBottom="50dp"
-        app:layout_constraintBottom_toBottomOf="parent">
-
-        <LinearLayout
-            android:id="@+id/linear"
-            android:layout_width="match_parent"
-            android:layout_height="150dp"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:id="@+id/iv_ak1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="2"
-                app:srcCompat="@drawable/ak_bloodsport" />
-
-            <ImageView
-                android:id="@+id/iv_ak2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="2"
-                app:srcCompat="@drawable/ak_elite_build" />
-
-            <ImageView
-                android:id="@+id/iv_ak3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="2"
-                app:srcCompat="@drawable/ak_panthera" />
-
-            <ImageView
-                android:id="@+id/iv_ak4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="2"
-                app:srcCompat="@drawable/ak_point_disarray" />
-
-            <ImageView
-                android:id="@+id/iv_ak5"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="2"
-                app:srcCompat="@drawable/ak_bloodsport" />
-
-            <ImageView
-                android:id="@+id/iv_ak6"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="2"
-                app:srcCompat="@drawable/ak_elite_build" />
-
-            <ImageView
-                android:id="@+id/iv_ak7"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="2"
-                app:srcCompat="@drawable/ak_panthera" />
-
-            <ImageView
-                android:id="@+id/iv_ak8"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="2"
-                app:srcCompat="@drawable/ak_point_disarray" />
-
-            <ImageView
-                android:id="@+id/iv_ak9"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="2"
-                app:srcCompat="@drawable/ak_point_disarray" />
-
-            <ImageView
-                android:id="@+id/iv_ak10"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="2"
-                app:srcCompat="@drawable/ak_bloodsport" />
-
-            <ImageView
-                android:id="@+id/iv_ak11"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="2"
-                app:srcCompat="@drawable/ak_elite_build" />
-
-            <ImageView
-                android:id="@+id/iv_ak12"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="2"
-                app:srcCompat="@drawable/ak_panthera" />
-
-            <ImageView
-                android:id="@+id/iv_ak13"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="2"
-                app:srcCompat="@drawable/ak_point_disarray" />
-
-            <ImageView
-                android:id="@+id/iv_ak14"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                app:srcCompat="@drawable/ak_panthera" />
-
-            <ImageView
-                android:id="@+id/iv_ak15"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="2"
-                app:srcCompat="@drawable/ak_point_disarray" />
-
-        </LinearLayout>
-    </HorizontalScrollView>
-
     <ImageView
         android:id="@+id/iv_store_back_classic"
         android:layout_width="160dp"
@@ -252,7 +119,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="150dp"
         android:gravity="center_horizontal"
-        android:text="Price : 100"
+        android:text="Price : 0"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -264,7 +131,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="350dp"
         android:gravity="center_horizontal"
-        android:text="Price : 1000"
+        android:text="Price : 0"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -276,7 +143,7 @@
         android:layout_marginTop="150dp"
         android:layout_marginEnd="8dp"
         android:gravity="center_horizontal"
-        android:text="Price : 500"
+        android:text="Price : 0"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -288,22 +155,10 @@
         android:layout_marginTop="350dp"
         android:layout_marginEnd="8dp"
         android:gravity="center_horizontal"
-        android:text="Price : 5000"
+        android:text="Price : 0"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/btn_store"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginBottom="8dp"
-        android:text="Button"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigationView"

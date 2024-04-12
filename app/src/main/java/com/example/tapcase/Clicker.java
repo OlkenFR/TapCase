@@ -21,7 +21,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 public class Clicker extends AppCompatActivity {
     private ActivityClickerBinding binding;
     BottomNavigationView bottomNavigationView;
-    private Integer score;
+    private int score;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,11 +39,11 @@ public class Clicker extends AppCompatActivity {
                     if(id == R.id.clicker){
                         return true;
                     } else if (id == R.id.inventory){
-                        startActivity(new Intent(Clicker.this, Inventory.class));
+                        startActivity(new Intent(Clicker.this, Inventory.class).putExtra("SCORE",score));
                         overridePendingTransition(0,0);
                         return true;
                     } else if (id == R.id.store){
-                        startActivity(new Intent(Clicker.this, Store.class));
+                        startActivity(new Intent(Clicker.this, Store.class).putExtra("SCORE",score));
                         overridePendingTransition(0,0);
                         return true;
                     }
@@ -55,9 +55,18 @@ public class Clicker extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        Intent intent = getIntent();
+        if(intent != null) {
+            score = intent.getIntExtra("SCORE", 0);
+            binding.tvScore.setText("Score = " + score);
+        }
+
         ViewGroup parent = (ViewGroup) binding.getRoot();
         parent.setOnTouchListener((view, event) -> {
             if (event.getAction() == MotionEvent.ACTION_DOWN) {
+
+                score += 1;
+                binding.tvScore.setText("Score = " + score);
 
                 RelativeLayout.LayoutParams paramsLayout = new RelativeLayout.LayoutParams(
                         RelativeLayout.LayoutParams.MATCH_PARENT,
@@ -66,8 +75,8 @@ public class Clicker extends AppCompatActivity {
 
 
                 Random random = new Random();
-                int randomX = random.nextInt(150);
-                int randomY = random.nextInt(150);
+                int randomX = random.nextInt(200);
+                int randomY = random.nextInt(200);
 
                 int newMarginX = (int) event.getX() - randomX;
                 int newMarginY = (int) event.getY() - randomY;
@@ -82,8 +91,8 @@ public class Clicker extends AppCompatActivity {
                 //CODE FOR PRINTING IMAGE WHILE SHOOTING
                 ImageView imageView = new ImageView(Clicker.this);
                 imageView.setImageResource(R.drawable.fleur);
-                paramsLayout.width = newMarginX+150;
-                paramsLayout.height = newMarginY+150;
+                paramsLayout.width = newMarginX+200;
+                paramsLayout.height = newMarginY+200;
                 imageView.setScaleType(ImageView.ScaleType.FIT_XY);
                 imageView.setPadding(newMarginX,newMarginY, 0, 0);
                 imageView.setLayoutParams(paramsLayout);
