@@ -44,15 +44,15 @@ public class CaseOpening extends AppCompatActivity {
         binding.bottomNavigationView.setOnItemSelectedListener(item -> {
             int id = item.getItemId();
             if(id == R.id.clicker){
-                startActivity(new Intent(CaseOpening.this, Clicker.class));
+                startActivity(new Intent(CaseOpening.this, Clicker.class).putExtra("SCORE",score));
                 overridePendingTransition(0,0);
                 return true;
             } else if (id == R.id.inventory){
-                startActivity(new Intent(CaseOpening.this, Inventory.class));
+                startActivity(new Intent(CaseOpening.this, Inventory.class).putExtra("SCORE",score));
                 overridePendingTransition(0,0);
                 return true;
             } else if (id == R.id.store){
-                startActivity(new Intent(CaseOpening.this, Store.class));
+                startActivity(new Intent(CaseOpening.this, Store.class).putExtra("SCORE",score));
                 overridePendingTransition(0,0);
                 return true;
             }
