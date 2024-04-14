@@ -65,25 +65,29 @@ public class Store extends AppCompatActivity {
         binding.ivStoreBoxClassic.setOnClickListener(v -> {
             startActivity(new Intent(Store.this, CaseOpening.class)
                     .putExtra("SCORE",score)
-                    .putExtra("PRICE",BOX_PRICE_CLASSIC));
+                    .putExtra("PRICE",BOX_PRICE_CLASSIC)
+                    .putExtra("CASE_ID", 0));
         });
         //ACTION FOR THE DREAMS BOX TAP
         binding.ivStoreBoxDreams.setOnClickListener(v -> {
             startActivity(new Intent(Store.this, CaseOpening.class)
                     .putExtra("SCORE",score)
-                    .putExtra("PRICE",BOX_PRICE_DREAMS));
+                    .putExtra("PRICE",BOX_PRICE_DREAMS)
+                    .putExtra("CASE_ID", 1));
         });
         //ACTION FOR THE BRAVO BOX TAP
         binding.ivStoreBoxBravo.setOnClickListener(v -> {
             startActivity(new Intent(Store.this, CaseOpening.class)
                     .putExtra("SCORE",score)
-                    .putExtra("PRICE",BOX_PRICE_BRAVO));
+                    .putExtra("PRICE",BOX_PRICE_BRAVO)
+                    .putExtra("CASE_ID", 2));
         });
         //ACTION FOR THE COBBLE BOX TAP
         binding.ivStoreBoxCobble.setOnClickListener(v -> {
             startActivity(new Intent(Store.this, CaseOpening.class)
                     .putExtra("SCORE",score)
-                    .putExtra("PRICE",BOX_PRICE_COBBLE));
+                    .putExtra("PRICE",BOX_PRICE_COBBLE)
+                    .putExtra("CASE_ID", 3));
         });
 
     }
