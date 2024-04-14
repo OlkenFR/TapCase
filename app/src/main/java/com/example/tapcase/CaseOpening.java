@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.tapcase.databinding.ActivityCaseOpeningBinding;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.Random;
@@ -84,6 +85,7 @@ public class CaseOpening extends AppCompatActivity {
         weaponAvailableList.add(ak47);
         weaponAvailableList.add(awp);
         weaponAvailableList.add(knife);
+        Collections.sort(weaponAvailableList, new TriRarity());
         int compteur = 0;
         LinearLayout.LayoutParams layoutParams = new TableRow.LayoutParams(270, 270);
         for(Arme weapon : weaponAvailableList){
@@ -199,6 +201,8 @@ public class CaseOpening extends AppCompatActivity {
                 binding.btnOpenning.setClickable(false);
                 scrollPos = 0;
                 scrollSpeed = 30;
+                Random randomTimer = new Random();
+                double randomNumber = randomTimer.nextInt(6);
                 timer = new Timer();
                 timer.schedule(new TimerTask() {
                     @Override
@@ -210,7 +214,7 @@ public class CaseOpening extends AppCompatActivity {
                                 if (scrollSpeed > 5) {
                                     scrollSpeed -= 0.1;
                                 } else {
-                                    scrollSpeed -= 0.01;
+                                    scrollSpeed -= (randomNumber+10)/1000;//entre:0.010 et 0.015
                                 }
 
                                 binding.btnOpenning.setText("speed=" + (int) scrollSpeed + " pos=" + (int) scrollPos);
