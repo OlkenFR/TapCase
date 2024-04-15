@@ -56,7 +56,7 @@ public class Store extends AppCompatActivity {
         bottomNavigationView.setOnItemSelectedListener(item -> {
             int id = item.getItemId();
             if(id == R.id.clicker){
-                startActivity(new Intent(getApplicationContext(), Clicker.class).putExtra("SCORE", score));
+                startActivity(new Intent(getApplicationContext(), Clicker.class));
                 overridePendingTransition(0,0);
                 return true;
             } else if (id == R.id.inventory){
