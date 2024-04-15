@@ -128,7 +128,7 @@ public class CaseOpening extends AppCompatActivity {
             Random random = new Random();
             int randomNumber = random.nextInt(100);
 
-            if (randomNumber<15){
+            if (randomNumber<13){
                 weaponList.add(glock);
             } else if (randomNumber<35) {
                 weaponList.add(usp);
@@ -205,7 +205,7 @@ public class CaseOpening extends AppCompatActivity {
                 scrollPos = 0;
                 scrollSpeed = 30;
                 Random randomTimer = new Random();
-                double randomNumber = randomTimer.nextInt(6);
+                double randomNumber = randomTimer.nextInt(5);
                 timer = new Timer();
                 timer.schedule(new TimerTask() {
                     @Override
@@ -217,7 +217,7 @@ public class CaseOpening extends AppCompatActivity {
                                 if (scrollSpeed > 5) {
                                     scrollSpeed -= 0.1;
                                 } else {
-                                    scrollSpeed -= (randomNumber+10)/1000;//entre:0.010 et 0.015
+                                    scrollSpeed -= (randomNumber+11)/1000;//entre:0.011 et 0.015
                                 }
 
                                 binding.btnOpenning.setText("speed=" + (int) scrollSpeed + " pos=" + (int) scrollPos);
