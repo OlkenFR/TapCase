@@ -105,39 +105,6 @@ public class Clicker extends AppCompatActivity {
                         binding.main.removeView(imageView);
                     }
                 }, 1000); //for 1 seconds
-
-
-
-
-//                params.addRule(RelativeLayout.CENTER_IN_PARENT);
-
-
-//                LinearLayout.LayoutParams paramsLayout = new LinearLayout.LayoutParams(150, 150);
-
-
-
-//                paramsLayout.leftMargin = 500;
-//                paramsLayout.topMargin = 500;
-
-
-//                paramsLayout.setMargins(newMarginX, newMarginY, 0, 0);
-//                paramsLayout.leftMargin = 150;
-//                paramsLayout.width=150;
-//                paramsLayout.height=150;
-//                paramsLayout.leftMargin += newMarginX;
-//                paramsLayout.topMargin += newMarginY;
-
-
-
-//                paramsLayout.width = 500;
-//                paramsLayout.height = 500;
-//                imageView.setMaxWidth(200);
-//                imageView.setMaxHeight(200);
-//                imageView.setPadding(newMarginX, newMarginY, 0, 0);
-//                paramsLayout.setMargins(500, 500, 0, 0);
-
-
-
             }
             return true;
         });
