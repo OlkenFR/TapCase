@@ -1,6 +1,7 @@
 package com.example.tapcase;
 
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.widget.ImageView;
@@ -28,11 +29,17 @@ public class CaseOpening extends AppCompatActivity {
     private int price;
     private int score;
     private int caseID;
+
+    MediaPlayer mediaPlayer;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityCaseOpeningBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        mediaPlayer = MediaPlayer.create(this, R.raw.open_sound);
+
         Intent intent = getIntent();
         if(intent != null) {
             price = intent.getIntExtra("PRICE", 0);
@@ -191,6 +198,22 @@ public class CaseOpening extends AppCompatActivity {
 
         //STARTING THE ROLL OF WEAPON
         binding.btnOpenning.setOnClickListener(v -> {
+            if (!mediaPlayer.isPlaying()) {
+                mediaPlayer.start();  // Démarrer la musique
+
+                // Arrêter la musique après un certain temps, par exemple après 10 secondes
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        if (mediaPlayer.isPlaying()) {
+                            mediaPlayer.stop();
+                            // Pour pouvoir jouer la musique à nouveau après stop, vous devez la préparer à nouveau
+                            mediaPlayer.prepareAsync();
+                            mediaPlayer.seekTo(0);
+                        }
+                    }
+                }, 6000);  // Délai en millisecondes
+            }
             if (score >= price) {
                 score = score - price;
                 binding.tvOpeningScore.setText("Score = " + score);
@@ -227,5 +250,14 @@ public class CaseOpening extends AppCompatActivity {
                 }, 0, 5); // Exécute la tâche toutes les 1000 millisecondes (1 seconde)
             }
         });
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (mediaPlayer != null) {
+            mediaPlayer.release();
+            mediaPlayer = null;
+        }
     }
 }

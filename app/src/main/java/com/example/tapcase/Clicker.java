@@ -2,6 +2,7 @@ package com.example.tapcase;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.MotionEvent;
@@ -20,6 +21,7 @@ import java.util.Random;
 public class Clicker extends AppCompatActivity {
     private ActivityClickerBinding binding;
     BottomNavigationView bottomNavigationView;
+    MediaPlayer mediaPlayer;
 
     private int score;
     private SharedPreferences prefs;
@@ -30,6 +32,8 @@ public class Clicker extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityClickerBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        mediaPlayer = MediaPlayer.create(this, R.raw.bruit_balle_2);
 
         prefs = getSharedPreferences("MY_PREFS_NAME", MODE_PRIVATE);
         editor = prefs.edit();
@@ -86,7 +90,7 @@ public class Clicker extends AppCompatActivity {
         ViewGroup parent = (ViewGroup) binding.getRoot();
         parent.setOnTouchListener((view, event) -> {
             if (event.getAction() == MotionEvent.ACTION_DOWN) {
-
+                mediaPlayer.start();
                 score++;
                 editor.putInt("SCORE", score);
                 editor.apply();
@@ -109,16 +113,16 @@ public class Clicker extends AppCompatActivity {
                 TextView texteViewTir = new TextView(Clicker.this);
                 texteViewTir.setText("o");
                 texteViewTir.setTextSize(20);
-                texteViewTir.setPadding(newMarginX,newMarginY, 0, 0);
+                texteViewTir.setPadding(newMarginX, newMarginY, 0, 0);
                 texteViewTir.setLayoutParams(paramsLayout);
 
                 //CODE FOR PRINTING IMAGE WHILE SHOOTING
                 ImageView imageView = new ImageView(Clicker.this);
                 imageView.setImageResource(R.drawable.fleur);
-                paramsLayout.width = newMarginX+200;
-                paramsLayout.height = newMarginY+200;
+                paramsLayout.width = newMarginX + 200;
+                paramsLayout.height = newMarginY + 200;
                 imageView.setScaleType(ImageView.ScaleType.FIT_XY);
-                imageView.setPadding(newMarginX,newMarginY, 0, 0);
+                imageView.setPadding(newMarginX, newMarginY, 0, 0);
                 imageView.setLayoutParams(paramsLayout);
 
                 binding.main.addView(imageView);
@@ -129,9 +133,20 @@ public class Clicker extends AppCompatActivity {
                         binding.main.removeView(imageView);
                     }
                 }, 1000); //for 1 seconds
+            } else if (event.getAction() == MotionEvent.ACTION_UP){
+                mediaPlayer.seekTo(0);
             }
             return true;
         });
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (mediaPlayer != null) {
+            mediaPlayer.release();
+            mediaPlayer = null;
+        }
     }
 }
 
