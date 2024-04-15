@@ -2,6 +2,7 @@ package com.example.tapcase;
 
 import android.content.Intent;
 import android.media.MediaPlayer;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.widget.ImageView;
@@ -29,9 +30,9 @@ public class CaseOpening extends AppCompatActivity {
     private int price;
     private int score;
     private int caseID;
-
     MediaPlayer mediaPlayer;
-
+    private SharedPreferences prefs;
+    private SharedPreferences.Editor editor;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,8 +47,11 @@ public class CaseOpening extends AppCompatActivity {
             score = intent.getIntExtra("SCORE", 0);
             caseID = intent.getIntExtra("CASE_ID", 0);
             binding.tvOpenningCasePrice.setText("Price = " + price);
-            binding.tvOpeningScore.setText("Score = " + score);
+            binding.tvScore.setText("" + score);
         }
+
+        prefs = getSharedPreferences("MY_PREFS_NAME", MODE_PRIVATE);
+        editor = prefs.edit();
 
         Arme glock = new Arme(getResources().getDrawable(R.drawable.glock_weasel), Rarete.SUPERIEUR, 2, 10, "Glock-17 Weasel");
         Arme usp = new Arme(getResources().getDrawable(R.drawable.usp_flashback), Rarete.SUPERIEUR, 7, 28, "USP-S Flashback");
@@ -129,7 +133,7 @@ public class CaseOpening extends AppCompatActivity {
             Random random = new Random();
             int randomNumber = random.nextInt(100);
 
-            if (randomNumber<15){
+            if (randomNumber<13){
                 weaponList.add(glock);
             } else if (randomNumber<35) {
                 weaponList.add(usp);
@@ -147,11 +151,8 @@ public class CaseOpening extends AppCompatActivity {
         }
 
         Case weaponCase = new Case(weaponList, 20, Rarete.BASE, weaponList.get(10));
-        binding.tvOpenningResult.setText("Result = " + weaponCase.getArmeObtenu().getNom());
-
         for(Arme weapon : weaponCase.getArmeDispo()){
             ImageView imageView = new ImageView(getApplicationContext());
-
             imageView.setImageDrawable(weapon.getImage_arme());
             Rarete weaponRarity = weapon.getRarete();
             if (weaponRarity == Rarete.BASE){
@@ -178,7 +179,7 @@ public class CaseOpening extends AppCompatActivity {
         binding.bottomNavigationView.setOnItemSelectedListener(item -> {
             int id = item.getItemId();
             if(id == R.id.clicker){
-                startActivity(new Intent(CaseOpening.this, Clicker.class).putExtra("SCORE",score));
+                startActivity(new Intent(CaseOpening.this, Clicker.class));
                 overridePendingTransition(0,0);
                 return true;
             } else if (id == R.id.inventory){
@@ -216,13 +217,16 @@ public class CaseOpening extends AppCompatActivity {
             }
             if (score >= price) {
                 score = score - price;
-                binding.tvOpeningScore.setText("Score = " + score);
+
+                editor.putInt("SCORE", score);
+                editor.apply();
+                binding.tvScore.setText("" + score);
 
                 binding.btnOpenning.setClickable(false);
                 scrollPos = 0;
                 scrollSpeed = 30;
                 Random randomTimer = new Random();
-                double randomNumber = randomTimer.nextInt(6);
+                double randomNumber = randomTimer.nextInt(5);
                 timer = new Timer();
                 timer.schedule(new TimerTask() {
                     @Override
@@ -234,7 +238,7 @@ public class CaseOpening extends AppCompatActivity {
                                 if (scrollSpeed > 5) {
                                     scrollSpeed -= 0.1;
                                 } else {
-                                    scrollSpeed -= (randomNumber+10)/1000;//entre:0.010 et 0.015
+                                    scrollSpeed -= (randomNumber+11)/1000;//entre:0.011 et 0.015
                                 }
 
                                 binding.btnOpenning.setText("speed=" + (int) scrollSpeed + " pos=" + (int) scrollPos);

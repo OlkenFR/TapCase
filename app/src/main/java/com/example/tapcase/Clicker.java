@@ -60,7 +60,6 @@ public class Clicker extends AppCompatActivity {
         update();
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
         bottomNavigationView.setSelectedItemId(R.id.clicker);
-
     }
 
     private void update() {
