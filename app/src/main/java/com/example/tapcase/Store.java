@@ -39,11 +39,11 @@ public class Store extends AppCompatActivity {
                     int id = item.getItemId();
                     if(id == R.id.clicker){
                         startActivity(new Intent(getApplicationContext(), Clicker.class));
-                        finish();
+                        overridePendingTransition(0,0);
                         return true;
                     } else if (id == R.id.inventory){
                         startActivity(new Intent(getApplicationContext(), Inventory.class));
-                        finish();
+                        overridePendingTransition(0,0);
                         return true;
                     } else if (id == R.id.store){
                         return true;

@@ -79,13 +79,13 @@ public class Inventory extends AppCompatActivity {
                     int id = item.getItemId();
                     if(id == R.id.clicker){
                         startActivity(new Intent(getApplicationContext(), Clicker.class));
-                        finish();
+                        overridePendingTransition(0,0);
                         return true;
                     } else if (id == R.id.inventory){
                         return true;
                     } else if (id == R.id.store){
                         startActivity(new Intent(getApplicationContext(), Store.class));
-                        finish();
+                        overridePendingTransition(0,0);
                         return true;
                     }
                     return false;
