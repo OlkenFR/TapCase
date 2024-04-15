@@ -24,6 +24,7 @@ public class Inventory extends AppCompatActivity {
     private static ActivityInventoryBinding binding;
 
     BottomNavigationView bottomNavigationView;
+    private Integer score;
 
     private List<Item> fragments_items = new ArrayList<>();
 
@@ -63,6 +64,8 @@ public class Inventory extends AppCompatActivity {
             ft.add(binding.gridLayout.getId(), item);
         }
 
+
+
         binding.btnSelect.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -74,22 +77,31 @@ public class Inventory extends AppCompatActivity {
                 = findViewById(R.id.bottomNavigationView);
         bottomNavigationView.setSelectedItemId(R.id.inventory);
 
-        bottomNavigationView
-                .setOnItemSelectedListener(item -> {
-                    int id = item.getItemId();
-                    if(id == R.id.clicker){
-                        startActivity(new Intent(getApplicationContext(), Clicker.class));
-                        overridePendingTransition(0,0);
-                        return true;
-                    } else if (id == R.id.inventory){
-                        return true;
-                    } else if (id == R.id.store){
-                        startActivity(new Intent(getApplicationContext(), Store.class));
-                        overridePendingTransition(0,0);
-                        return true;
-                    }
-                    return false;
-                });
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        Intent intent = getIntent();
+        if (intent != null) {
+            score = intent.getIntExtra("SCORE", 0);
+            binding.tvScore.setText("" + score);
+        }
+        bottomNavigationView.setOnItemSelectedListener(item -> {
+            int id = item.getItemId();
+            if (id == R.id.clicker) {
+                startActivity(new Intent(getApplicationContext(), Clicker.class).putExtra("SCORE", score));
+                overridePendingTransition(0, 0);
+                return true;
+            } else if (id == R.id.store) {
+                startActivity(new Intent(getApplicationContext(), Store.class).putExtra("SCORE", score));
+                overridePendingTransition(0, 0);
+                return true;
+            } else if (id == R.id.inventory) {
+                return true;
+            }
+            return false;
+        });
     }
 
     private List<Item> readItemsFromTextFile() {

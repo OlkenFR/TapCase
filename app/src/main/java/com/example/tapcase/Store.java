@@ -22,6 +22,11 @@ public class Store extends AppCompatActivity {
     private double scrollPos;
     private Timer timer;
     private final Handler handler = new Handler();
+    private int score;
+    private int BOX_PRICE_CLASSIC = 10;
+    private int BOX_PRICE_DREAMS = 20;
+    private int BOX_PRICE_BRAVO = 30;
+    private int BOX_PRICE_COBBLE = 40;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,30 +51,24 @@ public class Store extends AppCompatActivity {
         Intent intent = getIntent();
         if(intent != null) {
             score = intent.getIntExtra("SCORE", 0);
-            binding.tvStore.setText("Score = " + score);
+            binding.tvScore.setText("" + score);
         }
-
-
         bottomNavigationView.setOnItemSelectedListener(item -> {
-                    int id = item.getItemId();
-                    if(id == R.id.clicker){
-                        startActivity(new Intent(getApplicationContext(), Clicker.class));
-                        overridePendingTransition(0,0);
-                        return true;
-                    } else if (id == R.id.inventory){
-                        startActivity(new Intent(getApplicationContext(), Inventory.class));
-                        overridePendingTransition(0,0);
-                        return true;
-                    } else if (id == R.id.store){
-                        return true;
-                    }
-                    return false;
-                });
-    }
+            int id = item.getItemId();
+            if(id == R.id.clicker){
+                startActivity(new Intent(getApplicationContext(), Clicker.class).putExtra("SCORE", score));
+                overridePendingTransition(0,0);
+                return true;
+            } else if (id == R.id.inventory){
+                startActivity(new Intent(getApplicationContext(), Inventory.class).putExtra("SCORE", score));
+                overridePendingTransition(0,0);
+                return true;
+            } else if (id == R.id.store){
+                return true;
+            }
+            return false;
+        });
 
-    @Override
-    public void onResume() {
-        super.onResume();
 
         //ACTION FOR THE CLASSIC BOX TAP
         binding.ivStoreBoxClassic.setOnClickListener(v -> {
@@ -98,39 +97,6 @@ public class Store extends AppCompatActivity {
                     .putExtra("SCORE",score)
                     .putExtra("PRICE",BOX_PRICE_COBBLE)
                     .putExtra("CASE_ID", 3));
-        });
-
-
-
-
-
-        //STARTING THE ROLL OF WEAPON
-        binding.btnStore.setOnClickListener(v -> {
-            scrollPos=0;
-            scrollSpeed=30;
-            timer = new Timer();
-            timer.schedule(new TimerTask() {
-                @Override
-                public void run() {
-                    handler.post(new Runnable() {
-                        @Override
-                        public void run() {
-                            scrollPos += scrollSpeed; // Increment the scroll position
-                            if(scrollSpeed>5){
-                                scrollSpeed -= 0.1;
-                            }else{
-                                scrollSpeed -= 0.01;
-                            }
-
-                            binding.tvStore.setText("speed=" + (int) scrollSpeed + " pos=" + (int) scrollPos);
-                            binding.horizontal.scrollTo((int) scrollPos, 0); // Scroll to the new position
-                            if (scrollSpeed <= 0) {
-                                timer.cancel(); // Stop the timer when the activity is destroyed
-                            }
-                        }
-                    });
-                }
-            }, 0, 5); // Exécute la tâche toutes les 1000 millisecondes (1 seconde)
         });
     }
 }

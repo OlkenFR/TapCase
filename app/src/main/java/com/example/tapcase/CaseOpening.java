@@ -192,9 +192,6 @@ public class CaseOpening extends AppCompatActivity {
         //STARTING THE ROLL OF WEAPON
         binding.btnOpenning.setOnClickListener(v -> {
             if (score >= price) {
-
-
-
                 score = score - price;
                 binding.tvOpeningScore.setText("Score = " + score);
 

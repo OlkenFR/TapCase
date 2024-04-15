@@ -3,10 +3,19 @@ package com.example.tapcase;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
+import android.view.MotionEvent;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.tapcase.databinding.ActivityClickerBinding;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+
+import java.util.Random;
 
 public class Clicker extends AppCompatActivity {
     private ActivityClickerBinding binding;
@@ -47,21 +56,7 @@ public class Clicker extends AppCompatActivity {
         update();
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
         bottomNavigationView.setSelectedItemId(R.id.clicker);
-        bottomNavigationView.setOnItemSelectedListener(item -> {
-            int id = item.getItemId();
-            if(id == R.id.clicker){
-                return true;
-            } else if (id == R.id.inventory){
-                startActivity(new Intent(getApplicationContext(), Inventory.class));
-                overridePendingTransition(0,0);
-                return true;
-            } else if (id == R.id.store){
-                startActivity(new Intent(getApplicationContext(), Store.class));
-                overridePendingTransition(0,0);
-                return true;
-            }
-            return false;
-        });
+
     }
 
     private void update() {
@@ -72,18 +67,30 @@ public class Clicker extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        binding.btnClicker.setOnClickListener(view -> {
-            score++;
-            editor.putInt("SCORE", score);
-            editor.apply();
-            update();
+        bottomNavigationView.setOnItemSelectedListener(item -> {
+            int id = item.getItemId();
+            if(id == R.id.clicker){
+                return true;
+            } else if (id == R.id.inventory){
+                startActivity(new Intent(getApplicationContext(), Inventory.class).putExtra("SCORE", score));
+                overridePendingTransition(0,0);
+                return true;
+            } else if (id == R.id.store){
+                startActivity(new Intent(getApplicationContext(), Store.class).putExtra("SCORE", score));
+                overridePendingTransition(0,0);
+                return true;
+            }
+            return false;
+        });
 
         ViewGroup parent = (ViewGroup) binding.getRoot();
         parent.setOnTouchListener((view, event) -> {
             if (event.getAction() == MotionEvent.ACTION_DOWN) {
 
-                score += 1;
-                binding.tvScore.setText("Score = " + score);
+                score++;
+                editor.putInt("SCORE", score);
+                editor.apply();
+                update();
 
                 RelativeLayout.LayoutParams paramsLayout = new RelativeLayout.LayoutParams(
                         RelativeLayout.LayoutParams.MATCH_PARENT,
@@ -127,3 +134,5 @@ public class Clicker extends AppCompatActivity {
         });
     }
 }
+
+

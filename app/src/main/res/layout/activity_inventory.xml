@@ -8,17 +8,6 @@
     tools:context=".Inventory">
 
     <ImageView
-        android:id="@+id/iv_logo_inventory"
-        android:layout_width="67dp"
-        android:layout_height="81dp"
-        android:layout_marginStart="3dp"
-        android:layout_marginEnd="9dp"
-        app:layout_constraintEnd_toStartOf="@+id/iv_weapon_selected"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/logo" />
-
-    <ImageView
         android:id="@+id/iv_score_background"
         android:layout_width="151dp"
         android:layout_height="58dp"
@@ -32,14 +21,14 @@
 
     <ImageView
         android:id="@+id/iv_fleurs_score"
-        android:layout_width="55dp"
-        android:layout_height="51dp"
+        android:layout_width="51dp"
+        android:layout_height="47dp"
+        android:layout_marginTop="6dp"
         android:layout_marginEnd="60dp"
-        android:layout_marginBottom="3dp"
-        app:layout_constraintBottom_toBottomOf="@+id/iv_score_background"
         app:layout_constraintEnd_toStartOf="@+id/tv_score"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/iv_score_background"
+        app:layout_constraintTop_toTopOf="@+id/iv_score_background"
         app:srcCompat="@drawable/fleur" />
 
     <TextView
@@ -47,14 +36,25 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="20dp"
         android:layout_marginEnd="32dp"
+        android:layout_marginBottom="5dp"
         android:text="0"
         android:textSize="34sp"
+        app:layout_constraintBottom_toBottomOf="@+id/iv_score_background"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.993"
+        app:layout_constraintHorizontal_bias="0.99"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/iv_logo_inventory"
+        android:layout_width="67dp"
+        android:layout_height="81dp"
+        android:layout_marginStart="3dp"
+        android:layout_marginEnd="9dp"
+        app:layout_constraintEnd_toStartOf="@+id/iv_weapon_selected"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/logo" />
 
     <ImageView
         android:id="@+id/iv_weapon_selected"
@@ -134,11 +134,11 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <androidx.fragment.app.FragmentContainerView
-                android:id="@+id/fragment_item"
-                android:name="com.example.tapcase.Item"
+            <GridLayout
+                android:id="@+id/gridLayout"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:columnCount="3"/>
 
         </LinearLayout>
     </ScrollView>
