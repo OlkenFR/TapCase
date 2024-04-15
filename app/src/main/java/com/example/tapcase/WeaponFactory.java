@@ -13,7 +13,7 @@ public class WeaponFactory extends AppCompatActivity {
             case GLOCK_WATER_ELEMENT:
                 return new Arme(getResources().getDrawable(R.drawable.glock_water_element), Rarete.EXOTIQUE, 4, 25, "Glock-17 Water element");
             case GLOCK_BLACK_NEO:
-                return new Arme((getResources().getDrawable(R.drawable.glock_neo_noir), Rarete.EXOTIQUE, 7, 40, "Glock-17 Black-Neo");
+                return new Arme(getResources().getDrawable(R.drawable.glock_neo_noir), Rarete.EXOTIQUE, 7, 40, "Glock-17 Black-Neo");
             case GLOCK_BULLET_QUEEN:
                 return new Arme(getResources().getDrawable(R.drawable.glock_bullet_queen), Rarete.CLASSIFIE, 15, 75, "Glock-17 Bullet queen");
             case USP_CYREX:
