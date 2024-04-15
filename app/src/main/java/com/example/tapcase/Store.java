@@ -34,8 +34,23 @@ public class Store extends AppCompatActivity {
 
         bottomNavigationView.setSelectedItemId(R.id.store);
 
-        bottomNavigationView
-                .setOnItemSelectedListener(item -> {
+        binding.tvStoreBoxClassic.setText("Price = " + BOX_PRICE_CLASSIC);
+        binding.tvStoreBoxDreams.setText("Price = " + BOX_PRICE_DREAMS);
+        binding.tvStoreBoxBravo.setText("Price = " + BOX_PRICE_BRAVO);
+        binding.tvStoreBoxCooblestone.setText("Price = " + BOX_PRICE_COBBLE);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        Intent intent = getIntent();
+        if(intent != null) {
+            score = intent.getIntExtra("SCORE", 0);
+            binding.tvStore.setText("Score = " + score);
+        }
+
+
+        bottomNavigationView.setOnItemSelectedListener(item -> {
                     int id = item.getItemId();
                     if(id == R.id.clicker){
                         startActivity(new Intent(getApplicationContext(), Clicker.class));
@@ -58,19 +73,31 @@ public class Store extends AppCompatActivity {
 
         //ACTION FOR THE CLASSIC BOX TAP
         binding.ivStoreBoxClassic.setOnClickListener(v -> {
-            binding.tvTest.setText("Classic");
+            startActivity(new Intent(Store.this, CaseOpening.class)
+                    .putExtra("SCORE",score)
+                    .putExtra("PRICE",BOX_PRICE_CLASSIC)
+                    .putExtra("CASE_ID", 0));
         });
         //ACTION FOR THE DREAMS BOX TAP
         binding.ivStoreBoxDreams.setOnClickListener(v -> {
-            binding.tvTest.setText("Dreams");
+            startActivity(new Intent(Store.this, CaseOpening.class)
+                    .putExtra("SCORE",score)
+                    .putExtra("PRICE",BOX_PRICE_DREAMS)
+                    .putExtra("CASE_ID", 1));
         });
         //ACTION FOR THE BRAVO BOX TAP
         binding.ivStoreBoxBravo.setOnClickListener(v -> {
-            binding.tvTest.setText("Bravo");
+            startActivity(new Intent(Store.this, CaseOpening.class)
+                    .putExtra("SCORE",score)
+                    .putExtra("PRICE",BOX_PRICE_BRAVO)
+                    .putExtra("CASE_ID", 2));
         });
         //ACTION FOR THE COBBLE BOX TAP
         binding.ivStoreBoxCobble.setOnClickListener(v -> {
-            binding.tvTest.setText("Cobblestone");
+            startActivity(new Intent(Store.this, CaseOpening.class)
+                    .putExtra("SCORE",score)
+                    .putExtra("PRICE",BOX_PRICE_COBBLE)
+                    .putExtra("CASE_ID", 3));
         });
 
 

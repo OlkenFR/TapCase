@@ -21,6 +21,7 @@
         app:layout_constraintStart_toStartOf="parent"
         tools:layout_editor_absoluteY="38dp" />
 
+    
     <ImageView
         android:id="@+id/iv_score_background"
         android:layout_width="151dp"
@@ -58,7 +59,11 @@
         app:layout_constraintHorizontal_bias="0.993"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+    
+    
 
+    
+    
     <View
         android:id="@+id/rectangleView"
         android:layout_width="10dp"
