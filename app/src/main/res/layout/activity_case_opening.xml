@@ -6,66 +6,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#BED3E8"
+    android:visibility="visible"
     tools:context=".CaseOpening">
 
-<!--    <LinearLayout-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:orientation="horizontal"-->
-<!--        app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent">-->
 
-<!--        <ImageView-->
-<!--            android:id="@+id/iv_weapon_1"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_marginStart="32dp"-->
-<!--            android:layout_marginBottom="164dp"-->
-<!--            tools:srcCompat="@drawable/glock_bullet_queen" />-->
-
-<!--        <ImageView-->
-<!--            android:id="@+id/iv_weapon_2"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_marginStart="32dp"-->
-<!--            android:layout_marginEnd="32dp"-->
-<!--            android:layout_marginBottom="164dp"-->
-<!--            tools:srcCompat="@drawable/usp_cyrex" />-->
-
-<!--        <ImageView-->
-<!--            android:id="@+id/iv_weapon_3"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_marginEnd="32dp"-->
-<!--            android:layout_marginBottom="164dp"-->
-<!--            tools:srcCompat="@drawable/mp_food_chain" />-->
-
-        <!--        <ImageView-->
-        <!--            android:id="@+id/iv_weapon_4"-->
-        <!--            android:layout_width="100dp"-->
-        <!--            android:layout_height="100dp"-->
-        <!--            android:layout_marginStart="24dp"-->
-        <!--            android:layout_marginBottom="32dp"-->
-        <!--            tools:srcCompat="@drawable/m_hyperbeast" />-->
-
-        <!--        <ImageView-->
-        <!--            android:id="@+id/iv_weapon_5"-->
-        <!--            android:layout_width="100dp"-->
-        <!--            android:layout_height="100dp"-->
-        <!--            android:layout_marginStart="32dp"-->
-        <!--            android:layout_marginEnd="32dp"-->
-        <!--            android:layout_marginBottom="32dp"-->
-        <!--            tools:srcCompat="@drawable/ak_bloodsport" />-->
-
-        <!--        <ImageView-->
-        <!--            android:id="@+id/iv_weapon_6"-->
-        <!--            android:layout_width="100dp"-->
-        <!--            android:layout_height="100dp"-->
-        <!--            android:layout_marginEnd="24dp"-->
-        <!--            android:layout_marginBottom="32dp"-->
-        <!--            tools:srcCompat="@drawable/awp_dragon_lore" />-->
-<!--    </LinearLayout>-->
 
     <ImageView
         android:id="@+id/iv_logo_inventory"
@@ -122,80 +66,37 @@
         app:layout_constraintStart_toStartOf="parent"
         app:menu="@menu/bottom_nav_menu" />
 
-    <Button
-        android:id="@+id/btn_openning"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginEnd="32dp"
-        android:backgroundTint="#4CAF50"
-        android:text="Acheter"
-        android:textColor="#FFFFFF"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linear_case_open" />
-
-    <Button
-        android:id="@+id/btn_cancel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="32dp"
-        android:backgroundTint="#F44336"
-        android:text="Annuler"
-        android:textColor="#FFFFFF"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_openning" />
-
     <View
         android:id="@+id/rectangleView"
         android:layout_width="10dp"
         android:layout_height="150dp"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="200dp"
         android:layout_weight="1"
         android:background="#B30000"
         android:elevation="10dp"
+        android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <HorizontalScrollView
-        android:id="@+id/horizontal"
+        android:id="@+id/linear_open_open"
         android:layout_width="match_parent"
         android:layout_height="150dp"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="200dp"
+        android:scrollbars="none"
         android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
             android:id="@+id/linear"
             android:layout_width="match_parent"
             android:layout_height="150dp"
-            android:orientation="horizontal" />
+            android:orientation="horizontal"
+            android:scrollbars="vertical" />
     </HorizontalScrollView>
-
-    <TableLayout
-        android:id="@+id/tl_case_list"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="32dp"
-        app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
-
-        <TableRow
-            android:id="@+id/tr_1"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-
-        <TableRow
-            android:id="@+id/tr2"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-
-    </TableLayout>
 
     <LinearLayout
         android:id="@+id/linear_case_open"
@@ -220,11 +121,65 @@
             android:id="@+id/tv_openning_case_price"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
             android:gravity="center"
             android:text="TextView"
             android:textColor="#000000"
             android:textSize="20sp" />
+
+        <Button
+            android:id="@+id/btn_openning"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="8dp"
+            android:backgroundTint="#4CAF50"
+            android:text="Acheter"
+            android:textColor="#FFFFFF" />
+
+        <Button
+            android:id="@+id/btn_cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="8dp"
+            android:backgroundTint="#F44336"
+            android:text="Annuler"
+            android:textColor="#FFFFFF" />
+
     </LinearLayout>
+
+    <TableLayout
+        android:id="@+id/tl_case_list"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="32dp"
+        app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <TableRow
+            android:id="@+id/tr_1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <TableRow
+            android:id="@+id/tr2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </TableLayout>
+
+    <Button
+        android:id="@+id/btn_block_scroll"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_marginTop="200dp"
+        android:backgroundTint="#00FFFFFF"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TableRow;
@@ -204,6 +205,12 @@ public class CaseOpening extends AppCompatActivity {
         //STARTING THE ROLL OF WEAPON
         binding.btnOpenning.setOnClickListener(v -> {
             if (score >= price) {
+                binding.btnOpenning.setClickable(false);
+
+                binding.linearCaseOpen.setVisibility(View.INVISIBLE);
+                binding.rectangleView.setVisibility(View.VISIBLE);
+                binding.linearOpenOpen.setVisibility(View.VISIBLE);
+
                 score = score - price;
 
                 editor.putInt("SCORE", score);
@@ -225,7 +232,7 @@ public class CaseOpening extends AppCompatActivity {
                     }, 3500); //STOP AFTER 3500MS
                 }
 
-                binding.btnOpenning.setClickable(false);
+
                 scrollPos = 0;
                 scrollSpeed = 30;
                 Random randomTimer = new Random();
@@ -243,11 +250,10 @@ public class CaseOpening extends AppCompatActivity {
                                 } else {
                                     scrollSpeed -= (randomNumber+11)/1000;//entre:0.011 et 0.015
                                 }
-                                binding.horizontal.scrollTo((int) scrollPos, 0); // Scroll to the new position
+                                binding.linearOpenOpen.scrollTo((int) scrollPos, 0); // Scroll to the new position
                                 if (scrollSpeed < 0.5) {
                                     scrollSpeed = 0;
                                     timer.cancel();
-                                    binding.btnOpenning.setClickable(true);
                                 }
                             }
                         });
