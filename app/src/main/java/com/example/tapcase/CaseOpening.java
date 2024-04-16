@@ -180,18 +180,28 @@ public class CaseOpening extends AppCompatActivity {
             binding.btnCancel.setOnClickListener(v -> {
                 binding.bottomNavigationView.getMenu().performIdentifierAction(R.id.store, 0);
             });
+
+            Intent caseOpeningToStore = new Intent(CaseOpening.this, Store.class);
+            Intent caseOpeningToInventory = new Intent(CaseOpening.this, Inventory.class);
+            Intent caseOpeningToClicker = new Intent(CaseOpening.this, Clicker.class);
+            Bundle bundleCaseOpeningToStore = new Bundle();
+            Bundle bundleCaseOpeningToInventory = new Bundle();
+            bundleCaseOpeningToStore.putSerializable("GAME_INFO", gameInformation);
+            caseOpeningToStore.putExtras(bundleCaseOpeningToStore);
+            bundleCaseOpeningToInventory.putSerializable("GAME_INFO", gameInformation);
+            caseOpeningToInventory.putExtras(bundleCaseOpeningToInventory);
             binding.bottomNavigationView.setOnItemSelectedListener(item -> {
                 int id = item.getItemId();
                 if (id == R.id.clicker) {
-                    startActivity(new Intent(CaseOpening.this, Clicker.class));
+                    startActivity(caseOpeningToClicker);
                     overridePendingTransition(0, 0);
                     return true;
                 } else if (id == R.id.inventory) {
-                    startActivity(new Intent(CaseOpening.this, Inventory.class));
+                    startActivity(caseOpeningToInventory);
                     overridePendingTransition(0, 0);
                     return true;
                 } else if (id == R.id.store) {
-                    startActivity(new Intent(CaseOpening.this, Store.class));
+                    startActivity(caseOpeningToStore);
                     overridePendingTransition(0, 0);
                     return true;
                 }
