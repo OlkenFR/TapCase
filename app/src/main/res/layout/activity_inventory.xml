@@ -64,6 +64,7 @@
         android:layout_marginTop="88dp"
         android:layout_marginBottom="16dp"
         android:text="Nom de l'arme"
+        android:textColor="#000000"
         app:layout_constraintBottom_toTopOf="@+id/tvWeaponPrice"
         app:layout_constraintStart_toEndOf="@+id/iv_weapon_selected"
         app:layout_constraintTop_toTopOf="parent" />
@@ -75,6 +76,7 @@
         android:layout_marginStart="20dp"
         android:layout_marginTop="24dp"
         android:text="Prix"
+        android:textColor="#000000"
         app:layout_constraintStart_toEndOf="@+id/iv_weapon_selected"
         app:layout_constraintTop_toBottomOf="@+id/tv_arme_selectionne" />
 
@@ -86,6 +88,7 @@
         android:layout_marginTop="16dp"
         android:layout_marginBottom="12dp"
         android:text="Performance"
+        android:textColor="#000000"
         app:layout_constraintBottom_toTopOf="@+id/btn_select"
         app:layout_constraintStart_toEndOf="@+id/iv_weapon_selected"
         app:layout_constraintTop_toBottomOf="@+id/tvWeaponPrice" />
@@ -163,6 +166,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="180dp"
         android:text="Nombre d'armes : "
+        android:textColor="#000000"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/iv_logo_inventory" />
 
@@ -172,7 +176,8 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="3dp"
         android:layout_marginBottom="12dp"
-        android:text="Trié par :"
+        android:text="TriÃ© par :"
+        android:textColor="#000000"
         android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@+id/scrollView2"
         app:layout_constraintEnd_toStartOf="@+id/spinner_Sort" />
