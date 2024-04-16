@@ -6,14 +6,33 @@ import java.util.List;
 public class Case implements Serializable {
     private List<Arme> armeDispo;
     private Integer prix;
-    private Rarete rarete;
+    private String caseFileName;
+
+    private CaseType caseType;
     private Arme armeObtenu;
 
-    public Case(List<Arme> armeDispo, Integer prix, Rarete rarete, Arme armeObtenu) {
+    public Case(List<Arme> armeDispo, CaseType caseType, Integer prix, String caseFileName, Arme armeObtenu) {
         this.armeDispo = armeDispo;
         this.prix = prix;
-        this.rarete = rarete;
+        this.caseType = caseType;
+        this.caseFileName = caseFileName;
         this.armeObtenu = armeObtenu;
+    }
+
+    public String getCaseFileName() {
+        return caseFileName;
+    }
+
+    public CaseType getCaseType() {
+        return caseType;
+    }
+
+    public void setCaseType(CaseType caseType) {
+        this.caseType = caseType;
+    }
+
+    public void setCaseFileName(String caseFileName) {
+        this.caseFileName = caseFileName;
     }
 
     public List<Arme> getArmeDispo() {
@@ -30,14 +49,6 @@ public class Case implements Serializable {
 
     public void setPrix(Integer prix) {
         this.prix = prix;
-    }
-
-    public Rarete getRarete() {
-        return rarete;
-    }
-
-    public void setRarete(Rarete rarete) {
-        this.rarete = rarete;
     }
 
     public Arme getArmeObtenu() {
