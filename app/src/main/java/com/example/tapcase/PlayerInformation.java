@@ -36,10 +36,16 @@ public class PlayerInformation implements Serializable {
 
         for (int i = 0; i < player_armes.size(); i++) {
             Arme arme = player_armes.get(i);
-            sb.append("    Index: ").append(i).append(", Arme: ").append(arme.getNom()).append(", ").append(arme.getFileName()).append("\n");
+            sb.append("    Index: ").append(i).append("\n");
+            sb.append("      Rarete: ").append(arme.getRarete()).append("\n");
+            sb.append("      Flower per click: ").append(arme.getFlower_per_click()).append("\n");
+            sb.append("      Prix: ").append(arme.getPrix()).append("\n");
+            sb.append("      Nom: ").append(arme.getNom()).append("\n");
+            sb.append("      FileName: ").append(arme.getFileName()).append("\n");
         }
         sb.append("}");
         return sb.toString();
     }
+
 
 }

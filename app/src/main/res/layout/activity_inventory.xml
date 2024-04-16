@@ -113,6 +113,7 @@
         app:layout_constraintTop_toBottomOf="@+id/iv_weapon_selected" />
 
     <ScrollView
+        android:id="@+id/scrollView2"
         android:layout_width="411dp"
         android:layout_height="371dp"
         android:layout_marginTop="48dp"
@@ -131,7 +132,7 @@
                 android:id="@+id/gridLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:columnCount="3"/>
+                android:columnCount="3" />
 
         </LinearLayout>
     </ScrollView>
@@ -148,4 +149,35 @@
         app:itemIconSize="75dp"
         app:labelVisibilityMode="unlabeled"
         app:itemActiveIndicatorStyle="@color/black"/>
+
+    <TextView
+        android:id="@+id/tv_numberOfWeapon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="180dp"
+        android:text="Nombre d'armes : "
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/iv_logo_inventory" />
+
+    <TextView
+        android:id="@+id/tv_sortBy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="3dp"
+        android:layout_marginBottom="12dp"
+        android:text="Trié par :"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/scrollView2"
+        app:layout_constraintEnd_toStartOf="@+id/spinner_Sort" />
+
+    <Spinner
+        android:id="@+id/spinner_Sort"
+        android:layout_width="152dp"
+        android:layout_height="48dp"
+        android:layout_marginEnd="1dp"
+        android:minHeight="48dp"
+        android:scaleType="center"
+        app:layout_constraintBottom_toTopOf="@+id/scrollView2"
+        app:layout_constraintEnd_toEndOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
