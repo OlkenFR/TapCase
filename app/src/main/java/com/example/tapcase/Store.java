@@ -81,7 +81,7 @@ public class Store extends AppCompatActivity {
             // TODO case à changer et à réassigner au bundle
             //  bundleStoreToCaseOpening.putSerializable("GAME_INFO", caseInformation);
             //  Faire fonction createCase
-            startActivity(storeToCaseOpening);
+            startActivity(storeToCaseOpening) ;
         });
         //ACTION FOR THE DREAMS BOX TAP
         binding.ivStoreBoxDreams.setOnClickListener(v -> {
