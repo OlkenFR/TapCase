@@ -60,10 +60,11 @@
         android:id="@+id/tv_arme_selectionne"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="80dp"
-        android:text="AK"
-        android:textColor="#000000"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="88dp"
+        android:layout_marginBottom="16dp"
+        android:text="Nom de l'arme"
+        app:layout_constraintBottom_toTopOf="@+id/tvWeaponPrice"
         app:layout_constraintStart_toEndOf="@+id/iv_weapon_selected"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -74,7 +75,6 @@
         android:layout_marginStart="20dp"
         android:layout_marginTop="24dp"
         android:text="Prix"
-        android:textColor="#000000"
         app:layout_constraintStart_toEndOf="@+id/iv_weapon_selected"
         app:layout_constraintTop_toBottomOf="@+id/tv_arme_selectionne" />
 
@@ -82,10 +82,11 @@
         android:id="@+id/tvWeaponsPerformance"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
-        android:layout_marginStart="10dp"
+        android:layout_marginStart="20dp"
         android:layout_marginTop="16dp"
+        android:layout_marginBottom="12dp"
         android:text="Performance"
-        android:textColor="#000000"
+        app:layout_constraintBottom_toTopOf="@+id/btn_select"
         app:layout_constraintStart_toEndOf="@+id/iv_weapon_selected"
         app:layout_constraintTop_toBottomOf="@+id/tvWeaponPrice" />
 
@@ -118,6 +119,7 @@
         app:layout_constraintTop_toBottomOf="@+id/iv_weapon_selected" />
 
     <ScrollView
+        android:id="@+id/scrollView2"
         android:layout_width="411dp"
         android:layout_height="371dp"
         android:layout_marginTop="48dp"
@@ -153,4 +155,35 @@
         app:itemIconSize="75dp"
         app:labelVisibilityMode="unlabeled"
         app:itemActiveIndicatorStyle="@color/black"/>
+
+    <TextView
+        android:id="@+id/tv_numberOfWeapon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="180dp"
+        android:text="Nombre d'armes : "
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/iv_logo_inventory" />
+
+    <TextView
+        android:id="@+id/tv_sortBy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="3dp"
+        android:layout_marginBottom="12dp"
+        android:text="Trié par :"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/scrollView2"
+        app:layout_constraintEnd_toStartOf="@+id/spinner_Sort" />
+
+    <Spinner
+        android:id="@+id/spinner_Sort"
+        android:layout_width="152dp"
+        android:layout_height="48dp"
+        android:layout_marginEnd="1dp"
+        android:minHeight="48dp"
+        android:scaleType="center"
+        app:layout_constraintBottom_toTopOf="@+id/scrollView2"
+        app:layout_constraintEnd_toEndOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
