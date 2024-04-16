@@ -10,13 +10,15 @@ public class Case implements Serializable {
 
     private CaseType caseType;
     private Arme armeObtenu;
+    private String caseName;
 
-    public Case(List<Arme> armeDispo, CaseType caseType, Integer prix, String caseFileName, Arme armeObtenu) {
+    public Case(List<Arme> armeDispo, CaseType caseType, Integer prix, String caseFileName, Arme armeObtenu, String caseName) {
         this.armeDispo = armeDispo;
         this.prix = prix;
         this.caseType = caseType;
         this.caseFileName = caseFileName;
         this.armeObtenu = armeObtenu;
+        this.caseName = caseName;
     }
 
     public String getCaseFileName() {
@@ -57,5 +59,12 @@ public class Case implements Serializable {
 
     public void setArmeObtenu(Arme armeObtenu) {
         this.armeObtenu = armeObtenu;
+    }
+    public String getCaseName() {
+        return caseName;
+    }
+
+    public void setCaseName(String caseName) {
+        this.caseName = caseName;
     }
 }

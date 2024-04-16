@@ -34,6 +34,7 @@ public class CaseOpening extends AppCompatActivity {
     private GameInformation gameInformation;
     private PlayerInformation playerInformation;
     private int price;
+    private String name;
     private int score;
     private int caseID;
     private SharedPreferences prefs;
@@ -66,6 +67,8 @@ public class CaseOpening extends AppCompatActivity {
             binding.tvScore.setText("" + score);
             price = caseInformation.getCaseInfomation().getPrix();
             binding.tvOpenningCasePrice.setText("Prix = " + price);
+            name = caseInformation.getCaseInfomation().getCaseName();
+            binding.tvCaseName.setText("" + name);
             binding.ivCase.setImageResource(getResources().getIdentifier(caseInformation.getCaseInfomation().getCaseFileName(), "drawable", getPackageName()));
             //CANCEL BUTTON SIMULATE A CLICK ON THE STORE
             binding.btnCancel.setOnClickListener(v -> {

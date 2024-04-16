@@ -174,25 +174,26 @@
         android:id="@+id/tv_sortBy"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
         android:layout_marginBottom="60dp"
         android:text="Trié par :"
         android:textColor="#000000"
         android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@+id/scrollView2"
-        app:layout_constraintEnd_toStartOf="@+id/spinner_Sort" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Spinner
         android:id="@+id/spinner_Sort"
-        android:layout_width="152dp"
+        android:layout_width="wrap_content"
         android:layout_height="48dp"
-        android:layout_marginEnd="4dp"
+        android:layout_marginStart="8dp"
         android:layout_marginBottom="48dp"
+        android:background="@drawable/arrondir_base"
         android:foregroundTint="#000000"
         android:minHeight="48dp"
         android:scaleType="center"
         app:layout_constraintBottom_toTopOf="@+id/scrollView2"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintStart_toEndOf="@+id/tv_sortBy" />
 
     <CheckBox
         android:id="@+id/ascendingCheckBox"
@@ -200,6 +201,7 @@
         android:layout_height="48dp"
         android:layout_marginEnd="4dp"
         android:text="Ordre croissant"
+        android:textColor="#000000"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/spinner_Sort" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -28,10 +28,10 @@ public class Store extends AppCompatActivity {
     private int score;
     private List<Case> caseAvailable;
     private List<Arme> armeAvailable;
-    private int BOX_PRICE_CLASSIC = 10;
-    private int BOX_PRICE_DREAMS = 20;
-    private int BOX_PRICE_BRAVO = 30;
-    private int BOX_PRICE_COBBLE = 40;
+    private static final int BOX_PRICE_CLASSIC = 100;
+    private static final int BOX_PRICE_DREAMS = 500;
+    private static final int BOX_PRICE_BRAVO = 1000;
+    private static final int BOX_PRICE_COBBLE = 5000;
 
     private SharedPreferences prefs;
     private SharedPreferences.Editor editor;
@@ -51,10 +51,10 @@ public class Store extends AppCompatActivity {
         binding.tvStoreBoxDreams.setText("" + BOX_PRICE_DREAMS);
         binding.tvStoreBoxBravo.setText("" + BOX_PRICE_BRAVO);
         binding.tvStoreBoxCooblestone.setText("" + BOX_PRICE_COBBLE);
-        binding.tvStoreBoxClassic.setText("Price = " + BOX_PRICE_CLASSIC);
-        binding.tvStoreBoxDreams.setText("Price = " + BOX_PRICE_DREAMS);
-        binding.tvStoreBoxBravo.setText("Price = " + BOX_PRICE_BRAVO);
-        binding.tvStoreBoxCooblestone.setText("Price = " + BOX_PRICE_COBBLE);
+        binding.tvStoreBoxClassic.setText("Prix = " + BOX_PRICE_CLASSIC);
+        binding.tvStoreBoxDreams.setText("Prix = " + BOX_PRICE_DREAMS);
+        binding.tvStoreBoxBravo.setText("Prix = " + BOX_PRICE_BRAVO);
+        binding.tvStoreBoxCooblestone.setText("Prix = " + BOX_PRICE_COBBLE);
         prefs = getSharedPreferences("MY_PREFS_NAME", MODE_PRIVATE);
         editor = prefs.edit();
     }
@@ -93,7 +93,7 @@ public class Store extends AppCompatActivity {
         Intent storeToCaseOpening = new Intent(Store.this, CaseOpening.class);
         Bundle bundleStoreToCaseOpening = new Bundle();
 
-        this.caseInformation = new CaseInformation(gameInformation, new Case(gameInformation.getWeaponAvailable(), CaseType.BravoCase,1000 , "box_bravo_operation", gameInformation.getWeaponAvailable().get(3)));
+        this.caseInformation = new CaseInformation(gameInformation, new Case(gameInformation.getWeaponAvailable(), CaseType.BravoCase,1000 , "box_bravo_operation", gameInformation.getWeaponAvailable().get(3), "Caisse init"));
         bundleStoreToCaseOpening.putSerializable("CASE_INFO", caseInformation);
         storeToCaseOpening.putExtras(bundleStoreToCaseOpening);
         //ACTION FOR THE CLASSIC BOX TAP
@@ -105,7 +105,7 @@ public class Store extends AppCompatActivity {
             List<Arme> weaponList = new ArrayList<>();
             List<Integer> list = new ArrayList<>(Arrays.asList(1, 6, 12, 17, 20, 26, 31));
             weaponList = loadCase(list, weaponList);
-            Case weaponCase = new Case(weaponList, CaseType.ClassicCase, BOX_PRICE_CLASSIC, BOX_CLASSIC_LINK, weaponList.get(0));
+            Case weaponCase = new Case(weaponList, CaseType.ClassicCase, BOX_PRICE_CLASSIC, BOX_CLASSIC_LINK, weaponList.get(0), "Caisse classique");
             caseInformation = new CaseInformation(gameInformation, weaponCase);
             bundleStoreToCaseOpening.putSerializable("CASE_INFO", caseInformation);
             storeToCaseOpening.putExtras(bundleStoreToCaseOpening);
@@ -118,7 +118,7 @@ public class Store extends AppCompatActivity {
             List<Arme> weaponList = new ArrayList<>();
             List<Integer> list = new ArrayList<>(Arrays.asList(3, 5, 11, 16, 22, 25, 30));
             weaponList = loadCase(list, weaponList);
-            Case weaponCase = new Case(weaponList, CaseType.DreamsCase, BOX_PRICE_DREAMS, BOX_DREAMS_LINK, weaponList.get(0));
+            Case weaponCase = new Case(weaponList, CaseType.DreamsCase, BOX_PRICE_DREAMS, BOX_DREAMS_LINK, weaponList.get(0), "Caisse rêves et chauchemars");
             caseInformation = new CaseInformation(gameInformation, weaponCase);
             bundleStoreToCaseOpening.putSerializable("CASE_INFO", caseInformation);
             storeToCaseOpening.putExtras(bundleStoreToCaseOpening);
@@ -130,7 +130,7 @@ public class Store extends AppCompatActivity {
             List<Arme> weaponList = new ArrayList<>();
             List<Integer> list = new ArrayList<>(Arrays.asList(2, 8, 10, 18, 21, 27, 32));
             weaponList = loadCase(list, weaponList);
-            Case weaponCase = new Case(weaponList, CaseType.BravoCase, BOX_PRICE_BRAVO, BOX_BRAVO_LINK, weaponList.get(0));
+            Case weaponCase = new Case(weaponList, CaseType.BravoCase, BOX_PRICE_BRAVO, BOX_BRAVO_LINK, weaponList.get(0), "Caisse bravo");
             caseInformation = new CaseInformation(gameInformation, weaponCase);
             bundleStoreToCaseOpening.putSerializable("CASE_INFO", caseInformation);
             storeToCaseOpening.putExtras(bundleStoreToCaseOpening);
@@ -142,7 +142,7 @@ public class Store extends AppCompatActivity {
             List<Arme> weaponList = new ArrayList<>();
             List<Integer> list = new ArrayList<>(Arrays.asList(4, 7, 13, 15, 23, 28, 33));
             weaponList = loadCase(list, weaponList);
-            Case weaponCase = new Case(weaponList, CaseType.CobbleCase, BOX_PRICE_COBBLE, BOX_COBBLESTONE_LINK, weaponList.get(0));
+            Case weaponCase = new Case(weaponList, CaseType.CobbleCase, BOX_PRICE_COBBLE, BOX_COBBLESTONE_LINK, weaponList.get(0), "Caisse souvenirs cobblestone");
             caseInformation = new CaseInformation(gameInformation, weaponCase);
             bundleStoreToCaseOpening.putSerializable("CASE_INFO", caseInformation);
             storeToCaseOpening.putExtras(bundleStoreToCaseOpening);

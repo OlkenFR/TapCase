@@ -100,7 +100,7 @@
 
     <LinearLayout
         android:id="@+id/linear_case_open"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginTop="80dp"
@@ -114,6 +114,7 @@
             android:id="@+id/iv_case"
             android:layout_width="194dp"
             android:layout_height="201dp"
+            android:layout_gravity="center"
             android:background="@drawable/arrondir_base"
             app:srcCompat="@drawable/box_classic" />
 
@@ -121,8 +122,17 @@
             android:id="@+id/tv_openning_case_price"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
+            android:layout_marginTop="2dp"
+            android:gravity="center"
+            android:text="TextView"
+            android:textColor="#000000"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/tv_case_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
             android:gravity="center"
             android:text="TextView"
             android:textColor="#000000"
@@ -136,7 +146,8 @@
             android:layout_marginTop="8dp"
             android:backgroundTint="#4CAF50"
             android:text="Acheter"
-            android:textColor="#FFFFFF" />
+            android:textColor="#FFFFFF"
+            android:textSize="20sp" />
 
         <Button
             android:id="@+id/btn_cancel"
@@ -146,7 +157,8 @@
             android:layout_marginTop="8dp"
             android:backgroundTint="#F44336"
             android:text="Annuler"
-            android:textColor="#FFFFFF" />
+            android:textColor="#FFFFFF"
+            android:textSize="20sp" />
 
     </LinearLayout>
 

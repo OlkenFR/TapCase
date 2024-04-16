@@ -45,6 +45,8 @@ public class Clicker extends AppCompatActivity {
     private List<Arme> armesPlayer = new ArrayList<>();
     private Arme default_weapon;
  	MediaPlayer mediaPlayer;
+    private AutoClickService autoClicker;
+    private Intent intentService;
  
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -126,6 +128,14 @@ public class Clicker extends AppCompatActivity {
         binding.tvNomArme.setText(weapon_selected.getNom());
         binding.tvPrixArme.setText("Prix : " + String.valueOf(weapon_selected.getPrix()));
         binding.tvPerfArme.setText("Performance : " + String.valueOf(weapon_selected.getFlower_per_click()) + " fleurs/tirs");
+
+
+//        binding.btnAutoClicker.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                startService(intentService);
+//            }
+//        });
     }
 
     private void update() {
@@ -272,7 +282,6 @@ public class Clicker extends AppCompatActivity {
             editor.apply();
         }
     }
-
 }
 
 
