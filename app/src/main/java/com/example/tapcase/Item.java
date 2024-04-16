@@ -24,8 +24,10 @@ public class Item extends Fragment {
     private static final String ARG_RARETE = "rarete";
     private static final String ARG_IMAGE = "image";
     private static final String ARG_FLEURS_CLIQUE = "fleurs_clique";
+    private static final String ARG_NOM_FICHIER = "fileName";
 
     private String nom;
+    private String fileName;
     private Integer prix;
     private Integer fleurs_par_click;
     private Rarete rarete = Rarete.BASE;
@@ -36,10 +38,11 @@ public class Item extends Fragment {
 
     }
 
-    public static Item newInstance(String nom, Integer prix, Rarete rarete, int imageResId, int fleurs_par_click) {
+    public static Item newInstance(String nom, String fileName, Integer prix, Rarete rarete, int imageResId, int fleurs_par_click) {
         Item fragment = new Item();
         Bundle args = new Bundle();
         args.putString(ARG_NOM_ARME, nom);
+        args.putString(ARG_NOM_FICHIER, fileName);
         args.putInt(ARG_PRIX, prix);
         args.putSerializable(ARG_RARETE, rarete);
         args.putInt(ARG_IMAGE, imageResId);
@@ -53,6 +56,7 @@ public class Item extends Fragment {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             nom = getArguments().getString(ARG_NOM_ARME);
+            fileName = getArguments().getString(ARG_NOM_FICHIER);
             prix = getArguments().getInt(ARG_PRIX);
             fleurs_par_click = getArguments().getInt(ARG_FLEURS_CLIQUE);
             rarete = (Rarete) getArguments().getSerializable(ARG_RARETE);
@@ -61,8 +65,7 @@ public class Item extends Fragment {
     }
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentItemBinding.inflate(inflater, container, false);
         binding.ivImageArme.setImageDrawable(image);
         switch (rarete){
@@ -85,11 +88,37 @@ public class Item extends Fragment {
         binding.ivImageArme.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Inventory.select_weapons(nom, image, rarete, prix, String.valueOf(fleurs_par_click), getResources());
+                Inventory.select_weapons(nom, fileName, image, rarete, prix, String.valueOf(fleurs_par_click), getResources());
             }
         });
-
         return binding.getRoot();
     }
 
+    public FragmentItemBinding getBinding() {
+        return binding;
+    }
+
+    public String getNom() {
+        return nom;
+    }
+
+    public String getFileName() {
+        return fileName;
+    }
+
+    public Integer getPrix() {
+        return prix;
+    }
+
+    public Integer getFleurs_par_click() {
+        return fleurs_par_click;
+    }
+
+    public Rarete getRarete() {
+        return rarete;
+    }
+
+    public Drawable getImage() {
+        return image;
+    }
 }

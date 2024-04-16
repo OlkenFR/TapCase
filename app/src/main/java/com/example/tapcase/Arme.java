@@ -5,28 +5,19 @@ import android.graphics.drawable.Drawable;
 import java.io.Serializable;
 
 public class Arme implements Serializable {
-    private Drawable image_arme;
     private Rarete rarete;
     private Integer flower_per_click;
     private Integer prix;
     private String nom;
+    private String fileName;
 
-    public Arme(Drawable image_arme, Rarete rarete, Integer flower_per_click, Integer prix, String nom) {
-        this.image_arme = image_arme;
+    public Arme(Rarete rarete, Integer flower_per_click, Integer prix, String nom, String fileName) {
         this.rarete = rarete;
         this.flower_per_click = flower_per_click;
         this.prix = prix;
         this.nom = nom;
+        this.fileName = fileName;
     }
-
-    public Drawable getImage_arme() {
-        return image_arme;
-    }
-
-    public void setImage_arme(Drawable image_arme) {
-        this.image_arme = image_arme;
-    }
-
     public Rarete getRarete() {
         return rarete;
     }
@@ -57,5 +48,24 @@ public class Arme implements Serializable {
 
     public void setNom(String nom) {
         this.nom = nom;
+    }
+
+    public String getFileName() {
+        return fileName;
+    }
+
+    public void setFileName(String fileName) {
+        this.fileName = fileName;
+    }
+
+    @Override
+    public String toString() {
+        return "Arme{" +
+                "rarete=" + rarete +
+                ", flower_per_click=" + flower_per_click +
+                ", prix=" + prix +
+                ", nom='" + nom + '\'' +
+                ", fileName='" + fileName + '\'' +
+                '}';
     }
 }

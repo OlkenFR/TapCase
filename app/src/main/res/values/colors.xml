@@ -10,4 +10,6 @@
     <color name="SECRET">#FFAB28</color>
     <color name="BACKGROUND">#BED3E8</color>
     <color name="SCORE">#4CAF50</color>
+    <color name="RED">#FF0000</color>
+    <color name="GREEN">#00FF0A</color>
 </resources>

@@ -1,14 +1,11 @@
 package com.example.tapcase;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TableRow;
-import android.media.MediaPlayer;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -31,9 +28,6 @@ public class CaseOpening extends AppCompatActivity {
     private int price;
     private int score;
     private int caseID;
-    private SharedPreferences prefs;
-    private SharedPreferences.Editor editor;
-    MediaPlayer mediaPlayer;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,7 +39,7 @@ public class CaseOpening extends AppCompatActivity {
             score = intent.getIntExtra("SCORE", 0);
             caseID = intent.getIntExtra("CASE_ID", 0);
             binding.tvOpenningCasePrice.setText("Price = " + price);
-            binding.tvScore.setText("" + score);
+            binding.tvOpeningScore.setText("Score = " + score);
         }
         mediaPlayer = MediaPlayer.create(this, R.raw.open_sound);
         prefs = getSharedPreferences("MY_PREFS_NAME", MODE_PRIVATE);
