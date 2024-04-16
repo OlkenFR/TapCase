@@ -171,34 +171,6 @@ public class Clicker extends AppCompatActivity {
             }
             return false;
         });
-        binding.btnGetGun.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Random random = new Random();
-                int randomIndex = random.nextInt(armeAvailable.size());
-
-                Arme randomArme = armeAvailable.get(randomIndex);
-
-                boolean alreadyOwned = false;
-                for (Arme arme : armesPlayer){
-                    if (arme.getNom().equals(randomArme.getNom())) {
-                        alreadyOwned = true;
-                        break;
-                    }
-                }
-
-                if (!alreadyOwned) {
-                    armesPlayer.add(randomArme);
-                    Toast.makeText(Clicker.this, "Nouvelle arme débloqué : "+ randomArme.getNom(), Toast.LENGTH_SHORT).show();
-                } else {
-                    Toast.makeText(Clicker.this, "Vous possédez déjà cette arme : "+ randomArme.getNom(), Toast.LENGTH_SHORT).show();
-                }
-
-                playerWeaponsList = gson.toJson(armesPlayer);
-                editor.putString("NOM_ARMES_JOUEUR", playerWeaponsList);
-                editor.apply();
-            }
-        });
         ViewGroup parent = (ViewGroup) binding.getRoot();
         parent.setOnTouchListener((view, event) -> {
             if (event.getAction() == MotionEvent.ACTION_DOWN) {
