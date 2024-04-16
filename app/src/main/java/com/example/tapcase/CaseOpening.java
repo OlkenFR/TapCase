@@ -62,7 +62,7 @@ public class CaseOpening extends AppCompatActivity {
             this.caseInformation = (CaseInformation) bundle.getSerializable("CASE_INFO");
             this.gameInformation = this.caseInformation.getGameInformation();
             this.playerInformation = this.gameInformation.getPlayerInformation();
-            score = playerInformation.getScore();
+            score = prefs.getInt("SCORE", 0);
             binding.tvScore.setText("" + score);
             price = caseInformation.getCaseInfomation().getPrix();
             binding.tvOpenningCasePrice.setText("Prix = " + price);
@@ -175,18 +175,16 @@ public class CaseOpening extends AppCompatActivity {
                                 mediaPlayer.seekTo(0);
                             }
                         }
-                    }, 3500); //STOP AFTER 3500MS
+                    }, 3500);
                     unlockedWeapon = randomList.get(10);
-                    //PUT THE WEAPON IN THE INVENTORY
                     playerInformation.getPlayer_armes().add(unlockedWeapon);
 
-                    // Display toast after animation is finished
                     new Handler().postDelayed(new Runnable() {
                         @Override
                         public void run() {
                             displayToastUnlockedWeapon();
                         }
-                    }, 3500); // Display toast after 3500ms
+                    }, 3500);
                 }
                 scrollPos = 0;
                 scrollSpeed = 30;
@@ -214,13 +212,13 @@ public class CaseOpening extends AppCompatActivity {
                         });
                     }
                 }, 0, 5);//ROLL EVERY 5MS
+                playerWeaponsList = gson.toJson(playerInformation.getPlayer_armes());
+                editor.putString("NOM_ARMES_JOUEUR", playerWeaponsList);
+                editor.apply();
+            } else {
+                displayToastCantBuy();
             }
         });
-
-
-        playerWeaponsList = gson.toJson(playerInformation.getPlayer_armes());
-        editor.putString("NOM_ARMES_JOUEUR", playerWeaponsList);
-        editor.apply();
 
         Intent caseOpeningToStore = new Intent(CaseOpening.this, Store.class);
         Intent caseOpeningToInventory = new Intent(CaseOpening.this, Inventory.class);
@@ -264,5 +262,8 @@ public class CaseOpening extends AppCompatActivity {
 
     private void displayToastUnlockedWeapon(){
         Toast.makeText(CaseOpening.this, "Nouvelle arme débloqué : "+ unlockedWeapon.getNom(), Toast.LENGTH_SHORT).show();
+    }
+    private void displayToastCantBuy(){
+        Toast.makeText(CaseOpening.this, "Vous n'avez pas assez de fleurs.", Toast.LENGTH_SHORT).show();
     }
 }

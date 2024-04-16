@@ -9,21 +9,21 @@ public class ArmeComparator {
     public static Comparator<Arme> prixComparator = new Comparator<Arme>() {
         @Override
         public int compare(Arme arme1, Arme arme2) {
-            return Integer.compare(arme1.getPrix(), arme2.getPrix());
+            return Integer.compare(arme2.getPrix(), arme1.getPrix()); // Note the order change
         }
     };
 
     public static Comparator<Arme> rareteComparator = new Comparator<Arme>() {
         @Override
         public int compare(Arme arme1, Arme arme2) {
-            return arme1.getRarete().compareTo(arme2.getRarete());
+            return arme2.getRarete().compareTo(arme1.getRarete()); // Note the order change
         }
     };
 
     public static Comparator<Arme> fleursTirComparator = new Comparator<Arme>() {
         @Override
         public int compare(Arme arme1, Arme arme2) {
-            return Integer.compare(arme1.getFlower_per_click(), arme2.getFlower_per_click());
+            return Integer.compare(arme2.getFlower_per_click(), arme1.getFlower_per_click()); // Note the order change
         }
     };
 
@@ -33,10 +33,10 @@ public class ArmeComparator {
             int typeValue1 = getTypeValueFromFileName(arme1.getFileName());
             int typeValue2 = getTypeValueFromFileName(arme2.getFileName());
 
-            int typeCompare = Integer.compare(typeValue1, typeValue2);
+            int typeCompare = Integer.compare(typeValue2, typeValue1); // Note the order change
 
             if (typeCompare == 0) {
-                return arme1.getNom().compareTo(arme2.getNom());
+                return arme2.getNom().compareTo(arme1.getNom()); // Note the order change
             }
 
             return typeCompare;
@@ -61,6 +61,4 @@ public class ArmeComparator {
             return 7;
         }
     };
-
-
 }
