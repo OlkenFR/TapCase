@@ -170,33 +170,34 @@ public class CaseOpening extends AppCompatActivity {
 //        }
 //
 //
-//    }
-//
-//
-//    @Override
-//    public void onResume() {
-//        super.onResume();
-//        //CANCEL BUTTON SIMULATE A CLICK ON THE STORE
-//        binding.btnCancel.setOnClickListener(v -> {
-//            binding.bottomNavigationView.getMenu().performIdentifierAction(R.id.store, 0);
-//        });
-//        binding.bottomNavigationView.setOnItemSelectedListener(item -> {
-//            int id = item.getItemId();
-//            if(id == R.id.clicker){
-//                startActivity(new Intent(CaseOpening.this, Clicker.class));
-//                overridePendingTransition(0,0);
-//                return true;
-//            } else if (id == R.id.inventory){
-//                startActivity(new Intent(CaseOpening.this, Inventory.class).putExtra("SCORE",score));
-//                overridePendingTransition(0,0);
-//                return true;
-//            } else if (id == R.id.store){
-//                startActivity(new Intent(CaseOpening.this, Store.class).putExtra("SCORE",score));
-//                overridePendingTransition(0,0);
-//                return true;
-//            }
-//            return false;
-//        });
+    }
+
+
+    @Override
+    public void onResume() {
+            super.onResume();
+            //CANCEL BUTTON SIMULATE A CLICK ON THE STORE
+            binding.btnCancel.setOnClickListener(v -> {
+                binding.bottomNavigationView.getMenu().performIdentifierAction(R.id.store, 0);
+            });
+            binding.bottomNavigationView.setOnItemSelectedListener(item -> {
+                int id = item.getItemId();
+                if (id == R.id.clicker) {
+                    startActivity(new Intent(CaseOpening.this, Clicker.class));
+                    overridePendingTransition(0, 0);
+                    return true;
+                } else if (id == R.id.inventory) {
+                    startActivity(new Intent(CaseOpening.this, Inventory.class));
+                    overridePendingTransition(0, 0);
+                    return true;
+                } else if (id == R.id.store) {
+                    startActivity(new Intent(CaseOpening.this, Store.class));
+                    overridePendingTransition(0, 0);
+                    return true;
+                }
+                return false;
+            });
+        }
 //
 //
 //
@@ -269,5 +270,5 @@ public class CaseOpening extends AppCompatActivity {
 //            mediaPlayer.release();
 //            mediaPlayer = null;
 //        }
-    }
+
 }
