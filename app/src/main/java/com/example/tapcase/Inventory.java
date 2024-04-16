@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.CompoundButton;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -154,23 +155,25 @@ public class Inventory extends AppCompatActivity {
                 String selectedOption = parentView.getItemAtPosition(position).toString();
                 editor.putInt("SPINNER_POSITION", position);
                 editor.apply();
+
+                boolean isAscending = binding.ascendingCheckBox.isChecked();
+
                 switch (selectedOption) {
                     case "Prix":
-                        Collections.sort(playerInformation.getPlayer_armes(), ArmeComparator.prixComparator);
+                        Collections.sort(playerInformation.getPlayer_armes(), ArmeComparator.getPrixComparator(isAscending));
                         break;
                     case "Rareté":
-                        Collections.sort(playerInformation.getPlayer_armes(), ArmeComparator.rareteComparator);
+                        Collections.sort(playerInformation.getPlayer_armes(), ArmeComparator.getRareteComparator(isAscending));
                         break;
                     case "Fleurs/Tirs":
-                        Collections.sort(playerInformation.getPlayer_armes(), ArmeComparator.fleursTirComparator);
+                        Collections.sort(playerInformation.getPlayer_armes(), ArmeComparator.getFleursTirComparator(isAscending));
                         break;
                     case "Arme":
-                        Collections.sort(playerInformation.getPlayer_armes(), ArmeComparator.nomComparator);
+                        Collections.sort(playerInformation.getPlayer_armes(), ArmeComparator.getNomComparator(isAscending));
                         break;
                 }
                 updateGridLayout();
             }
-
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
 
@@ -243,6 +246,13 @@ public class Inventory extends AppCompatActivity {
                 update();
             }
         });
+
+        binding.ascendingCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                updateSortedList(isChecked);
+            }
+        });
     }
 
     private void update() {
@@ -282,6 +292,24 @@ public class Inventory extends AppCompatActivity {
         return itemsList;
     }
 
+    private void updateSortedList(boolean isAscending) {
+        String selectedOption = binding.spinnerSort.getSelectedItem().toString();
+        switch (selectedOption) {
+            case "Prix":
+                Collections.sort(playerInformation.getPlayer_armes(), ArmeComparator.getPrixComparator(isAscending));
+                break;
+            case "Rareté":
+                Collections.sort(playerInformation.getPlayer_armes(), ArmeComparator.getRareteComparator(isAscending));
+                break;
+            case "Fleurs/Tirs":
+                Collections.sort(playerInformation.getPlayer_armes(), ArmeComparator.getFleursTirComparator(isAscending));
+                break;
+            case "Arme":
+                Collections.sort(playerInformation.getPlayer_armes(), ArmeComparator.getNomComparator(isAscending));
+                break;
+        }
+        updateGridLayout();
+    }
 
     private void updateGridLayout() {
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();

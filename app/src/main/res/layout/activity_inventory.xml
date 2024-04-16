@@ -105,7 +105,7 @@
         android:textColor="#FFFFFF"
         android:textColorLink="#FF0000"
         app:layout_constraintEnd_toStartOf="@+id/btn_select"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/iv_weapon_selected" />
 
@@ -114,7 +114,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
-        android:layout_marginEnd="80dp"
+        android:layout_marginEnd="124dp"
         android:backgroundTint="#4CAF50"
         android:text="Selectionner"
         android:textColor="#FFFFFF"
@@ -123,12 +123,11 @@
 
     <ScrollView
         android:id="@+id/scrollView2"
-        android:layout_width="411dp"
-        android:layout_height="371dp"
-        android:layout_marginTop="48dp"
+        android:layout_width="407dp"
+        android:layout_height="312dp"
+        android:layout_marginTop="96dp"
         android:contentDescription="@string/app_name"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btn_select">
 
@@ -141,10 +140,11 @@
                 android:id="@+id/gridLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:columnCount="3"/>
+                android:columnCount="3" />
 
         </LinearLayout>
     </ScrollView>
+
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigationView"
         android:layout_width="match_parent"
@@ -163,8 +163,8 @@
         android:id="@+id/tv_numberOfWeapon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="180dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="228dp"
         android:text="Nombre d'armes : "
         android:textColor="#000000"
         app:layout_constraintStart_toStartOf="parent"
@@ -174,8 +174,8 @@
         android:id="@+id/tv_sortBy"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="3dp"
-        android:layout_marginBottom="12dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="60dp"
         android:text="Trié par :"
         android:textColor="#000000"
         android:textSize="20sp"
@@ -186,9 +186,20 @@
         android:id="@+id/spinner_Sort"
         android:layout_width="152dp"
         android:layout_height="48dp"
-        android:layout_marginEnd="1dp"
+        android:layout_marginEnd="4dp"
+        android:layout_marginBottom="48dp"
+        android:foregroundTint="#000000"
         android:minHeight="48dp"
         android:scaleType="center"
         app:layout_constraintBottom_toTopOf="@+id/scrollView2"
         app:layout_constraintEnd_toEndOf="parent" />
+
+    <CheckBox
+        android:id="@+id/ascendingCheckBox"
+        android:layout_width="226dp"
+        android:layout_height="48dp"
+        android:layout_marginEnd="4dp"
+        android:text="Ordre croissant"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spinner_Sort" />
 </androidx.constraintlayout.widget.ConstraintLayout>

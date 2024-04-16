@@ -73,8 +73,9 @@ public class CaseOpening extends AppCompatActivity {
             });
 
         //DISPLAY THE AVAILABLE WEAPON IN THE CASE
+        boolean isAscending = true;
         Case weaponCase = caseInformation.getCaseInfomation();
-        Collections.sort(weaponCase.getArmeDispo(), ArmeComparator.rareteComparator);
+        Collections.sort(weaponCase.getArmeDispo(), ArmeComparator.getRareteComparator(isAscending));
         int compteur = 0;
         LinearLayout.LayoutParams layoutParams = new TableRow.LayoutParams(270, 270);
         for(Arme weapon : weaponCase.getArmeDispo()){
