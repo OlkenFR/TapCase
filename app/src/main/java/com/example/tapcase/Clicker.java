@@ -1,9 +1,15 @@
 package com.example.tapcase;
 
+import android.app.ActivityManager;
+import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
+import android.content.ServiceConnection;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.IBinder;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -47,6 +53,7 @@ public class Clicker extends AppCompatActivity {
  	MediaPlayer mediaPlayer;
     private AutoClickService autoClicker;
     private Intent intentService;
+
  
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -129,13 +136,17 @@ public class Clicker extends AppCompatActivity {
         binding.tvPrixArme.setText("Prix : " + String.valueOf(weapon_selected.getPrix()));
         binding.tvPerfArme.setText("Performance : " + String.valueOf(weapon_selected.getFlower_per_click()) + " fleurs/tirs");
 
+        //AUTOCLICKER ON WHEN THE BOX IS CHECKED
+        binding.checkBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            Intent intent = new Intent(getApplication(), AutoClickService.class);
+            if (isChecked) {
+                startService(intent);
 
-//        binding.btnAutoClicker.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                startService(intentService);
-//            }
-//        });
+            } else {
+                stopService(intent);
+            }
+        });
+
     }
 
     private void update() {
@@ -282,6 +293,10 @@ public class Clicker extends AppCompatActivity {
             editor.apply();
         }
     }
+    public static void clickAuto(){
+        Log.println(Log.DEBUG, "CLICKER", "CLICK");
+    }
+
 }
 
 

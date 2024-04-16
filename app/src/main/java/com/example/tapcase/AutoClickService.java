@@ -2,35 +2,46 @@ package com.example.tapcase;
 
 import android.app.Service;
 import android.content.Intent;
-import android.os.Binder;
 import android.os.Handler;
 import android.os.IBinder;
 import android.util.Log;
-import android.view.View;
-import android.view.accessibility.AccessibilityNodeInfo;
+import androidx.annotation.Nullable;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class AutoClickService extends Service {
+
+    private Timer timer;
     private Handler handler;
-    public class MyBinder extends Binder {
-        AutoClickService getService() {
-            return AutoClickService.this;
-        }
-    }
-    private final MyBinder myBinder = new MyBinder();
+    @Nullable
     @Override
     public IBinder onBind(Intent intent) {
-        return myBinder;
+        return null;
     }
+
     @Override
-    public int onStartCommand(Intent intent, int flags, int startId){
-        handler = new Handler();
-        Runnable runnable = new Runnable() {
+    public int onStartCommand(Intent intent, int flags, int startId) {
+        Log.println(Log.DEBUG, "AutoClickService", "Service started");
+        handler = new Handler(getMainLooper());
+        timer = new Timer();
+        timer.scheduleAtFixedRate(new TimerTask() {
+            @Override
             public void run() {
-                Log.println(Log.DEBUG, "AutoclickService", "Le service d'autoclick est en cours d'exécution.");
-                handler.postDelayed(this, 4000);
+                Clicker.clickAuto();
+
+                handler.post(() -> Log.println(Log.DEBUG, "AutoClickService", "Service is running"));
             }
-        };
-        handler.post(runnable);
+        }, 0, 1000);
+
         return START_STICKY;
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        Log.println(Log.DEBUG, "AutoClickService", "Service destroyed");
+        if (timer != null) {
+            timer.cancel();
+        }
     }
 }
