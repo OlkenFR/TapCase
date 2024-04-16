@@ -189,9 +189,9 @@ public class Clicker extends AppCompatActivity {
 
                 if (!alreadyOwned) {
                     armesPlayer.add(randomArme);
-                    Toast.makeText(Clicker.this, "Nouvelle arme dÈbloquÈe : "+ randomArme.getNom(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Clicker.this, "Nouvelle arme d√©bloqu√© : "+ randomArme.getNom(), Toast.LENGTH_SHORT).show();
                 } else {
-                    Toast.makeText(Clicker.this, "Vous possÈdez dÈj‡ cette arme : "+ randomArme.getNom(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Clicker.this, "Vous poss√©dez d√©j√† cette arme : "+ randomArme.getNom(), Toast.LENGTH_SHORT).show();
                 }
 
                 playerWeaponsList = gson.toJson(armesPlayer);
