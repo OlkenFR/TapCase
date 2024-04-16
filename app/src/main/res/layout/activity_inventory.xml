@@ -103,7 +103,9 @@
         android:layout_marginStart="83dp"
         android:layout_marginTop="12dp"
         android:layout_marginEnd="34dp"
+        android:backgroundTint="#FF0000"
         android:text="Vendre"
+        android:textColorLink="#FF0000"
         app:layout_constraintEnd_toStartOf="@+id/btn_select"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -113,11 +115,12 @@
         android:id="@+id/btn_select"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="22dp"
-        android:layout_marginEnd="72dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="80dp"
+        android:backgroundTint="#4CAF50"
         android:text="Selectionner"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvWeaponsPerformance" />
+        app:layout_constraintTop_toBottomOf="@+id/iv_weapon_selected" />
 
     <ScrollView
         android:layout_width="411dp"

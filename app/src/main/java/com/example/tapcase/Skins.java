@@ -36,4 +36,4 @@ public enum Skins {
     KNIFE_BAYONET,
     KNIFE_KARAMBIT,
     KNIFE_BUTTERFLY,
-    }
+}

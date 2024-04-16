@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.tapcase.databinding.ActivityStoreBinding;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -23,6 +24,7 @@ public class Store extends AppCompatActivity {
     private Timer timer;
     private final Handler handler = new Handler();
     private int score;
+    private List<Case> caseAvailable;
     private int BOX_PRICE_CLASSIC = 10;
     private int BOX_PRICE_DREAMS = 20;
     private int BOX_PRICE_BRAVO = 30;
@@ -33,12 +35,8 @@ public class Store extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityStoreBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-
-        bottomNavigationView
-                = findViewById(R.id.bottomNavigationView);
-
+        bottomNavigationView = findViewById(R.id.bottomNavigationView);
         bottomNavigationView.setSelectedItemId(R.id.store);
-
         binding.tvStoreBoxClassic.setText("Price = " + BOX_PRICE_CLASSIC);
         binding.tvStoreBoxDreams.setText("Price = " + BOX_PRICE_DREAMS);
         binding.tvStoreBoxBravo.setText("Price = " + BOX_PRICE_BRAVO);

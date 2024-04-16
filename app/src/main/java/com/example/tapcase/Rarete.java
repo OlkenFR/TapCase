@@ -1,10 +1,19 @@
 package com.example.tapcase;
 
 public enum Rarete {
-    BASE,
-    SUPERIEUR,
-    EXOTIQUE,
-    CLASSIFIE,
+    BASE(0),
+    SUPERIEUR(1),
+    EXOTIQUE(2),
+    CLASSIFIE(3),
+    SECRET(4);
 
-    SECRET
+    private final int value;
+
+    Rarete(int value) {
+        this.value = value;
+    }
+
+    public int getValue() {
+        return value;
+    }
 }
