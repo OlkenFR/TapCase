@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TableRow;
@@ -145,24 +146,9 @@ public class CaseOpening extends AppCompatActivity {
 //            }
 //        }
 //
-//        Case weaponCase = new Case(weaponList, 20, Rarete.BASE, weaponList.get(10));
-//        for(Arme weapon : weaponCase.getArmeDispo()){
-//            ImageView imageView = new ImageView(getApplicationContext());
-////            imageView.setImageDrawable(weapon.getImage_arme());
-//            Rarete weaponRarity = weapon.getRarete();
-//            if (weaponRarity == Rarete.BASE){
-//                imageView.setBackground(getResources().getDrawable(R.drawable.arrondir_base));
-//            } else if (weaponRarity == Rarete.SUPERIEUR) {
-//                imageView.setBackground(getResources().getDrawable(R.drawable.arrondir_superieur));
-//            } else if (weaponRarity == Rarete.EXOTIQUE) {
-//                imageView.setBackground(getResources().getDrawable(R.drawable.arrondir_exotique));
-//            } else if (weaponRarity == Rarete.CLASSIFIE) {
-//                imageView.setBackground(getResources().getDrawable(R.drawable.arrondir_classifie));
-//            } else if (weaponRarity == Rarete.SECRET) {
-//                imageView.setBackground(getResources().getDrawable(R.drawable.arrondir_secret));
-//            }
-//            binding.linear.addView(imageView);
-//        }
+
+
+
 //
 //
     }
@@ -176,6 +162,11 @@ public class CaseOpening extends AppCompatActivity {
             this.caseInformation = (CaseInformation) bundle.getSerializable("CASE_INFO");
             this.gameInformation = this.caseInformation.getGameInformation();
             this.playerInformation = this.gameInformation.getPlayerInformation();
+            score = playerInformation.getScore();
+            binding.tvScore.setText("" + score);
+            price = caseInformation.getCaseInfomation().getPrix();
+            binding.tvOpenningCasePrice.setText("Prix = " + price);
+            binding.ivCase.setImageResource(getResources().getIdentifier(caseInformation.getCaseInfomation().getCaseFileName(), "drawable", getPackageName()));
             //CANCEL BUTTON SIMULATE A CLICK ON THE STORE
             binding.btnCancel.setOnClickListener(v -> {
                 binding.bottomNavigationView.getMenu().performIdentifierAction(R.id.store, 0);
@@ -207,78 +198,159 @@ public class CaseOpening extends AppCompatActivity {
                 }
                 return false;
             });
-        }
-//
-//
-//
-//
-//        //STARTING THE ROLL OF WEAPON
-//        binding.btnOpenning.setOnClickListener(v -> {
-//            if (score >= price) {
-//                binding.btnOpenning.setClickable(false);
-//
-//                binding.linearCaseOpen.setVisibility(View.INVISIBLE);
-//                binding.rectangleView.setVisibility(View.VISIBLE);
-//                binding.linearOpenOpen.setVisibility(View.VISIBLE);
-//
-//                score = score - price;
-//
-//                editor.putInt("SCORE", score);
-//                editor.apply();
-//                binding.tvScore.setText("" + score);
-//
-//                //SOUND PART
-//                if (!mediaPlayer.isPlaying()) {
-//                    mediaPlayer.start();
-//                    new Handler().postDelayed(new Runnable() {
-//                        @Override
-//                        public void run() {
-//                            if (mediaPlayer.isPlaying()) {
-//                                mediaPlayer.stop();
-//                                mediaPlayer.prepareAsync();
-//                                mediaPlayer.seekTo(0);
-//                            }
-//                        }
-//                    }, 3500); //STOP AFTER 3500MS
-//                }
-//
-//
-//                scrollPos = 0;
-//                scrollSpeed = 30;
-//                Random randomTimer = new Random();
-//                double randomNumber = randomTimer.nextInt(5);
-//                timer = new Timer();
-//                timer.schedule(new TimerTask() {
-//                    @Override
-//                    public void run() {
-//                        handler.post(new Runnable() {
-//                            @Override
-//                            public void run() {
-//                                scrollPos += scrollSpeed; // Increment the scroll position
-//                                if (scrollSpeed > 5) {
-//                                    scrollSpeed -= 0.1;
-//                                } else {
-//                                    scrollSpeed -= (randomNumber+11)/1000;//entre:0.011 et 0.015
-//                                }
-//                                binding.linearOpenOpen.scrollTo((int) scrollPos, 0); // Scroll to the new position
-//                                if (scrollSpeed < 0.5) {
-//                                    scrollSpeed = 0;
-//                                    timer.cancel();
-//                                }
-//                            }
-//                        });
-//                    }
-//                }, 0, 5);//ROLL EVERY 5MS
-//            }
-//        });
-//    }
-//    //DESTROY MEDIAPLAYER
-//    @Override
-//    protected void onDestroy() {
-//        super.onDestroy();
-//        if (mediaPlayer != null) {
-//            mediaPlayer.release();
-//            mediaPlayer = null;
-//        }
 
+
+        //DISPLAY THE AVAILABLE WEAPON IN THE CASE
+        Case weaponCase = caseInformation.getCaseInfomation();
+        Collections.sort(weaponCase.getArmeDispo(), new TriRarity());
+        int compteur = 0;
+        LinearLayout.LayoutParams layoutParams = new TableRow.LayoutParams(270, 270);
+        for(Arme weapon : weaponCase.getArmeDispo()){
+
+            ImageView imageView = new ImageView(getApplicationContext());
+            int newImageRessourceId = getResources().getIdentifier(weapon.getFileName(), "drawable", getPackageName());
+            imageView.setImageResource(newImageRessourceId);
+            Rarete weaponRarity = weapon.getRarete();
+            if (weaponRarity == Rarete.BASE){
+                imageView.setBackground(getResources().getDrawable(R.drawable.arrondir_base));
+            } else if (weaponRarity == Rarete.SUPERIEUR) {
+                imageView.setBackground(getResources().getDrawable(R.drawable.arrondir_superieur));
+            } else if (weaponRarity == Rarete.EXOTIQUE) {
+                imageView.setBackground(getResources().getDrawable(R.drawable.arrondir_exotique));
+            } else if (weaponRarity == Rarete.CLASSIFIE) {
+                imageView.setBackground(getResources().getDrawable(R.drawable.arrondir_classifie));
+            } else if (weaponRarity == Rarete.SECRET) {
+                imageView.setBackground(getResources().getDrawable(R.drawable.arrondir_secret));
+            }
+
+            imageView.setLayoutParams(layoutParams);
+            if(compteur<4){
+                binding.tr1.addView(imageView);
+            } else {
+                binding.tr2.addView(imageView);
+            }
+            compteur++;
+        }
+
+
+        //RANDOMIZE THE CASE
+        List<Arme> randomList = new ArrayList<>();
+        Arme randomWeapon = weaponCase.getArmeDispo().get(0);
+        Random random = new Random();
+        for (int i=0; i<15; i++){
+            int randomNumber = random.nextInt(100);
+
+
+            if (randomNumber<13){
+                randomWeapon = weaponCase.getArmeDispo().get(0);
+            } else if (randomNumber<35) {
+                randomWeapon = weaponCase.getArmeDispo().get(1);
+            } else if (randomNumber<70) {
+                randomWeapon = weaponCase.getArmeDispo().get(2);
+            } else if (randomNumber<80) {
+                randomWeapon = weaponCase.getArmeDispo().get(3);
+            } else if (randomNumber<90) {
+                randomWeapon = weaponCase.getArmeDispo().get(4);
+            } else if (randomNumber<98) {
+                randomWeapon = weaponCase.getArmeDispo().get(5);
+            } else if (randomNumber<100) {
+                randomWeapon = weaponCase.getArmeDispo().get(6);
+            }
+
+
+
+            ImageView imageView = new ImageView(getApplicationContext());
+
+            int newImageRessourceId = getResources().getIdentifier(randomWeapon.getFileName(), "drawable", getPackageName());
+            imageView.setImageResource(newImageRessourceId);
+
+            Rarete weaponRarity = randomWeapon.getRarete();
+            if (weaponRarity == Rarete.BASE){
+                imageView.setBackground(getResources().getDrawable(R.drawable.arrondir_base));
+            } else if (weaponRarity == Rarete.SUPERIEUR) {
+                imageView.setBackground(getResources().getDrawable(R.drawable.arrondir_superieur));
+            } else if (weaponRarity == Rarete.EXOTIQUE) {
+                imageView.setBackground(getResources().getDrawable(R.drawable.arrondir_exotique));
+            } else if (weaponRarity == Rarete.CLASSIFIE) {
+                imageView.setBackground(getResources().getDrawable(R.drawable.arrondir_classifie));
+            } else if (weaponRarity == Rarete.SECRET) {
+                imageView.setBackground(getResources().getDrawable(R.drawable.arrondir_secret));
+            }
+            randomList.add(randomWeapon);
+            binding.linear.addView(imageView);
+        }
+
+
+        //STARTING THE ROLL OF WEAPON
+        binding.btnOpenning.setOnClickListener(v -> {
+            if (score >= price) {
+                binding.btnOpenning.setClickable(false);
+
+                binding.linearCaseOpen.setVisibility(View.INVISIBLE);
+                binding.rectangleView.setVisibility(View.VISIBLE);
+                binding.linearOpenOpen.setVisibility(View.VISIBLE);
+
+                score = score - price;
+
+                editor.putInt("SCORE", score);
+                editor.apply();
+                binding.tvScore.setText("" + score);
+
+                //PUT THE WEAPON IN THE INVENTORY
+                playerInformation.getPlayer_armes().add(randomList.get(10));
+
+                //SOUND PART
+                if (!mediaPlayer.isPlaying()) {
+                    mediaPlayer.start();
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            if (mediaPlayer.isPlaying()) {
+                                mediaPlayer.stop();
+                                mediaPlayer.prepareAsync();
+                                mediaPlayer.seekTo(0);
+                            }
+                        }
+                    }, 3500); //STOP AFTER 3500MS
+                }
+
+
+                scrollPos = 0;
+                scrollSpeed = 30;
+                Random randomTimer = new Random();
+                double randomNumber = randomTimer.nextInt(5);
+                timer = new Timer();
+                timer.schedule(new TimerTask() {
+                    @Override
+                    public void run() {
+                        handler.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                scrollPos += scrollSpeed; // Increment the scroll position
+                                if (scrollSpeed > 5) {
+                                    scrollSpeed -= 0.1;
+                                } else {
+                                    scrollSpeed -= (randomNumber+11)/1000;//entre:0.011 et 0.015
+                                }
+                                binding.linearOpenOpen.scrollTo((int) scrollPos, 0); // Scroll to the new position
+                                if (scrollSpeed < 0.5) {
+                                    scrollSpeed = 0;
+                                    timer.cancel();
+                                }
+                            }
+                        });
+                    }
+                }, 0, 5);//ROLL EVERY 5MS
+            }
+        });
+    }
+    //DESTROY MEDIAPLAYER
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (mediaPlayer != null) {
+            mediaPlayer.release();
+            mediaPlayer = null;
+        }
+    }
 }

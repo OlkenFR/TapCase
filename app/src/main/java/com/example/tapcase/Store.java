@@ -11,6 +11,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.tapcase.databinding.ActivityStoreBinding;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -29,6 +31,11 @@ public class Store extends AppCompatActivity {
     private int BOX_PRICE_DREAMS = 20;
     private int BOX_PRICE_BRAVO = 30;
     private int BOX_PRICE_COBBLE = 40;
+
+    private static final String BOX_CLASSIC_LINK = "box_classic";
+    private static final String BOX_BRAVO_LINK = "box_bravo_operation";
+    private static final String BOX_DREAMS_LINK = "box_dreams_nightmares";
+    private static final String BOX_COBBLESTONE_LINK = "box_cobblestone_memory";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,29 +78,75 @@ public class Store extends AppCompatActivity {
             }
             return false;
         });
+
+
+
+
+
         Intent storeToCaseOpening = new Intent(Store.this, CaseOpening.class);
         Bundle bundleStoreToCaseOpening = new Bundle();
-        this.caseInformation = new CaseInformation(gameInformation, new Case(gameInformation.getWeaponAvailable(), CaseType.BravoCase,1000 , "box_bravo_operation", gameInformation.getWeaponAvailable().get(3)));
-        bundleStoreToCaseOpening.putSerializable("CASE_INFO", caseInformation);
-        storeToCaseOpening.putExtras(bundleStoreToCaseOpening);
+
+
+
         //ACTION FOR THE CLASSIC BOX TAP
         binding.ivStoreBoxClassic.setOnClickListener(v -> {
             // TODO case à changer et à réassigner au bundle
             //  bundleStoreToCaseOpening.putSerializable("GAME_INFO", caseInformation);
             //  Faire fonction createCase
-            startActivity(storeToCaseOpening) ;
+
+            List<Arme> weaponList = new ArrayList<>();
+            List<Integer> list = new ArrayList<>(Arrays.asList(1, 6, 12, 17, 20, 26, 31));
+            weaponList = loadCase(list, weaponList);
+            Case weaponCase = new Case(weaponList, CaseType.ClassicCase, BOX_PRICE_CLASSIC, BOX_CLASSIC_LINK, weaponList.get(0));
+            caseInformation = new CaseInformation(gameInformation, weaponCase);
+
+
+            bundleStoreToCaseOpening.putSerializable("CASE_INFO", caseInformation);
+            storeToCaseOpening.putExtras(bundleStoreToCaseOpening);
+            startActivity(storeToCaseOpening);
         });
         //ACTION FOR THE DREAMS BOX TAP
         binding.ivStoreBoxDreams.setOnClickListener(v -> {
+            List<Arme> weaponList = new ArrayList<>();
+            List<Integer> list = new ArrayList<>(Arrays.asList(3, 5, 11, 16, 22, 25, 30));
+            weaponList = loadCase(list, weaponList);
+            Case weaponCase = new Case(weaponList, CaseType.DreamsCase, BOX_PRICE_DREAMS, BOX_DREAMS_LINK, weaponList.get(0));
+            caseInformation = new CaseInformation(gameInformation, weaponCase);
+
+            bundleStoreToCaseOpening.putSerializable("CASE_INFO", caseInformation);
+            storeToCaseOpening.putExtras(bundleStoreToCaseOpening);
             startActivity(storeToCaseOpening);
         });
         //ACTION FOR THE BRAVO BOX TAP
         binding.ivStoreBoxBravo.setOnClickListener(v -> {
+            List<Arme> weaponList = new ArrayList<>();
+            List<Integer> list = new ArrayList<>(Arrays.asList(2, 8, 10, 18, 21, 27, 32));
+            weaponList = loadCase(list, weaponList);
+            Case weaponCase = new Case(weaponList, CaseType.BravoCase, BOX_PRICE_BRAVO, BOX_BRAVO_LINK, weaponList.get(0));
+            caseInformation = new CaseInformation(gameInformation, weaponCase);
+
+            bundleStoreToCaseOpening.putSerializable("CASE_INFO", caseInformation);
+            storeToCaseOpening.putExtras(bundleStoreToCaseOpening);
             startActivity(storeToCaseOpening);
         });
         //ACTION FOR THE COBBLE BOX TAP
         binding.ivStoreBoxCobble.setOnClickListener(v -> {
+            List<Arme> weaponList = new ArrayList<>();
+            List<Integer> list = new ArrayList<>(Arrays.asList(4, 7, 13, 15, 23, 28, 33));
+            weaponList = loadCase(list, weaponList);
+            Case weaponCase = new Case(weaponList, CaseType.CobbleCase, BOX_PRICE_COBBLE, BOX_COBBLESTONE_LINK, weaponList.get(0));
+            caseInformation = new CaseInformation(gameInformation, weaponCase);
+
+            bundleStoreToCaseOpening.putSerializable("CASE_INFO", caseInformation);
+            storeToCaseOpening.putExtras(bundleStoreToCaseOpening);
             startActivity(storeToCaseOpening);
         });
     }
+    private List<Arme> loadCase(List<Integer> list, List<Arme> weaponList){
+        for(Integer id : list) {
+            weaponList.add(armeAvailable.get(id));
+        }
+        return weaponList;
+    }
+
 }

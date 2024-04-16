@@ -177,6 +177,7 @@
         android:layout_height="150dp"
         android:layout_marginTop="200dp"
         android:backgroundTint="#00FFFFFF"
+        android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
