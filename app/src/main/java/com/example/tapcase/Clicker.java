@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -175,7 +176,22 @@ public class Clicker extends AppCompatActivity {
                 int randomIndex = random.nextInt(armeAvailable.size());
 
                 Arme randomArme = armeAvailable.get(randomIndex);
-                armesPlayer.add(randomArme);
+
+                boolean alreadyOwned = false;
+                for (Arme arme : armesPlayer){
+                    if (arme.getNom().equals(randomArme.getNom())) {
+                        alreadyOwned = true;
+                        break;
+                    }
+                }
+
+                if (!alreadyOwned) {
+                    armesPlayer.add(randomArme);
+                    Toast.makeText(Clicker.this, "Nouvelle arme débloquée : "+ randomArme.getNom(), Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(Clicker.this, "Vous possédez déjà cette arme : "+ randomArme.getNom(), Toast.LENGTH_SHORT).show();
+                }
+
                 playerWeaponsList = gson.toJson(armesPlayer);
                 editor.putString("NOM_ARMES_JOUEUR", playerWeaponsList);
                 editor.apply();
