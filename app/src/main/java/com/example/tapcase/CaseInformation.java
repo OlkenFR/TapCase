@@ -9,7 +9,7 @@ public class CaseInformation implements Serializable {
 
     public CaseInformation(GameInformation gameInformation, Case caseInfomation) {
         this.gameInformation = gameInformation;
-        this.caseInfomation = caseInfomation;
+        this.caseInfomation = caseInfomation ;
     }
 
     public GameInformation getGameInformation() {
