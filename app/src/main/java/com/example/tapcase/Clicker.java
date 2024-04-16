@@ -145,14 +145,14 @@ public class Clicker extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        GameInformation gameInformation = new GameInformation(armeAvailable);
         PlayerInformation playerInformation = new PlayerInformation(score, weapon_selected, armesPlayer);
+        GameInformation gameInformation = new GameInformation(armeAvailable, playerInformation);
         Intent clickerToStore = new Intent(Clicker.this, Store.class);
         Intent clickerToInventory = new Intent(Clicker.this, Inventory.class);
         Bundle bundleClickerToStore = new Bundle();
         Bundle bundleClickerToInventory = new Bundle();
         bundleClickerToStore.putSerializable("GAME_INFO", gameInformation);
-        bundleClickerToInventory.putSerializable("PLAYER_INFO", playerInformation);
+        bundleClickerToInventory.putSerializable("GAME_INFO", gameInformation);
         clickerToInventory.putExtras(bundleClickerToInventory);
         clickerToStore.putExtras(bundleClickerToInventory);
         bottomNavigationView.setOnItemSelectedListener(item -> {
@@ -165,7 +165,7 @@ public class Clicker extends AppCompatActivity {
                 overridePendingTransition(0,0);
                 return true;
             } else if (id == R.id.store){
-                startActivity(new Intent(getApplicationContext(), Store.class).putExtra("SCORE", score));
+                startActivity(clickerToStore);
                 overridePendingTransition(0,0);
                 return true;
             }

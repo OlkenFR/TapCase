@@ -27,6 +27,9 @@ public class CaseOpening extends AppCompatActivity {
     private double scrollPos;
     private Timer timer;
     private final Handler handler = new Handler();
+    private CaseInformation caseInformation;
+    private GameInformation gameInformation;
+    private PlayerInformation playerInformation;
     private int price;
     private int score;
     private int caseID;
@@ -38,14 +41,6 @@ public class CaseOpening extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityCaseOpeningBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        Intent intent = getIntent();
-        if(intent != null) {
-            price = intent.getIntExtra("PRICE", 0);
-            score = intent.getIntExtra("SCORE", 0);
-            caseID = intent.getIntExtra("CASE_ID", 0);
-            binding.tvOpenningCasePrice.setText("Price = " + price);
-            binding.tvScore.setText("Score = " + score);
-        }
         mediaPlayer = MediaPlayer.create(this, R.raw.open_sound);
         prefs = getSharedPreferences("MY_PREFS_NAME", MODE_PRIVATE);
         editor = prefs.edit();
@@ -176,6 +171,11 @@ public class CaseOpening extends AppCompatActivity {
     @Override
     public void onResume() {
             super.onResume();
+            Intent intent = getIntent();
+            Bundle bundle = intent.getExtras();
+            this.caseInformation = (CaseInformation) bundle.getSerializable("CASE_INFO");
+            this.gameInformation = this.caseInformation.getGameInformation();
+            this.playerInformation = this.gameInformation.getPlayerInformation();
             //CANCEL BUTTON SIMULATE A CLICK ON THE STORE
             binding.btnCancel.setOnClickListener(v -> {
                 binding.bottomNavigationView.getMenu().performIdentifierAction(R.id.store, 0);

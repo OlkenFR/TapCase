@@ -28,6 +28,7 @@ public class Inventory extends AppCompatActivity {
     private static ActivityInventoryBinding binding;
     private BottomNavigationView bottomNavigationView;
     private Gson gson;
+    private GameInformation gameInformation;
     private static PlayerInformation playerInformation;
     private Integer score;
     private SharedPreferences prefs;
@@ -51,7 +52,8 @@ public class Inventory extends AppCompatActivity {
         super.onResume();
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
-        this.playerInformation = (PlayerInformation) bundle.getSerializable("PLAYER_INFO");
+        this.gameInformation = (GameInformation) bundle.getSerializable("GAME_INFO");
+        this.playerInformation = this.gameInformation.getPlayerInformation();
         score = playerInformation.getScore();
         List<Item> playerItem = new ArrayList<>();
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
@@ -182,14 +184,18 @@ public class Inventory extends AppCompatActivity {
         binding.tvWeaponsPerformance.setText(String.valueOf(playerInformation.getArme_selectionné().getFlower_per_click()) + " fleurs/tirs");
         binding.tvWeaponPrice.setText("Prix : " + String.valueOf(playerInformation.getArme_selectionné().getPrix()));
         binding.tvArmeSelectionne.setText(String.valueOf(playerInformation.getArme_selectionné().getNom()));
+        Intent inventoryToStore = new Intent(Inventory.this, Store.class);
+        Bundle bundleInventoryToStore = new Bundle();
+        bundleInventoryToStore.putSerializable("GAME_INFO", gameInformation);
+        inventoryToStore.putExtras(bundleInventoryToStore);
         bottomNavigationView.setOnItemSelectedListener(item -> {
             int id = item.getItemId();
             if (id == R.id.clicker) {
-                startActivity(new Intent(getApplicationContext(), Clicker.class));
+                startActivity(new Intent(Inventory.this, Clicker.class));
                 overridePendingTransition(0, 0);
                 return true;
             } else if (id == R.id.store) {
-                startActivity(new Intent(getApplicationContext(), Store.class).putExtra("SCORE", score));
+                startActivity(inventoryToStore);
                 overridePendingTransition(0, 0);
                 return true;
             } else if (id == R.id.inventory) {

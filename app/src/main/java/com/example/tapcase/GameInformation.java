@@ -5,9 +5,11 @@ import java.util.List;
 
 public class GameInformation implements Serializable {
     private List<Arme> weaponAvailable;
+    private PlayerInformation playerInformation;
 
-    public GameInformation(List<Arme> weaponAvailable) {
+    public GameInformation(List<Arme> weaponAvailable, PlayerInformation playerInformation) {
         this.weaponAvailable = weaponAvailable;
+        this.playerInformation = playerInformation;
     }
 
     public List<Arme> getWeaponAvailable() {
@@ -16,5 +18,13 @@ public class GameInformation implements Serializable {
 
     public void setWeaponAvailable(List<Arme> weaponAvailable) {
         this.weaponAvailable = weaponAvailable;
+    }
+
+    public PlayerInformation getPlayerInformation() {
+        return playerInformation;
+    }
+
+    public void setPlayerInformation(PlayerInformation playerInformation) {
+        this.playerInformation = playerInformation;
     }
 }

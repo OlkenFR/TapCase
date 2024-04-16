@@ -19,12 +19,12 @@ public class Store extends AppCompatActivity {
 
     private ActivityStoreBinding binding;
     BottomNavigationView bottomNavigationView;
-    private double scrollSpeed;
-    private double scrollPos;
-    private Timer timer;
-    private final Handler handler = new Handler();
+    private GameInformation gameInformation;
+    private PlayerInformation playerInformation;
+    private CaseInformation caseInformation;
     private int score;
     private List<Case> caseAvailable;
+    private List<Arme> armeAvailable;
     private int BOX_PRICE_CLASSIC = 10;
     private int BOX_PRICE_DREAMS = 20;
     private int BOX_PRICE_BRAVO = 30;
@@ -47,18 +47,23 @@ public class Store extends AppCompatActivity {
     public void onResume() {
         super.onResume();
         Intent intent = getIntent();
-        if(intent != null) {
-            score = intent.getIntExtra("SCORE", 0);
-            binding.tvScore.setText("" + score);
-        }
+        Bundle bundle = intent.getExtras();
+        this.gameInformation = (GameInformation) bundle.getSerializable("GAME_INFO");
+        this.playerInformation = this.gameInformation.getPlayerInformation();
+        this.armeAvailable = this.gameInformation.getWeaponAvailable();
+        binding.tvScore.setText(String.valueOf(playerInformation.getScore()));
+        Intent storeToInventory = new Intent(Store.this, Inventory.class);
+        Bundle bundleStoreToInventory = new Bundle();
+        bundleStoreToInventory.putSerializable("GAME_INFO", gameInformation);
+        storeToInventory.putExtras(bundleStoreToInventory);
         bottomNavigationView.setOnItemSelectedListener(item -> {
             int id = item.getItemId();
             if(id == R.id.clicker){
-                startActivity(new Intent(getApplicationContext(), Clicker.class));
+                startActivity(new Intent(Store.this, Clicker.class));
                 overridePendingTransition(0,0);
                 return true;
             } else if (id == R.id.inventory){
-                startActivity(new Intent(getApplicationContext(), Inventory.class).putExtra("SCORE", score));
+                startActivity(storeToInventory);
                 overridePendingTransition(0,0);
                 return true;
             } else if (id == R.id.store){
@@ -66,35 +71,28 @@ public class Store extends AppCompatActivity {
             }
             return false;
         });
-
-
+        Intent storeToCaseOpening = new Intent(Store.this, CaseOpening.class);
+        Bundle bundleStoreToCaseOpening = new Bundle();
+        bundleStoreToCaseOpening.putSerializable("GAME_INFO", caseInformation);
+        storeToCaseOpening.putExtras(bundleStoreToCaseOpening);
         //ACTION FOR THE CLASSIC BOX TAP
         binding.ivStoreBoxClassic.setOnClickListener(v -> {
-            startActivity(new Intent(Store.this, CaseOpening.class)
-                    .putExtra("SCORE",score)
-                    .putExtra("PRICE",BOX_PRICE_CLASSIC)
-                    .putExtra("CASE_ID", 0));
+            // TODO case à changer et à réassigner au bundle
+            //  bundleStoreToCaseOpening.putSerializable("GAME_INFO", caseInformation);
+            //  Faire fonction createCase
+            startActivity(storeToCaseOpening);
         });
         //ACTION FOR THE DREAMS BOX TAP
         binding.ivStoreBoxDreams.setOnClickListener(v -> {
-            startActivity(new Intent(Store.this, CaseOpening.class)
-                    .putExtra("SCORE",score)
-                    .putExtra("PRICE",BOX_PRICE_DREAMS)
-                    .putExtra("CASE_ID", 1));
+            startActivity(storeToCaseOpening);
         });
         //ACTION FOR THE BRAVO BOX TAP
         binding.ivStoreBoxBravo.setOnClickListener(v -> {
-            startActivity(new Intent(Store.this, CaseOpening.class)
-                    .putExtra("SCORE",score)
-                    .putExtra("PRICE",BOX_PRICE_BRAVO)
-                    .putExtra("CASE_ID", 2));
+            startActivity(storeToCaseOpening);
         });
         //ACTION FOR THE COBBLE BOX TAP
         binding.ivStoreBoxCobble.setOnClickListener(v -> {
-            startActivity(new Intent(Store.this, CaseOpening.class)
-                    .putExtra("SCORE",score)
-                    .putExtra("PRICE",BOX_PRICE_COBBLE)
-                    .putExtra("CASE_ID", 3));
+            startActivity(storeToCaseOpening);
         });
     }
 }
