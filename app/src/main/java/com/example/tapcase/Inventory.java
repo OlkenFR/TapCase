@@ -35,8 +35,9 @@ public class Inventory extends AppCompatActivity {
     private static PlayerInformation playerInformation;
     private Integer score;
     private SharedPreferences prefs;
-    private Rarete armeSelectionneRarete;
     private SharedPreferences.Editor editor;
+    private Rarete armeSelectionneRarete;
+
     private List<Item> fragments_items = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,7 +62,7 @@ public class Inventory extends AppCompatActivity {
         Bundle bundle = intent.getExtras();
         this.gameInformation = (GameInformation) bundle.getSerializable("GAME_INFO");
         this.playerInformation = this.gameInformation.getPlayerInformation();
-        score = playerInformation.getScore();
+        score = prefs.getInt("SCORE", 0);
         updateGridLayout();
         binding.tvScore.setText(String.valueOf(score));
         binding.tvNumberOfWeapon.setText("Nombres d'armes : " + String.valueOf(playerInformation.getPlayer_armes().size()));
@@ -203,7 +204,7 @@ public class Inventory extends AppCompatActivity {
                 Arme nextArme = playerInformation.getPlayer_armes().get(randomIndex);
                 binding.tvArmeSelectionne.setText(nextArme.getNom());
                 binding.tvWeaponsPerformance.setText(nextArme.getFlower_per_click() + " fleurs/tirs");
-                binding.tvWeaponPrice.setText("Prix :" + nextArme.getPrix());
+                binding.tvWeaponPrice.setText("Prix : " + nextArme.getPrix());
                 int newImageResId = getResources().getIdentifier(nextArme.getFileName(), "drawable", getPackageName());
                 binding.ivWeaponSelected.setImageResource(newImageResId);
                 binding.btnSelect.setText("Sélectionner");

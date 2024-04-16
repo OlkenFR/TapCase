@@ -60,9 +60,11 @@
         android:id="@+id/tv_arme_selectionne"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="80dp"
-        android:text="AK"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="88dp"
+        android:layout_marginBottom="16dp"
+        android:text="Nom de l'arme"
+        app:layout_constraintBottom_toTopOf="@+id/tvWeaponPrice"
         app:layout_constraintStart_toEndOf="@+id/iv_weapon_selected"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -80,9 +82,11 @@
         android:id="@+id/tvWeaponsPerformance"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
-        android:layout_marginStart="10dp"
+        android:layout_marginStart="20dp"
         android:layout_marginTop="16dp"
+        android:layout_marginBottom="12dp"
         android:text="Performance"
+        app:layout_constraintBottom_toTopOf="@+id/btn_select"
         app:layout_constraintStart_toEndOf="@+id/iv_weapon_selected"
         app:layout_constraintTop_toBottomOf="@+id/tvWeaponPrice" />
 

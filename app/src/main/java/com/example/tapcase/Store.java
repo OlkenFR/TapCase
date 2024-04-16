@@ -1,6 +1,7 @@
 package com.example.tapcase;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.MenuItem;
@@ -29,6 +30,8 @@ public class Store extends AppCompatActivity {
     private int BOX_PRICE_DREAMS = 20;
     private int BOX_PRICE_BRAVO = 30;
     private int BOX_PRICE_COBBLE = 40;
+    private SharedPreferences prefs;
+    private SharedPreferences.Editor editor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +44,8 @@ public class Store extends AppCompatActivity {
         binding.tvStoreBoxDreams.setText("Price = " + BOX_PRICE_DREAMS);
         binding.tvStoreBoxBravo.setText("Price = " + BOX_PRICE_BRAVO);
         binding.tvStoreBoxCooblestone.setText("Price = " + BOX_PRICE_COBBLE);
+        prefs = getSharedPreferences("MY_PREFS_NAME", MODE_PRIVATE);
+        editor = prefs.edit();
     }
 
     @Override
@@ -51,7 +56,8 @@ public class Store extends AppCompatActivity {
         this.gameInformation = (GameInformation) bundle.getSerializable("GAME_INFO");
         this.playerInformation = this.gameInformation.getPlayerInformation();
         this.armeAvailable = this.gameInformation.getWeaponAvailable();
-        binding.tvScore.setText(String.valueOf(playerInformation.getScore()));
+        score = prefs.getInt("SCORE", 0);
+        binding.tvScore.setText(String.valueOf(score));
         Intent storeToInventory = new Intent(Store.this, Inventory.class);
         Bundle bundleStoreToInventory = new Bundle();
         bundleStoreToInventory.putSerializable("GAME_INFO", gameInformation);
