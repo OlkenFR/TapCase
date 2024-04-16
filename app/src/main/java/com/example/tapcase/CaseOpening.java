@@ -7,6 +7,7 @@ import android.os.Handler;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TableRow;
+import android.media.MediaPlayer;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -31,6 +32,7 @@ public class CaseOpening extends AppCompatActivity {
     private int caseID;
     private SharedPreferences prefs;
     private SharedPreferences.Editor editor;
+    MediaPlayer mediaPlayer;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,7 +46,7 @@ public class CaseOpening extends AppCompatActivity {
             binding.tvOpenningCasePrice.setText("Price = " + price);
             binding.tvScore.setText("" + score);
         }
-
+        mediaPlayer = MediaPlayer.create(this, R.raw.open_sound);
         prefs = getSharedPreferences("MY_PREFS_NAME", MODE_PRIVATE);
         editor = prefs.edit();
 
@@ -64,6 +66,7 @@ public class CaseOpening extends AppCompatActivity {
             ak47 = new Arme(getResources().getDrawable(R.drawable.ak_panthera), Rarete.EXOTIQUE, 37, 156, "AK-47 Panthera");
             awp = new Arme(getResources().getDrawable(R.drawable.awp_worm_god), Rarete.BASE, 44, 154, "AWP Worm god");
             knife = new Arme(getResources().getDrawable(R.drawable.knife_boreal_forest), Rarete.SECRET, 80, 234, "Classic Boreal forest");
+//            binding.ivCase.setImageDrawable(getResources().getDrawable(R.drawable.box_dreams_nightmares));
         } else if(caseID== 2){
             glock = new Arme(getResources().getDrawable(R.drawable.glock_water_element), Rarete.EXOTIQUE, 4, 25, "Glock-17 Water element");
             usp = new Arme(getResources().getDrawable(R.drawable.usp_traitor), Rarete.CLASSIFIE, 18, 67, "USP-S The traitor");
@@ -72,6 +75,7 @@ public class CaseOpening extends AppCompatActivity {
             ak47 = new Arme(getResources().getDrawable(R.drawable.ak_point_disarray), Rarete.SUPERIEUR, 33, 128, "AK-47 Dissaray point");
             awp = new Arme(getResources().getDrawable(R.drawable.awp_neo_noir), Rarete.EXOTIQUE, 60, 200, "AWP Black-Neo");
             knife = new Arme(getResources().getDrawable(R.drawable.knife_fade), Rarete.SECRET, 108, 322, "Bayonet Fade");
+//            binding.ivCase.setImageDrawable(getResources().getDrawable(R.drawable.box_bravo_operation));
         } else if(caseID== 3){
             glock = new Arme(getResources().getDrawable(R.drawable.glock_bullet_queen), Rarete.CLASSIFIE, 15, 75, "Glock-17 Bullet queen");
             usp = new Arme(getResources().getDrawable(R.drawable.usp_orion), Rarete.EXOTIQUE, 12, 37, "USP-S Orion");
@@ -80,6 +84,7 @@ public class CaseOpening extends AppCompatActivity {
             ak47 = new Arme(getResources().getDrawable(R.drawable.ak_bloodsport), Rarete.CLASSIFIE, 42, 185, "AK-47 Bloodsport");
             awp = new Arme(getResources().getDrawable(R.drawable.awp_hyperbeast), Rarete.CLASSIFIE, 69, 232, "AWP Hyperbeast");
             knife = new Arme(getResources().getDrawable(R.drawable.knife_lore), Rarete.SECRET, 122, 366, "Karambit Lore");
+//            binding.ivCase.setImageDrawable(getResources().getDrawable(R.drawable.box_cobblestone_memory));
         }
 
         //CREATE THE CASE WITH ALL THE WEAPON AVAILABLE FOR DISPLAY
@@ -171,6 +176,10 @@ public class CaseOpening extends AppCompatActivity {
     @Override
     public void onResume() {
         super.onResume();
+        //CANCEL BUTTON SIMULATE A CLICK ON THE STORE
+        binding.btnCancel.setOnClickListener(v -> {
+            binding.bottomNavigationView.getMenu().performIdentifierAction(R.id.store, 0);
+        });
         binding.bottomNavigationView.setOnItemSelectedListener(item -> {
             int id = item.getItemId();
             if(id == R.id.clicker){
@@ -201,6 +210,21 @@ public class CaseOpening extends AppCompatActivity {
                 editor.apply();
                 binding.tvScore.setText("" + score);
 
+                //SOUND PART
+                if (!mediaPlayer.isPlaying()) {
+                    mediaPlayer.start();
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            if (mediaPlayer.isPlaying()) {
+                                mediaPlayer.stop();
+                                mediaPlayer.prepareAsync();
+                                mediaPlayer.seekTo(0);
+                            }
+                        }
+                    }, 3500); //STOP AFTER 3500MS
+                }
+
                 binding.btnOpenning.setClickable(false);
                 scrollPos = 0;
                 scrollSpeed = 30;
@@ -219,19 +243,26 @@ public class CaseOpening extends AppCompatActivity {
                                 } else {
                                     scrollSpeed -= (randomNumber+11)/1000;//entre:0.011 et 0.015
                                 }
-
-                                binding.btnOpenning.setText("speed=" + (int) scrollSpeed + " pos=" + (int) scrollPos);
                                 binding.horizontal.scrollTo((int) scrollPos, 0); // Scroll to the new position
                                 if (scrollSpeed < 0.5) {
                                     scrollSpeed = 0;
-                                    timer.cancel(); // Stop the timer when the activity is destroyed
+                                    timer.cancel();
                                     binding.btnOpenning.setClickable(true);
                                 }
                             }
                         });
                     }
-                }, 0, 5); // Exécute la tâche toutes les 1000 millisecondes (1 seconde)
+                }, 0, 5);//ROLL EVERY 5MS
             }
         });
+    }
+    //DESTROY MEDIAPLAYER
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (mediaPlayer != null) {
+            mediaPlayer.release();
+            mediaPlayer = null;
+        }
     }
 }

@@ -67,7 +67,18 @@
         <!--            tools:srcCompat="@drawable/awp_dragon_lore" />-->
 <!--    </LinearLayout>-->
 
+    <ImageView
+        android:id="@+id/iv_logo_inventory"
+        android:layout_width="91dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/logo" />
+
     <LinearLayout
+        android:id="@+id/linear_score_open"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -97,15 +108,6 @@
             android:textSize="34sp" />
     </LinearLayout>
 
-    <ImageView
-        android:id="@+id/iv_logo_inventory"
-        android:layout_width="67dp"
-        android:layout_height="81dp"
-        android:layout_marginStart="3dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/logo" />
-
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigationView"
         android:layout_width="match_parent"
@@ -125,12 +127,27 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="50dp"
         android:layout_marginEnd="32dp"
-        android:text="Button"
+        android:backgroundTint="#4CAF50"
+        android:text="Acheter"
+        android:textColor="#FFFFFF"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/rectangleView" />
+        app:layout_constraintTop_toBottomOf="@+id/linear_case_open" />
+
+    <Button
+        android:id="@+id/btn_cancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="32dp"
+        android:backgroundTint="#F44336"
+        android:text="Annuler"
+        android:textColor="#FFFFFF"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_openning" />
 
     <View
         android:id="@+id/rectangleView"
@@ -149,6 +166,7 @@
         android:layout_width="match_parent"
         android:layout_height="150dp"
         android:layout_marginTop="100dp"
+        android:visibility="invisible"
         app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
@@ -157,20 +175,6 @@
             android:layout_height="150dp"
             android:orientation="horizontal" />
     </HorizontalScrollView>
-
-    <TextView
-        android:id="@+id/tv_openning_case_price"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="32dp"
-        android:text="TextView"
-        android:textColor="#000000"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <TableLayout
         android:id="@+id/tl_case_list"
@@ -192,6 +196,35 @@
             android:layout_height="match_parent" />
 
     </TableLayout>
+
+    <LinearLayout
+        android:id="@+id/linear_case_open"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="80dp"
+        android:layout_marginEnd="32dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/iv_case"
+            android:layout_width="194dp"
+            android:layout_height="201dp"
+            android:background="@drawable/arrondir_base"
+            app:srcCompat="@drawable/box_classic" />
+
+        <TextView
+            android:id="@+id/tv_openning_case_price"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="TextView"
+            android:textColor="#000000"
+            android:textSize="20sp" />
+    </LinearLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

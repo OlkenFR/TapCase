@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.media.MediaPlayer;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -24,12 +25,15 @@ public class Clicker extends AppCompatActivity {
     private int score;
     private SharedPreferences prefs;
     private SharedPreferences.Editor editor;
+    MediaPlayer mediaPlayer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityClickerBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        mediaPlayer = MediaPlayer.create(this, R.raw.bruit_balle_2);
 
         prefs = getSharedPreferences("MY_PREFS_NAME", MODE_PRIVATE);
         editor = prefs.edit();
@@ -90,6 +94,7 @@ public class Clicker extends AppCompatActivity {
                 editor.putInt("SCORE", score);
                 editor.apply();
                 update();
+                mediaPlayer.start();
 
                 RelativeLayout.LayoutParams paramsLayout = new RelativeLayout.LayoutParams(
                         RelativeLayout.LayoutParams.MATCH_PARENT,
@@ -128,10 +133,22 @@ public class Clicker extends AppCompatActivity {
                         binding.main.removeView(imageView);
                     }
                 }, 1000); //for 1 seconds
+            } else if (event.getAction() == MotionEvent.ACTION_UP) {
+                mediaPlayer.seekTo(0);
             }
             return true;
         });
     }
+    //DESTROY MEDIAPLAYER
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (mediaPlayer != null) {
+            mediaPlayer.release();
+            mediaPlayer = null;
+        }
+    }
+
 }
 
 
