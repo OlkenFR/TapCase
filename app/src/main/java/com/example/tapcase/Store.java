@@ -44,10 +44,10 @@ public class Store extends AppCompatActivity {
         setContentView(binding.getRoot());
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
         bottomNavigationView.setSelectedItemId(R.id.store);
-        binding.tvStoreBoxClassic.setText("Price = " + BOX_PRICE_CLASSIC);
-        binding.tvStoreBoxDreams.setText("Price = " + BOX_PRICE_DREAMS);
-        binding.tvStoreBoxBravo.setText("Price = " + BOX_PRICE_BRAVO);
-        binding.tvStoreBoxCooblestone.setText("Price = " + BOX_PRICE_COBBLE);
+        binding.tvStoreBoxClassic.setText("" + BOX_PRICE_CLASSIC);
+        binding.tvStoreBoxDreams.setText("" + BOX_PRICE_DREAMS);
+        binding.tvStoreBoxBravo.setText("" + BOX_PRICE_BRAVO);
+        binding.tvStoreBoxCooblestone.setText("" + BOX_PRICE_COBBLE);
     }
 
     @Override
@@ -79,14 +79,8 @@ public class Store extends AppCompatActivity {
             return false;
         });
 
-
-
-
-
         Intent storeToCaseOpening = new Intent(Store.this, CaseOpening.class);
         Bundle bundleStoreToCaseOpening = new Bundle();
-
-
 
         //ACTION FOR THE CLASSIC BOX TAP
         binding.ivStoreBoxClassic.setOnClickListener(v -> {
@@ -99,11 +93,10 @@ public class Store extends AppCompatActivity {
             weaponList = loadCase(list, weaponList);
             Case weaponCase = new Case(weaponList, CaseType.ClassicCase, BOX_PRICE_CLASSIC, BOX_CLASSIC_LINK, weaponList.get(0));
             caseInformation = new CaseInformation(gameInformation, weaponCase);
-
-
             bundleStoreToCaseOpening.putSerializable("CASE_INFO", caseInformation);
             storeToCaseOpening.putExtras(bundleStoreToCaseOpening);
             startActivity(storeToCaseOpening);
+            overridePendingTransition(0, 0);
         });
         //ACTION FOR THE DREAMS BOX TAP
         binding.ivStoreBoxDreams.setOnClickListener(v -> {
@@ -112,10 +105,10 @@ public class Store extends AppCompatActivity {
             weaponList = loadCase(list, weaponList);
             Case weaponCase = new Case(weaponList, CaseType.DreamsCase, BOX_PRICE_DREAMS, BOX_DREAMS_LINK, weaponList.get(0));
             caseInformation = new CaseInformation(gameInformation, weaponCase);
-
             bundleStoreToCaseOpening.putSerializable("CASE_INFO", caseInformation);
             storeToCaseOpening.putExtras(bundleStoreToCaseOpening);
             startActivity(storeToCaseOpening);
+            overridePendingTransition(0, 0);
         });
         //ACTION FOR THE BRAVO BOX TAP
         binding.ivStoreBoxBravo.setOnClickListener(v -> {
@@ -124,10 +117,10 @@ public class Store extends AppCompatActivity {
             weaponList = loadCase(list, weaponList);
             Case weaponCase = new Case(weaponList, CaseType.BravoCase, BOX_PRICE_BRAVO, BOX_BRAVO_LINK, weaponList.get(0));
             caseInformation = new CaseInformation(gameInformation, weaponCase);
-
             bundleStoreToCaseOpening.putSerializable("CASE_INFO", caseInformation);
             storeToCaseOpening.putExtras(bundleStoreToCaseOpening);
             startActivity(storeToCaseOpening);
+            overridePendingTransition(0, 0);
         });
         //ACTION FOR THE COBBLE BOX TAP
         binding.ivStoreBoxCobble.setOnClickListener(v -> {
@@ -136,10 +129,10 @@ public class Store extends AppCompatActivity {
             weaponList = loadCase(list, weaponList);
             Case weaponCase = new Case(weaponList, CaseType.CobbleCase, BOX_PRICE_COBBLE, BOX_COBBLESTONE_LINK, weaponList.get(0));
             caseInformation = new CaseInformation(gameInformation, weaponCase);
-
             bundleStoreToCaseOpening.putSerializable("CASE_INFO", caseInformation);
             storeToCaseOpening.putExtras(bundleStoreToCaseOpening);
             startActivity(storeToCaseOpening);
+            overridePendingTransition(0, 0);
         });
     }
     private List<Arme> loadCase(List<Integer> list, List<Arme> weaponList){

@@ -9,10 +9,12 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TableRow;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.tapcase.databinding.ActivityCaseOpeningBinding;
+import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -35,8 +37,11 @@ public class CaseOpening extends AppCompatActivity {
     private int score;
     private int caseID;
     private SharedPreferences prefs;
+    private String playerWeaponsList;
     private SharedPreferences.Editor editor;
     MediaPlayer mediaPlayer;
+    private Arme unlockedWeapon;
+    private Gson gson;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,112 +50,7 @@ public class CaseOpening extends AppCompatActivity {
         mediaPlayer = MediaPlayer.create(this, R.raw.open_sound);
         prefs = getSharedPreferences("MY_PREFS_NAME", MODE_PRIVATE);
         editor = prefs.edit();
-
-//        Arme glock = new Arme(Rarete.SUPERIEUR, 2, 10, "Glock-17 Weasel");
-//        Arme usp = new Arme(getResources().getDrawable(R.drawable.usp_flashback), Rarete.SUPERIEUR, 7, 28, "USP-S Flashback");
-//        Arme mp9 = new Arme(getResources().getDrawable(R.drawable.mp_goo), Rarete.SUPERIEUR, 20, 67, "MP9 Goo");
-//        Arme m4a1 = new Arme(getResources().getDrawable(R.drawable.m_printstream), Rarete.EXOTIQUE, 28, 110, "M4A1-S Printstream");
-//        Arme ak47 = new Arme(getResources().getDrawable(R.drawable.ak_elite_build), Rarete.BASE, 28, 108, "AK-47 Elite build");
-//        Arme awp = new Arme(getResources().getDrawable(R.drawable.awp_atheris), Rarete.SUPERIEUR, 53, 178, "AWP Atheris");
-//        Arme knife = new Arme(getResources().getDrawable(R.drawable.knife_freehand), Rarete.SECRET, 91, 275, "Huntsman Freehand");
-//
-//        if(caseID== 1){
-//            glock = new Arme(getResources().getDrawable(R.drawable.glock_neo_noir), Rarete.EXOTIQUE, 7, 40, "Glock-17 Black-Neo");
-//            usp = new Arme(getResources().getDrawable(R.drawable.usp_cyrex), Rarete.BASE, 22, 78, "USP-S Cyrex");
-//            mp9 = new Arme(getResources().getDrawable(R.drawable.mp_hydra), Rarete.SUPERIEUR, 16, 54, "MP9 Hydra");
-//            m4a1 = new Arme(getResources().getDrawable(R.drawable.m_cyrex), Rarete.SUPERIEUR, 22, 78, "M4A1-S Cyrex");
-//            ak47 = new Arme(getResources().getDrawable(R.drawable.ak_panthera), Rarete.EXOTIQUE, 37, 156, "AK-47 Panthera");
-//            awp = new Arme(getResources().getDrawable(R.drawable.awp_worm_god), Rarete.BASE, 44, 154, "AWP Worm god");
-//            knife = new Arme(getResources().getDrawable(R.drawable.knife_boreal_forest), Rarete.SECRET, 80, 234, "Classic Boreal forest");
-////            binding.ivCase.setImageDrawable(getResources().getDrawable(R.drawable.box_dreams_nightmares));
-//        } else if(caseID== 2){
-//            glock = new Arme(getResources().getDrawable(R.drawable.glock_water_element), Rarete.EXOTIQUE, 4, 25, "Glock-17 Water element");
-//            usp = new Arme(getResources().getDrawable(R.drawable.usp_traitor), Rarete.CLASSIFIE, 18, 67, "USP-S The traitor");
-//            mp9 = new Arme(getResources().getDrawable(R.drawable.mp_dry_season), Rarete.BASE, 12, 40, "MP9 Dry season");
-//            m4a1 = new Arme(getResources().getDrawable(R.drawable.m_hyperbeast), Rarete.CLASSIFIE, 32, 144, "M4A1-S Hyperbeast");
-//            ak47 = new Arme(getResources().getDrawable(R.drawable.ak_point_disarray), Rarete.SUPERIEUR, 33, 128, "AK-47 Dissaray point");
-//            awp = new Arme(getResources().getDrawable(R.drawable.awp_neo_noir), Rarete.EXOTIQUE, 60, 200, "AWP Black-Neo");
-//            knife = new Arme(getResources().getDrawable(R.drawable.knife_fade), Rarete.SECRET, 108, 322, "Bayonet Fade");
-////            binding.ivCase.setImageDrawable(getResources().getDrawable(R.drawable.box_bravo_operation));
-//        } else if(caseID== 3){
-//            glock = new Arme(getResources().getDrawable(R.drawable.glock_bullet_queen), Rarete.CLASSIFIE, 15, 75, "Glock-17 Bullet queen");
-//            usp = new Arme(getResources().getDrawable(R.drawable.usp_orion), Rarete.EXOTIQUE, 12, 37, "USP-S Orion");
-//            mp9 = new Arme(getResources().getDrawable(R.drawable.mp_mount_fuji), Rarete.EXOTIQUE, 25, 95, "MP9 Mount Fudji");
-//            m4a1 = new Arme(getResources().getDrawable(R.drawable.m_nitro), Rarete.BASE, 17, 60, "M4A1-S Nitro");
-//            ak47 = new Arme(getResources().getDrawable(R.drawable.ak_bloodsport), Rarete.CLASSIFIE, 42, 185, "AK-47 Bloodsport");
-//            awp = new Arme(getResources().getDrawable(R.drawable.awp_hyperbeast), Rarete.CLASSIFIE, 69, 232, "AWP Hyperbeast");
-//            knife = new Arme(getResources().getDrawable(R.drawable.knife_lore), Rarete.SECRET, 122, 366, "Karambit Lore");
-////            binding.ivCase.setImageDrawable(getResources().getDrawable(R.drawable.box_cobblestone_memory));
-//        }
-//
-//        //CREATE THE CASE WITH ALL THE WEAPON AVAILABLE FOR DISPLAY
-//        List<Arme> weaponAvailableList = new ArrayList<>();
-//        weaponAvailableList.add(glock);
-//        weaponAvailableList.add(usp);
-//        weaponAvailableList.add(mp9);
-//        weaponAvailableList.add(m4a1);
-//        weaponAvailableList.add(ak47);
-//        weaponAvailableList.add(awp);
-//        weaponAvailableList.add(knife);
-//        Collections.sort(weaponAvailableList, new TriRarity());
-//        int compteur = 0;
-//        LinearLayout.LayoutParams layoutParams = new TableRow.LayoutParams(270, 270);
-//        for(Arme weapon : weaponAvailableList){
-//
-//            ImageView imageView = new ImageView(getApplicationContext());
-//            imageView.setImageDrawable(weapon.getImage_arme());
-//            Rarete weaponRarity = weapon.getRarete();
-//            if (weaponRarity == Rarete.BASE){
-//                imageView.setBackground(getResources().getDrawable(R.drawable.arrondir_base));
-//            } else if (weaponRarity == Rarete.SUPERIEUR) {
-//                imageView.setBackground(getResources().getDrawable(R.drawable.arrondir_superieur));
-//            } else if (weaponRarity == Rarete.EXOTIQUE) {
-//                imageView.setBackground(getResources().getDrawable(R.drawable.arrondir_exotique));
-//            } else if (weaponRarity == Rarete.CLASSIFIE) {
-//                imageView.setBackground(getResources().getDrawable(R.drawable.arrondir_classifie));
-//            } else if (weaponRarity == Rarete.SECRET) {
-//                imageView.setBackground(getResources().getDrawable(R.drawable.arrondir_secret));
-//            }
-//
-//            imageView.setLayoutParams(layoutParams);
-//            if(compteur<4){
-//                binding.tr1.addView(imageView);
-//            } else {
-//                binding.tr2.addView(imageView);
-//            }
-//            compteur++;
-//        }
-//
-//
-//
-//        //CREATE THE CASE WITH 15 RANDOM WEAPONS
-//        List<Arme> weaponList = new ArrayList<>();
-//        for (int i=0; i<15; i++){
-//            Random random = new Random();
-//            int randomNumber = random.nextInt(100);
-//
-//            if (randomNumber<13){
-//                weaponList.add(glock);
-//            } else if (randomNumber<35) {
-//                weaponList.add(usp);
-//            } else if (randomNumber<70) {
-//                weaponList.add(mp9);
-//            } else if (randomNumber<80) {
-//                weaponList.add(m4a1);
-//            } else if (randomNumber<90) {
-//                weaponList.add(ak47);
-//            } else if (randomNumber<98) {
-//                weaponList.add(awp);
-//            } else if (randomNumber<100) {
-//                weaponList.add(knife);
-//            }
-//        }
-//
-
-
-
-//
-//
+        gson = new Gson();
     }
 
 
@@ -171,34 +71,6 @@ public class CaseOpening extends AppCompatActivity {
             binding.btnCancel.setOnClickListener(v -> {
                 binding.bottomNavigationView.getMenu().performIdentifierAction(R.id.store, 0);
             });
-
-            Intent caseOpeningToStore = new Intent(CaseOpening.this, Store.class);
-            Intent caseOpeningToInventory = new Intent(CaseOpening.this, Inventory.class);
-            Intent caseOpeningToClicker = new Intent(CaseOpening.this, Clicker.class);
-            Bundle bundleCaseOpeningToStore = new Bundle();
-            Bundle bundleCaseOpeningToInventory = new Bundle();
-            bundleCaseOpeningToStore.putSerializable("GAME_INFO", gameInformation);
-            caseOpeningToStore.putExtras(bundleCaseOpeningToStore);
-            bundleCaseOpeningToInventory.putSerializable("GAME_INFO", gameInformation);
-            caseOpeningToInventory.putExtras(bundleCaseOpeningToInventory);
-            binding.bottomNavigationView.setOnItemSelectedListener(item -> {
-                int id = item.getItemId();
-                if (id == R.id.clicker) {
-                    startActivity(caseOpeningToClicker);
-                    overridePendingTransition(0, 0);
-                    return true;
-                } else if (id == R.id.inventory) {
-                    startActivity(caseOpeningToInventory);
-                    overridePendingTransition(0, 0);
-                    return true;
-                } else if (id == R.id.store) {
-                    startActivity(caseOpeningToStore);
-                    overridePendingTransition(0, 0);
-                    return true;
-                }
-                return false;
-            });
-
 
         //DISPLAY THE AVAILABLE WEAPON IN THE CASE
         Case weaponCase = caseInformation.getCaseInfomation();
@@ -239,8 +111,6 @@ public class CaseOpening extends AppCompatActivity {
         Random random = new Random();
         for (int i=0; i<15; i++){
             int randomNumber = random.nextInt(100);
-
-
             if (randomNumber<13){
                 randomWeapon = weaponCase.getArmeDispo().get(0);
             } else if (randomNumber<35) {
@@ -256,8 +126,6 @@ public class CaseOpening extends AppCompatActivity {
             } else if (randomNumber<100) {
                 randomWeapon = weaponCase.getArmeDispo().get(6);
             }
-
-
 
             ImageView imageView = new ImageView(getApplicationContext());
 
@@ -280,7 +148,6 @@ public class CaseOpening extends AppCompatActivity {
             binding.linear.addView(imageView);
         }
 
-
         //STARTING THE ROLL OF WEAPON
         binding.btnOpenning.setOnClickListener(v -> {
             if (score >= price) {
@@ -296,9 +163,6 @@ public class CaseOpening extends AppCompatActivity {
                 editor.apply();
                 binding.tvScore.setText("" + score);
 
-                //PUT THE WEAPON IN THE INVENTORY
-                playerInformation.getPlayer_armes().add(randomList.get(10));
-
                 //SOUND PART
                 if (!mediaPlayer.isPlaying()) {
                     mediaPlayer.start();
@@ -312,9 +176,18 @@ public class CaseOpening extends AppCompatActivity {
                             }
                         }
                     }, 3500); //STOP AFTER 3500MS
+                    unlockedWeapon = randomList.get(10);
+                    //PUT THE WEAPON IN THE INVENTORY
+                    playerInformation.getPlayer_armes().add(unlockedWeapon);
+
+                    // Display toast after animation is finished
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            displayToastUnlockedWeapon();
+                        }
+                    }, 3500); // Display toast after 3500ms
                 }
-
-
                 scrollPos = 0;
                 scrollSpeed = 30;
                 Random randomTimer = new Random();
@@ -343,6 +216,41 @@ public class CaseOpening extends AppCompatActivity {
                 }, 0, 5);//ROLL EVERY 5MS
             }
         });
+
+
+        playerWeaponsList = gson.toJson(playerInformation.getPlayer_armes());
+        editor.putString("NOM_ARMES_JOUEUR", playerWeaponsList);
+        editor.apply();
+
+        Intent caseOpeningToStore = new Intent(CaseOpening.this, Store.class);
+        Intent caseOpeningToInventory = new Intent(CaseOpening.this, Inventory.class);
+        Intent caseOpeningToClicker = new Intent(CaseOpening.this, Clicker.class);
+        Bundle bundleCaseOpeningToStore = new Bundle();
+        Bundle bundleCaseOpeningToInventory = new Bundle();
+        bundleCaseOpeningToStore.putSerializable("GAME_INFO", gameInformation);
+        caseOpeningToStore.putExtras(bundleCaseOpeningToStore);
+        bundleCaseOpeningToInventory.putSerializable("GAME_INFO", gameInformation);
+        caseOpeningToInventory.putExtras(bundleCaseOpeningToInventory);
+        String playerWeaponsList = gson.toJson(playerInformation.getPlayer_armes());
+
+        binding.bottomNavigationView.setOnItemSelectedListener(item -> {
+            int id = item.getItemId();
+            if (id == R.id.clicker) {
+                startActivity(caseOpeningToClicker);
+                overridePendingTransition(0, 0);
+                return true;
+            } else if (id == R.id.inventory) {
+                startActivity(caseOpeningToInventory);
+                overridePendingTransition(0, 0);
+                return true;
+            } else if (id == R.id.store) {
+                startActivity(caseOpeningToStore);
+                overridePendingTransition(0, 0);
+                return true;
+            }
+            return false;
+        });
+
     }
     //DESTROY MEDIAPLAYER
     @Override
@@ -352,5 +260,9 @@ public class CaseOpening extends AppCompatActivity {
             mediaPlayer.release();
             mediaPlayer = null;
         }
+    }
+
+    private void displayToastUnlockedWeapon(){
+        Toast.makeText(CaseOpening.this, "Nouvelle arme débloqué : "+ unlockedWeapon.getNom(), Toast.LENGTH_SHORT).show();
     }
 }
