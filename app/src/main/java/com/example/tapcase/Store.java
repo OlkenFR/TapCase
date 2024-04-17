@@ -94,10 +94,6 @@ public class Store extends AppCompatActivity {
         storeToCaseOpening.putExtras(bundleStoreToCaseOpening);
         //ACTION FOR THE CLASSIC BOX TAP
         binding.ivStoreBoxClassic.setOnClickListener(v -> {
-            // TODO case à changer et à réassigner au bundle
-            //  bundleStoreToCaseOpening.putSerializable("GAME_INFO", caseInformation);
-            //  Faire fonction createCase
-
             List<Arme> weaponList = new ArrayList<>();
             List<Integer> list = new ArrayList<>(Arrays.asList(1, 6, 12, 17, 20, 26, 31));
             weaponList = loadCase(list, weaponList);
