@@ -34,6 +34,7 @@
             android:layout_marginTop="2dp"
             android:layout_marginEnd="10dp"
             android:layout_marginBottom="2dp"
+            android:layout_weight="1"
             app:srcCompat="@drawable/fleur" />
 
         <TextView
@@ -204,4 +205,14 @@
         android:textColor="#000000"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/spinner_Sort" />
+
+    <ImageView
+        android:id="@+id/iv_fleurs_score_weapon_price"
+        android:layout_width="22dp"
+        android:layout_height="22dp"
+        android:layout_marginStart="64dp"
+        android:layout_marginTop="24dp"
+        app:layout_constraintStart_toStartOf="@+id/tvWeaponPrice"
+        app:layout_constraintTop_toBottomOf="@+id/tv_arme_selectionne"
+        app:srcCompat="@drawable/fleur" />
 </androidx.constraintlayout.widget.ConstraintLayout>

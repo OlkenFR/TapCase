@@ -40,6 +40,7 @@
             android:layout_marginTop="2dp"
             android:layout_marginEnd="10dp"
             android:layout_marginBottom="2dp"
+            android:layout_weight="1"
             app:srcCompat="@drawable/fleur" />
 
         <TextView
@@ -99,6 +100,44 @@
     </HorizontalScrollView>
 
     <LinearLayout
+        android:id="@+id/linear_layout_case_price"
+        android:layout_width="222dp"
+        android:layout_height="34dp"
+        android:layout_marginStart="95dp"
+        android:layout_marginTop="82dp"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal"
+        android:textAlignment="center"
+        app:layout_constraintStart_toStartOf="@+id/linear_open_open"
+        app:layout_constraintTop_toTopOf="@+id/linear_open_open">
+
+        <TextView
+            android:id="@+id/tv_openning_case_price"
+            android:layout_width="wrap_content"
+            android:layout_height="42dp"
+            android:layout_marginTop="2dp"
+            android:gravity="center"
+            android:text="TextView"
+            android:textColor="#000000"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/iv_fleurs_score_prix" />
+
+        <ImageView
+            android:id="@+id/iv_fleurs_score_prix"
+            android:layout_width="69dp"
+            android:layout_height="31dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="2dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="2dp"
+            app:layout_constraintStart_toStartOf="@id/tv_openning_case_price"
+            app:layout_constraintTop_toTopOf="@id/tv_openning_case_price"
+            app:srcCompat="@drawable/fleur" />
+
+    </LinearLayout>
+
+    <LinearLayout
         android:id="@+id/linear_case_open"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -118,15 +157,11 @@
             android:background="@drawable/arrondir_base"
             app:srcCompat="@drawable/box_classic" />
 
-        <TextView
-            android:id="@+id/tv_openning_case_price"
+        <ImageView
+            android:id="@+id/imageView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="2dp"
-            android:gravity="center"
-            android:text="TextView"
-            android:textColor="#000000"
-            android:textSize="20sp" />
+            android:layout_height="38dp"
+            app:srcCompat="@drawable/empty" />
 
         <TextView
             android:id="@+id/tv_case_name"
@@ -161,6 +196,22 @@
             android:textSize="20sp" />
 
     </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_see_inventory"
+        android:layout_width="wrap_content"
+        android:layout_height="65dp"
+        android:layout_gravity="center"
+        android:layout_marginBottom="52dp"
+        android:backgroundTint="#4CAF50"
+        android:text="Voir dans l'inventaire"
+        android:textColor="#FFFFFF"
+        android:textSize="20sp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/tl_case_list"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TableLayout
         android:id="@+id/tl_case_list"

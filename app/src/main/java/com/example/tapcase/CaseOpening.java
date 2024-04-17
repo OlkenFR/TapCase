@@ -66,7 +66,7 @@ public class CaseOpening extends AppCompatActivity {
             score = prefs.getInt("SCORE", 0);
             binding.tvScore.setText("" + score);
             price = caseInformation.getCaseInfomation().getPrix();
-            binding.tvOpenningCasePrice.setText("Prix = " + price);
+            binding.tvOpenningCasePrice.setText("" + price);
             name = caseInformation.getCaseInfomation().getCaseName();
             binding.tvCaseName.setText("" + name);
             binding.ivCase.setImageResource(getResources().getIdentifier(caseInformation.getCaseInfomation().getCaseFileName(), "drawable", getPackageName()));
@@ -74,6 +74,9 @@ public class CaseOpening extends AppCompatActivity {
             binding.btnCancel.setOnClickListener(v -> {
                 binding.bottomNavigationView.getMenu().performIdentifierAction(R.id.store, 0);
             });
+        binding.btnSeeInventory.setOnClickListener(v -> {
+            binding.bottomNavigationView.getMenu().performIdentifierAction(R.id.inventory, 0);
+        });
 
         //DISPLAY THE AVAILABLE WEAPON IN THE CASE
         boolean isAscending = true;
@@ -160,6 +163,7 @@ public class CaseOpening extends AppCompatActivity {
                 binding.linearCaseOpen.setVisibility(View.INVISIBLE);
                 binding.rectangleView.setVisibility(View.VISIBLE);
                 binding.linearOpenOpen.setVisibility(View.VISIBLE);
+                binding.linearLayoutCasePrice.setVisibility(View.INVISIBLE);
 
                 score = score - price;
 
@@ -187,6 +191,7 @@ public class CaseOpening extends AppCompatActivity {
                         @Override
                         public void run() {
                             displayToastUnlockedWeapon();
+                            binding.btnSeeInventory.setVisibility(View.VISIBLE);
                         }
                     }, 3500);
                 }
