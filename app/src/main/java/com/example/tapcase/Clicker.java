@@ -245,7 +245,6 @@ public class Clicker extends AppCompatActivity {
             if (isChecked) {
                 startService(intentService);
 //                bindService(intentService,myServiceConnection, Context.BIND_AUTO_CREATE);
-//                AutoClickService.get
 
             } else {
                 stopService(intentService);
