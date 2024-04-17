@@ -8,7 +8,7 @@
     android:background="#BED3E8"
     tools:context=".Clicker">
 
-<ImageView
+    <ImageView
         android:id="@+id/iv_logo_inventory"
         android:layout_width="91dp"
         android:layout_height="100dp"
@@ -53,6 +53,16 @@
         app:layout_constraintHorizontal_bias="0.076"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_nomArme" />
+
+    <ImageView
+        android:id="@+id/iv_fleurs_nom"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="4dp"
+        app:layout_constraintStart_toEndOf="@+id/tv_prixArme"
+        app:layout_constraintTop_toBottomOf="@+id/tv_nomArme"
+        app:srcCompat="@drawable/fleur" />
 
     <TextView
         android:id="@+id/tv_perfArme"
