@@ -94,6 +94,7 @@ public class Inventory extends AppCompatActivity {
             public void onClick(View v) {
                 binding.btnSelect.setEnabled(false);
                 binding.btnSelect.setText("Sélectionné");
+                binding.btnSelect.setBackgroundColor(R.color.GREENMMoins);
                 editor.putString("WEAPON_SELECTED", playerInformation.getArme_selectionné().getFileName());
                 editor.putInt("RARETE", playerInformation.getArme_selectionné().getRarete().getValue());
                 editor.putString("NOM", playerInformation.getArme_selectionné().getNom());

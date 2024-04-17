@@ -60,6 +60,7 @@ public class Clicker extends AppCompatActivity {
 
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -208,7 +209,22 @@ public class Clicker extends AppCompatActivity {
                 );
                 //SOUND PART FOR SHOOTING
                 if (!mediaPlayer.isPlaying()) {
-                    mediaPlayer.start();
+                    String fileName = playerInformation.getArme_selectionné().getFileName();
+                    if (fileName.startsWith("glock")) {
+                        play_sound(R.raw.glock_cut);
+                    } else if (fileName.startsWith("usp")) {
+                        play_sound(R.raw.usp_cut);
+                    } else if (fileName.startsWith("mp")) {
+                        play_sound(R.raw.mp9_cut);
+                    } else if (fileName.startsWith("m_")) {
+                        play_sound(R.raw.m4_cut);
+                    } else if (fileName.startsWith("ak")) {
+                        play_sound(R.raw.bruit_balle_2);
+                    } else if (fileName.startsWith("awp")) {
+                        play_sound(R.raw.awp_cut);
+                    } else if (fileName.startsWith("knife")) {
+                        play_sound(R.raw.sound_knife);
+                    }
                 }
 
                 Random random = new Random();
@@ -247,8 +263,6 @@ public class Clicker extends AppCompatActivity {
             }
             return true;
         });
-
-        // registerReceiver(receiver,new IntentFilter(BROADCAST));
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
             registerReceiver(receiver,new IntentFilter(BROADCAST),RECEIVER_EXPORTED);
         }
@@ -271,15 +285,6 @@ public class Clicker extends AppCompatActivity {
         unregisterReceiver(receiver);
     }
 
-    //DESTROY MEDIAPLAYER
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        if (mediaPlayer != null) {
-            mediaPlayer.release();
-            mediaPlayer = null;
-          }
-        }
          private void loadAvailableWeapons() {
         InputStream inputStream = getResources().openRawResource(R.raw.item_data);
         BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
@@ -347,8 +352,16 @@ public class Clicker extends AppCompatActivity {
             }
         }
     };
-
-
+    private void play_sound(int id_sound) {
+        MediaPlayer sound = MediaPlayer.create(this, id_sound);
+        sound.start();
+        sound.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mediaPlayer) {
+                mediaPlayer.release();
+            }
+        });
+    }
 }
 
 
