@@ -171,16 +171,20 @@ public class Clicker extends AppCompatActivity {
         bundleClickerToInventory.putSerializable("GAME_INFO", gameInformation);
         clickerToInventory.putExtras(bundleClickerToInventory);
         clickerToStore.putExtras(bundleClickerToInventory);
+        registerReceiver(receiver,new IntentFilter(BROADCAST));
         bottomNavigationView.setOnItemSelectedListener(item -> {
             int id = item.getItemId();
             if(id == R.id.clicker){
                 return true;
             } else if (id == R.id.inventory){
-                System.out.println(playerInformation.toString());
+                stopService(intentService);
+                unregisterReceiver(receiver);
                 startActivity(clickerToInventory);
                 overridePendingTransition(0,0);
                 return true;
             } else if (id == R.id.store){
+                stopService(intentService);
+                unregisterReceiver(receiver);
                 startActivity(clickerToStore);
                 overridePendingTransition(0,0);
                 return true;
@@ -239,7 +243,6 @@ public class Clicker extends AppCompatActivity {
         });
 
         //AUTOCLICKER ON WHEN THE BOX IS CHECKED
-        registerReceiver(receiver,new IntentFilter(BROADCAST));
         binding.checkBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
             Intent intent = new Intent(Clicker.this, AutoClickService.class);
             if (isChecked) {
