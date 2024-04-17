@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.ServiceConnection;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
@@ -171,20 +172,22 @@ public class Clicker extends AppCompatActivity {
         bundleClickerToInventory.putSerializable("GAME_INFO", gameInformation);
         clickerToInventory.putExtras(bundleClickerToInventory);
         clickerToStore.putExtras(bundleClickerToInventory);
-        registerReceiver(receiver,new IntentFilter(BROADCAST));
+
+        // registerReceiver(receiver,new IntentFilter(BROADCAST));
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+            registerReceiver(receiver,new IntentFilter(BROADCAST),RECEIVER_EXPORTED);
+        }
         bottomNavigationView.setOnItemSelectedListener(item -> {
             int id = item.getItemId();
             if(id == R.id.clicker){
                 return true;
             } else if (id == R.id.inventory){
                 stopService(intentService);
-                unregisterReceiver(receiver);
                 startActivity(clickerToInventory);
                 overridePendingTransition(0,0);
                 return true;
             } else if (id == R.id.store){
                 stopService(intentService);
-                unregisterReceiver(receiver);
                 startActivity(clickerToStore);
                 overridePendingTransition(0,0);
                 return true;
@@ -203,7 +206,10 @@ public class Clicker extends AppCompatActivity {
                         RelativeLayout.LayoutParams.MATCH_PARENT,
                         RelativeLayout.LayoutParams.MATCH_PARENT
                 );
-
+                //SOUND PART FOR SHOOTING
+                if (!mediaPlayer.isPlaying()) {
+                    mediaPlayer.start();
+                }
 
                 Random random = new Random();
                 int randomX = random.nextInt(200);
@@ -242,21 +248,29 @@ public class Clicker extends AppCompatActivity {
             return true;
         });
 
+        // registerReceiver(receiver,new IntentFilter(BROADCAST));
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+            registerReceiver(receiver,new IntentFilter(BROADCAST),RECEIVER_EXPORTED);
+        }
+
         //AUTOCLICKER ON WHEN THE BOX IS CHECKED
         binding.checkBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
             Intent intent = new Intent(Clicker.this, AutoClickService.class);
             if (isChecked) {
                 startService(intentService);
-//                bindService(intentService,myServiceConnection, Context.BIND_AUTO_CREATE);
-
             } else {
                 stopService(intentService);
-                unregisterReceiver(receiver);
-
-//                unbindService(myServiceConnection);
             }
         });
     }
+
+    //UNREGISTER THE RECEIVER FOR THE AUTOCLICKER
+    @Override
+    protected void onPause() {
+        super.onPause();
+        unregisterReceiver(receiver);
+    }
+
     //DESTROY MEDIAPLAYER
     @Override
     protected void onDestroy() {

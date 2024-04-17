@@ -22,12 +22,6 @@
             android:name=".CaseOpening"
             android:exported="false" />
         <activity
-            android:name=".CaseOpener"
-            android:exported="false" />
-        <activity
-            android:name=".Inventory"
-            android:exported="false" />
-        <activity
             android:name=".Clicker"
             android:exported="true">
             <intent-filter>
@@ -36,7 +30,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <service android:name=".AutoClickService"/>
+        <service android:name=".AutoClickService"
+            android:enabled="true"
+            android:exported="true"/>
     </application>
 
 </manifest>

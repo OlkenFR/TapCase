@@ -171,7 +171,7 @@ public class CaseOpening extends AppCompatActivity {
                 editor.apply();
                 binding.tvScore.setText("" + score);
 
-                //SOUND PART
+                //SOUND PART FOR OPENNING
                 if (!mediaPlayer.isPlaying()) {
                     mediaPlayer.start();
                     new Handler().postDelayed(new Runnable() {
