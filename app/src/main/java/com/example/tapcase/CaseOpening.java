@@ -57,29 +57,29 @@ public class CaseOpening extends AppCompatActivity {
 
     @Override
     public void onResume() {
-            super.onResume();
-            Intent intent = getIntent();
-            Bundle bundle = intent.getExtras();
-            this.caseInformation = (CaseInformation) bundle.getSerializable("CASE_INFO");
-            this.gameInformation = this.caseInformation.getGameInformation();
-            this.playerInformation = this.gameInformation.getPlayerInformation();
-            score = prefs.getInt("SCORE", 0);
-            binding.tvScore.setText("" + score);
-            price = caseInformation.getCaseInfomation().getPrix();
-            binding.tvOpenningCasePrice.setText("" + price);
-            name = caseInformation.getCaseInfomation().getCaseName();
-            binding.tvCaseName.setText("" + name);
-            binding.ivCase.setImageResource(getResources().getIdentifier(caseInformation.getCaseInfomation().getCaseFileName(), "drawable", getPackageName()));
-            //CANCEL BUTTON SIMULATE A CLICK ON THE STORE
-            binding.btnCancel.setOnClickListener(v -> {
-                binding.bottomNavigationView.getMenu().performIdentifierAction(R.id.store, 0);
-            });
-            binding.btnSeeInventory.setOnClickListener(v -> {
-                binding.bottomNavigationView.getMenu().performIdentifierAction(R.id.inventory, 0);
-            });
-            binding.btnBackMagasin.setOnClickListener(v -> {
-                binding.bottomNavigationView.getMenu().performIdentifierAction(R.id.store, 0);
-            });
+        super.onResume();
+        Intent intent = getIntent();
+        Bundle bundle = intent.getExtras();
+        this.caseInformation = (CaseInformation) bundle.getSerializable("CASE_INFO");
+        this.gameInformation = this.caseInformation.getGameInformation();
+        this.playerInformation = this.gameInformation.getPlayerInformation();
+        score = prefs.getInt("SCORE", 0);
+        binding.tvScore.setText("" + score);
+        price = caseInformation.getCaseInfomation().getPrix();
+        binding.tvOpenningCasePrice.setText("" + price);
+        name = caseInformation.getCaseInfomation().getCaseName();
+        binding.tvCaseName.setText("" + name);
+        binding.ivCase.setImageResource(getResources().getIdentifier(caseInformation.getCaseInfomation().getCaseFileName(), "drawable", getPackageName()));
+        //CANCEL BUTTON SIMULATE A CLICK ON THE STORE
+        binding.btnCancel.setOnClickListener(v -> {
+            binding.bottomNavigationView.getMenu().performIdentifierAction(R.id.store, 0);
+        });
+        binding.btnSeeInventory.setOnClickListener(v -> {
+            binding.bottomNavigationView.getMenu().performIdentifierAction(R.id.inventory, 0);
+        });
+        binding.btnBackMagasin.setOnClickListener(v -> {
+            binding.bottomNavigationView.getMenu().performIdentifierAction(R.id.store, 0);
+        });
 
         //DISPLAY THE AVAILABLE WEAPON IN THE CASE
         boolean isAscending = true;
@@ -88,7 +88,6 @@ public class CaseOpening extends AppCompatActivity {
         int compteur = 0;
         LinearLayout.LayoutParams layoutParams = new TableRow.LayoutParams(270, 270);
         for(Arme weapon : weaponCase.getArmeDispo()){
-
             ImageView imageView = new ImageView(getApplicationContext());
             int newImageRessourceId = getResources().getIdentifier(weapon.getFileName(), "drawable", getPackageName());
             imageView.setImageResource(newImageRessourceId);
@@ -114,7 +113,6 @@ public class CaseOpening extends AppCompatActivity {
             compteur++;
         }
 
-
         //RANDOMIZE THE CASE
         List<Arme> randomList = new ArrayList<>();
         Arme randomWeapon = weaponCase.getArmeDispo().get(0);
@@ -138,7 +136,6 @@ public class CaseOpening extends AppCompatActivity {
             }
 
             ImageView imageView = new ImageView(getApplicationContext());
-
             int newImageRessourceId = getResources().getIdentifier(randomWeapon.getFileName(), "drawable", getPackageName());
             imageView.setImageResource(newImageRessourceId);
 
@@ -210,13 +207,13 @@ public class CaseOpening extends AppCompatActivity {
                         handler.post(new Runnable() {
                             @Override
                             public void run() {
-                                scrollPos += scrollSpeed; // Increment the scroll position
+                                scrollPos += scrollSpeed;
                                 if (scrollSpeed > 5) {
                                     scrollSpeed -= 0.1;
                                 } else {
-                                    scrollSpeed -= (randomNumber+11)/1000;//entre:0.011 et 0.015
+                                    scrollSpeed -= (randomNumber+11)/1000;
                                 }
-                                binding.linearOpenOpen.scrollTo((int) scrollPos, 0); // Scroll to the new position
+                                binding.linearOpenOpen.scrollTo((int) scrollPos, 0);
                                 if (scrollSpeed < 0.5) {
                                     scrollSpeed = 0;
                                     timer.cancel();

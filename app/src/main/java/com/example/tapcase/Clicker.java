@@ -332,18 +332,15 @@ public class Clicker extends AppCompatActivity {
         public void onReceive(Context context, Intent intent) {
             Bundle bundle = intent.getExtras();
             if (bundle != null) {
-//                Log.println(Log.DEBUG, "AutoClickService", "CLICKING");
-
                 ViewGroup parent = (ViewGroup) binding.getRoot();
                 MotionEvent event = MotionEvent.obtain(
                         System.currentTimeMillis(),
-                        System.currentTimeMillis() + 100, // Durée de l'événement (100 ms par exemple)
+                        System.currentTimeMillis() + 100,
                         MotionEvent.ACTION_DOWN,
-                        parent.getWidth() / 2, // Coordonnée X du centre du ViewGroup
-                        parent.getHeight() / 2, // Coordonnée Y du centre du ViewGroup
+                        parent.getWidth() / 2,
+                        parent.getHeight() / 2,
                         0
                 );
-
                 parent.dispatchTouchEvent(event);
 
                 event.setAction(MotionEvent.ACTION_UP);

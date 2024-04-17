@@ -14,12 +14,6 @@ public class AutoClickService extends Service {
 
     private Timer timer;
     private Handler handler;
-    private String test = "Hello World";
-//    @Nullable
-//    @Override
-//    public IBinder onBind(Intent intent) {
-//        return null;
-//    }
 
     public class MyBinder extends Binder {
         AutoClickService getService() {
@@ -35,14 +29,11 @@ public class AutoClickService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-//        Log.println(Log.DEBUG, "AutoClickService", "Service started");
         handler = new Handler(getMainLooper());
         timer = new Timer();
         timer.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
-//                handler.post(() -> Log.println(Log.DEBUG, "AutoClickService", "Service is running"));
-
                 Intent intent1 = new Intent(Clicker.BROADCAST);
                 intent1.putExtra("message", "Hello!");
                 sendBroadcast(intent1);
@@ -59,9 +50,5 @@ public class AutoClickService extends Service {
         if (timer != null) {
             timer.cancel();
         }
-    }
-
-    public String getAutoClicker() {
-        return test;
     }
 }
