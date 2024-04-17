@@ -85,10 +85,8 @@ public class Store extends AppCompatActivity {
             }
             return false;
         });
-
         Intent storeToCaseOpening = new Intent(Store.this, CaseOpening.class);
         Bundle bundleStoreToCaseOpening = new Bundle();
-
         this.caseInformation = new CaseInformation(gameInformation, new Case(gameInformation.getWeaponAvailable(), CaseType.BravoCase,1000 , "box_bravo_operation", gameInformation.getWeaponAvailable().get(3), "Caisse init"));
         bundleStoreToCaseOpening.putSerializable("CASE_INFO", caseInformation);
         storeToCaseOpening.putExtras(bundleStoreToCaseOpening);
