@@ -1,9 +1,11 @@
 package com.example.tapcase;
 
 import android.app.ActivityManager;
+import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.ServiceConnection;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -53,8 +55,10 @@ public class Clicker extends AppCompatActivity {
  	MediaPlayer mediaPlayer;
     private AutoClickService autoClicker;
     private Intent intentService;
+    static public final String BROADCAST = "com.cfc.slides.event";
 
- 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -136,17 +140,8 @@ public class Clicker extends AppCompatActivity {
         binding.tvPrixArme.setText("Prix : " + String.valueOf(weapon_selected.getPrix()));
         binding.tvPerfArme.setText("Performance : " + String.valueOf(weapon_selected.getFlower_per_click()) + " fleurs/tirs");
 
-        //AUTOCLICKER ON WHEN THE BOX IS CHECKED
-        binding.checkBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            Intent intent = new Intent(getApplication(), AutoClickService.class);
-            if (isChecked) {
-                startService(intent);
 
-            } else {
-                stopService(intent);
-            }
-        });
-
+        intentService = new Intent(this, AutoClickService.class);
     }
 
     private void update() {
@@ -242,6 +237,23 @@ public class Clicker extends AppCompatActivity {
             }
             return true;
         });
+
+        //AUTOCLICKER ON WHEN THE BOX IS CHECKED
+        registerReceiver(receiver,new IntentFilter(BROADCAST));
+        binding.checkBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            Intent intent = new Intent(Clicker.this, AutoClickService.class);
+            if (isChecked) {
+                startService(intentService);
+//                bindService(intentService,myServiceConnection, Context.BIND_AUTO_CREATE);
+//                AutoClickService.get
+
+            } else {
+                stopService(intentService);
+                unregisterReceiver(receiver);
+
+//                unbindService(myServiceConnection);
+            }
+        });
     }
     //DESTROY MEDIAPLAYER
     @Override
@@ -293,9 +305,33 @@ public class Clicker extends AppCompatActivity {
             editor.apply();
         }
     }
-    public static void clickAuto(){
-        Log.println(Log.DEBUG, "CLICKER", "CLICK");
-    }
+
+    private final BroadcastReceiver receiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            Bundle bundle = intent.getExtras();
+            if (bundle != null) {
+//                Log.println(Log.DEBUG, "AutoClickService", "CLICKING");
+
+                ViewGroup parent = (ViewGroup) binding.getRoot();
+                MotionEvent event = MotionEvent.obtain(
+                        System.currentTimeMillis(),
+                        System.currentTimeMillis() + 100, // Durée de l'événement (100 ms par exemple)
+                        MotionEvent.ACTION_DOWN,
+                        parent.getWidth() / 2, // Coordonnée X du centre du ViewGroup
+                        parent.getHeight() / 2, // Coordonnée Y du centre du ViewGroup
+                        0
+                );
+
+                parent.dispatchTouchEvent(event);
+
+                event.setAction(MotionEvent.ACTION_UP);
+                parent.dispatchTouchEvent(event);
+                event.recycle();
+            }
+        }
+    };
+
 
 }
 
