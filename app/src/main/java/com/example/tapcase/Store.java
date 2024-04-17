@@ -51,10 +51,6 @@ public class Store extends AppCompatActivity {
         binding.tvStoreBoxDreams.setText("" + BOX_PRICE_DREAMS);
         binding.tvStoreBoxBravo.setText("" + BOX_PRICE_BRAVO);
         binding.tvStoreBoxCooblestone.setText("" + BOX_PRICE_COBBLE);
-        binding.tvStoreBoxClassic.setText("Prix = " + BOX_PRICE_CLASSIC);
-        binding.tvStoreBoxDreams.setText("Prix = " + BOX_PRICE_DREAMS);
-        binding.tvStoreBoxBravo.setText("Prix = " + BOX_PRICE_BRAVO);
-        binding.tvStoreBoxCooblestone.setText("Prix = " + BOX_PRICE_COBBLE);
         prefs = getSharedPreferences("MY_PREFS_NAME", MODE_PRIVATE);
         editor = prefs.edit();
     }
