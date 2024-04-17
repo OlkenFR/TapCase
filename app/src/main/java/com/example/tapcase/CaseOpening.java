@@ -74,9 +74,12 @@ public class CaseOpening extends AppCompatActivity {
             binding.btnCancel.setOnClickListener(v -> {
                 binding.bottomNavigationView.getMenu().performIdentifierAction(R.id.store, 0);
             });
-        binding.btnSeeInventory.setOnClickListener(v -> {
-            binding.bottomNavigationView.getMenu().performIdentifierAction(R.id.inventory, 0);
-        });
+            binding.btnSeeInventory.setOnClickListener(v -> {
+                binding.bottomNavigationView.getMenu().performIdentifierAction(R.id.inventory, 0);
+            });
+            binding.btnBackMagasin.setOnClickListener(v -> {
+                binding.bottomNavigationView.getMenu().performIdentifierAction(R.id.store, 0);
+            });
 
         //DISPLAY THE AVAILABLE WEAPON IN THE CASE
         boolean isAscending = true;
@@ -192,6 +195,7 @@ public class CaseOpening extends AppCompatActivity {
                         public void run() {
                             displayToastUnlockedWeapon();
                             binding.btnSeeInventory.setVisibility(View.VISIBLE);
+                            binding.btnBackMagasin.setVisibility(View.VISIBLE);
                         }
                     }, 3500);
                 }
