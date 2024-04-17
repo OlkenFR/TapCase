@@ -29,9 +29,9 @@ public class Store extends AppCompatActivity {
     private List<Case> caseAvailable;
     private List<Arme> armeAvailable;
     private static final int BOX_PRICE_CLASSIC = 100;
-    private static final int BOX_PRICE_DREAMS = 500;
-    private static final int BOX_PRICE_BRAVO = 1000;
-    private static final int BOX_PRICE_COBBLE = 5000;
+    private static final int BOX_PRICE_DREAMS = 800;
+    private static final int BOX_PRICE_BRAVO = 3000;
+    private static final int BOX_PRICE_COBBLE = 10000;
 
     private SharedPreferences prefs;
     private SharedPreferences.Editor editor;
